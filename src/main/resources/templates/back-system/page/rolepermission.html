@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+</head>
+<body>
+<form class="layui-form layui-form-pane" id="test" style="display:none">
+    <div class="layui-form-item" >
+        <input type="hidden" id="rolePermissionId">
+        <div class="layui-inline" style="margin: 10px">
+            <label class="layui-form-label" style="width: 100px">资源名</label>
+            <div class="layui-input-inline">
+                <select name="permissionId" id="permissionId" lay-verify="required"  lay-search="">
+                    <option value=""></option>
+                </select>
+
+            </div>
+        </div>
+        <div class="layui-inline" style="margin: 10px">
+            <label class="layui-form-label" style="width: 100px">角色名</label>
+            <div class="layui-input-inline">
+                <select name="roleId" id="roleId" lay-verify="required" lay-search="">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="layui-elem-field layuimini-search">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">资源名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="permissionName" name="name" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">角色名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="roleName" name="name" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <a class="layui-btn" lay-submit="" lay-filter="data-search-btn">搜索</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <div class="layui-btn-group">
+            <button class="layui-btn data-add-btn">添加</button>
+            <button class="layui-btn layui-btn-danger data-delete-btn">删除</button>
+        </div>
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+        <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        </script>
+    </div>
+</div>
+<script src="../lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+
+        table.render({
+            async: true,
+            elem: '#currentTableId',
+            url: '/rolepermission/getAllRolePermission',
+            cols:
+                [
+                    [
+                        {
+                            type: "checkbox",
+                            width: 50,
+                            fixed: "left"
+                        },
+                        {
+                            field: 'rolePermissionId',
+                            width: 200,
+                            title: 'ID',
+                            sort: true
+                        },
+                        {
+                            field: 'permissionName',
+                            width: 150,
+                            title: '资源名'
+                        },
+                        {
+                            field: 'permissionUrl',
+                            width: 250,
+                            title: '资源地址'
+                        },
+                        {
+                            field: 'roleName',
+                            width: 150,
+                            title: '角色名'
+                        },
+                        {
+                            field: 'roleFlag',
+                            width: 150,
+                            title: '角色标识'
+                        },
+                        {
+                            title: '操作',
+                            minWidth: 50,
+                            templet: '#currentTableBar',
+                            fixed: "right",
+                            align: "center"
+                        }
+                    ]
+                ],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 10,
+            page: true
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            var roleName = $("#roleName").val();
+            var permissionName = $("#permissionName").val();
+            //location.reload();
+            //执行搜索重载
+            reload(roleName,permissionName);
+        });
+        getSelectData();
+
+
+        // 监听添加操作
+        $(".data-add-btn").on("click", function () {
+            $("#rolePermissionId").val("");
+            editBox();
+        });
+
+        // 监听删除操作
+        $(".data-delete-btn").on("click", function () {
+            var checkStatus = table.checkStatus('currentTableId')
+                , data = checkStatus.data;
+            for(var i = 0; i < data.length; i++){
+                //alert(data[i].rolePermissionId);
+                deletepermissionById(data[i].rolePermissionId);
+            }
+        });
+
+        //监听表格复选框选择
+        table.on('checkbox(currentTableFilter)', function (obj) {
+            console.log(obj)
+        });
+
+        table.on('tool(currentTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'edit') {
+                $("#rolePermissionId").val(data.rolePermissionId);
+                $("#permissionId").val(data.permissionId);
+                $("#roleId").val(data.roleId);
+                editBox();
+            } else if (obj.event === 'delete') {
+                layer.confirm('真的删除行么', function (index) {
+                    var id=data.rolePermissionId;
+                    deletepermissionById(id);
+                    layer.close(index);
+                });
+            }
+        });
+
+        /**
+         * 重新加载数据
+         * @param name
+         */
+        function reload(roleName,permissionName) {
+            table.reload('currentTableId', {
+                async: true,
+                page: {
+                    curr: 1
+                }
+                , where: {
+                    "roleName":roleName,
+                    "permissionName":permissionName
+                }
+            }, 'data');
+        }
+
+        /**
+         * 根据id删除数据
+         * @param id
+         */
+        function deletepermissionById(id) {
+            $.ajax({
+                url:"/rolepermission/deleteRolePermission",
+                type:'post',
+                async: true,
+                data:{
+                    "id":id
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        layer.msg(
+                            data.msg,
+                            { icon: 6,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            },function(){
+                                reload("","");
+                            })
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            { icon: 5,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            });
+        }
+
+        /**
+         * 弹出编辑框
+         */
+        function editBox() {
+            layer.open({
+                type:1,
+                area:['420px'],
+                title: '授权编辑'
+                ,content: $("#test"),
+                shade: 0,
+                btn: ['提交', '取消']
+                ,btn1: function(){
+                    savepermission();
+                },
+                btn2: function(){
+                    layer.closeAll();
+                },
+                cancel: function(layero,index){
+                    layer.closeAll();
+                }
+            });
+        }
+
+        /**
+         * 获取下拉数据
+         */
+        function getSelectData() {
+            $.ajax({
+                url: '/permission/getAllPermission2',
+                dataType: 'json',
+                async: true,
+                type: 'get',
+                success: function (data) {
+                    if(data.code==0){
+                        var Data=data.data;
+                        $.each(Data, function (index, item) {
+                            $('#permissionId').append(new Option(item.permissionName,item.permissionId));// 下拉菜单里添加元素
+                        });
+                    }
+                    else {
+                        layer.msg(
+                            "获取资源数据失败",
+                            {
+                            icon:6
+                            }
+                        )
+                    }
+                    form.render('select');
+                }
+            });
+            $.ajax({
+                url: '/role/getAllRole2',
+                dataType: 'json',
+                type: 'get',
+                async: true,
+                success: function (data) {
+                    if(data.code==0){
+                        var Data=data.data;
+                        $.each(Data, function (index, item) {
+                            $('#roleId').append(new Option(item.roleName,item.roleId));// 下拉菜单里添加元素
+                        });
+                    }
+                    else {
+                        layer.msg(
+                            "获取资源数据失败",
+                            {
+                                icon:6
+                            }
+                        )
+                    }
+                    form.render('select');
+                }
+            })
+        }
+
+        function savepermission() {
+            var rolePermissionId=$("#rolePermissionId").val();
+            var permissionId=$("#permissionId").val();
+            var roleId=$("#roleId").val();
+            if(rolePermissionId=="") rolePermissionId=null;
+            $.ajax({
+                url:"/rolepermission/saveOrUpdateRolePermission",
+                type:'post',
+                async: true,
+                data:{
+                    "rolePermissionId":rolePermissionId,
+                    "permissionId":permissionId,
+                    "roleId":roleId
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        layer.closeAll();
+                        layer.msg(
+                            data.msg,
+                            { icon: 6,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            },function(){
+                                reload("","");
+                            })
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            { icon: 5,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            });
+        }
+    });
+
+</script>
+<script>
+
+</script>
+
+</body>
+</html>
