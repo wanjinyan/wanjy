@@ -31,9 +31,23 @@
         },
         {
           "title": "用户管理",
-          "href": "page/table.html",
-          "icon": "fa fa-file-text",
-          "target": "_self"
+          "href": "",
+          "icon": "fa fa-calendar",
+          "target": "_self",
+          "child": [
+            {
+              "title": "用户数据统计",
+              "href": "role",
+              "icon": "fa fa-file-text",
+              "target": "_self"
+            },
+            {
+              "title": "用户信息",
+              "href": "/userInfo",
+              "icon": "fa fa-file-text",
+              "target": "_self"
+            }
+          ]
         },
         {
           "title": "权限管理",

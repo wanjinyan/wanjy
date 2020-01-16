@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>后台管理-登陆</title>
+    <title>用户注册</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -39,22 +39,18 @@
     <div></div>
     <div class="admin-login-background">
         <div class="admin-header">
-            <span>layuimini</span>
+            <span>用户注册</span>
         </div>
         <form class="layui-form" action="">
             <div>
                 <i class="layui-icon layui-icon-username admin-icon"></i>
-                <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input admin-input admin-input-username" value="admin">
+                <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input admin-input admin-input-username" value="">
             </div>
             <div>
                 <i class="layui-icon layui-icon-password admin-icon"></i>
-                <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input admin-input" value="123456">
+                <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input admin-input" value="">
             </div>
-            <div>
-                <input type="text" name="captcha" placeholder="请输入验证码" autocomplete="off" class="layui-input admin-input admin-input-verify" value="xszg">
-                <img class="admin-captcha" width="90" height="30" src="../images/captcha.jpg">
-            </div>
-            <button type="button" class="layui-btn admin-button" lay-submit="" lay-filter="login">登 陆</button>
+            <button  type="button" class="layui-btn admin-button" lay-submit="" lay-filter="sign_up">注 册</button>
         </form>
     </div>
 </div>
@@ -66,9 +62,10 @@
         var $= layui.jquery;
         // 登录过期的时候，跳出ifram框架
         if (top.location != self.location) top.location = self.location;
-        function login(account,password){
+
+        function signup(account,password){
             $.ajax({
-                url:"/user/login",
+                url:"/user/addUser",
                 type:'POST',
                 dataType:"json",
                 data:{
@@ -82,7 +79,7 @@
                             { icon: 6,//成功的表情
                                 time: 1000 //1秒关闭（如果不配置，默认是3秒）
                             })
-                        window.location = '/index';
+                        setTimeout(1000,window.location = '/login');
                     }
                     else {
                         layer.msg(
@@ -96,7 +93,7 @@
             });
         }
         // 进行登录操作
-        form.on('submit(login)', function (data) {
+        form.on('submit(sign_up)', function (data) {
             data = data.field;
             if (data.username == '') {
                 layer.msg('用户名不能为空');
@@ -106,11 +103,7 @@
                 layer.msg('密码不能为空');
                 return false;
             }
-            if (data.captcha == '') {
-                layer.msg('验证码不能为空');
-                return false;
-            }
-            login(data.username,data.password);
+            signup(data.username,data.password);
         });
     });
 </script>

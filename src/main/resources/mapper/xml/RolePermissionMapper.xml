@@ -36,4 +36,21 @@
         and
           ${ew.sqlSegment}
     </select>
+
+    <select id="getAllRolePermission" resultType="com.wanjy.backSystem.entity.MyRolePermission">
+        SELECT
+            role_permission.*,
+            role.role_name,
+            role.role_flag,
+            permission.permission_name,
+            permission.permission_url
+        FROM
+          role,
+            permission,
+            role_permission
+        WHERE
+            role_permission.permission_id=permission.permission_id
+        and
+            role_permission.role_id=role.role_id
+    </select>
 </mapper>

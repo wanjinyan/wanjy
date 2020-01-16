@@ -8,6 +8,8 @@ import com.wanjy.common.entity.RolePermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  * 角色权限表 Mapper 接口
@@ -20,4 +22,5 @@ public interface RolePermissionMapper extends BaseMapper<RolePermission> {
     IPage<MyRolePermission> getRolePerssionByOrder(IPage<MyRolePermission> page, @Param(Constants.WRAPPER) Wrapper<MyRolePermission> queryWrapper);
 
     IPage<MyRolePermission> getRolePerssion(IPage<MyRolePermission> page);
+    List<MyRolePermission> getAllRolePermission();
 }

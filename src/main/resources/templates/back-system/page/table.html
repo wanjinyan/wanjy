@@ -56,6 +56,7 @@
         </div>
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
         <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="userdetails">查看详情</a>
             <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
         </script>
@@ -70,25 +71,68 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '../api/table.json',
-            cols: [[
-                {type: "checkbox", width: 50, fixed: "left"},
-                {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'username', width: 80, title: '用户名'},
-                {field: 'sex', width: 80, title: '性别', sort: true},
-                {field: 'city', width: 80, title: '城市'},
-                {field: 'sign', title: '签名', minWidth: 150},
-                {field: 'experience', width: 80, title: '积分', sort: true},
-                {field: 'score', width: 80, title: '评分', sort: true},
-                {field: 'classify', width: 80, title: '职业'},
-                {field: 'wealth', width: 135, title: '财富', sort: true},
-                {title: '操作', minWidth: 50, templet: '#currentTableBar', fixed: "right", align: "center"}
-            ]],
+            url: '/user/getAllUserInfo',
+            cols:
+                [
+                    [
+                        {type: "checkbox", width: 50, fixed: "left"},
+                        {field: 'userId', width: 150, title: '用户编号', sort: true},
+                        {field: 'account', width: 150, title: '用户账号', sort: true},
+                        {field: 'nickname', width: 150, title: '用户昵称'},
+                        {
+                            field: 'roleId',
+                            width: 150,
+                            title: '用户角色',
+                            templet: function(d){
+                                var val=RoleIdToName(d.roleId);
+                                return val;
+                            }
+                        },
+                        {
+                            field: 'userStatus',
+                            width: 150,
+                            title: '用户状态',
+                            templet: function(d){
+                               switch (d.userStatus)
+                               {
+                                   case 0: return "逻辑删除";
+                                   case 1: return "正常";
+                                   case 2: return "锁定";
+                                   case 3: return "违规";
+                                   default: return "数据异常";
+                               }
+                            }
+                        },
+                        {field: 'registerTime', title: '注册时间', minWidth: 150},
+                        {title: '操作', minWidth: 50, templet: '#currentTableBar', fixed: "right", align: "center"}
+                    ]
+                ],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
             page: true
         });
+        function RoleIdToName(roleId){
+            var val=null;
+            $.ajax({
+                url:"/role/roleIdToName",
+                type:'get',
+                async:false,
+                dataType:"json",
+                data:{
+                    "roleId":roleId,
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        val= data.data.roleName;
+                    }
+                    else {
+                        val="数据映射错误";
+                    }
 
+                }
+            });
+            return val;
+        }
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
             var result = JSON.stringify(data.field);
@@ -135,6 +179,8 @@
                     obj.del();
                     layer.close(index);
                 });
+            }else if(obj.event === "userdetails"){
+                layer.msg("用户详情");
             }
         });
 

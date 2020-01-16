@@ -6,6 +6,7 @@ import com.wanjy.common.entity.Role;
 import com.wanjy.common.service.RoleService;
 import com.wanjy.common.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +36,18 @@ public class MyRoleController {
     public Result getAllRole(){
         List<Role> roles = roleService.list();
         return Result.success(roles,roles.size());
+    }
+
+    /**
+     * 根据ID查询角色
+     * @param roleId
+     * @return
+     */
+    @GetMapping("/roleIdToName")
+    public Result roleIdToName(String roleId){
+        Role role = roleService.getById(roleId);
+        if(role != null) return Result.success(role);
+        else return Result.error();
     }
     /**
      * 根据id删除角色

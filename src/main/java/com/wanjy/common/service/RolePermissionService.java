@@ -9,6 +9,8 @@ import com.wanjy.common.entity.RolePermission;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 
 /**
  * <p>
@@ -33,4 +35,6 @@ public interface RolePermissionService extends IService<RolePermission> {
      * @return
      */
     IPage<MyRolePermission> getRolePerssion(IPage<MyRolePermission> page, @Param(Constants.WRAPPER) Wrapper<MyRolePermission> queryWrapper);
+
+    public List<MyRolePermission> getAllRolePermission();
 }

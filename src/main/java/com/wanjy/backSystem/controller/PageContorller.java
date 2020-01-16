@@ -1,5 +1,6 @@
 package com.wanjy.backSystem.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -63,6 +64,26 @@ public class PageContorller {
     public ModelAndView welcome(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("back-system/page/welcome-1.html");
+        return modelAndView;
+    }
+
+    @GetMapping(value = "/notRole")
+    public ModelAndView notRole(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("back-system/page/404.html");
+        return modelAndView;
+    }
+    @GetMapping(value = "/signup")
+    public ModelAndView signUp(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("back-system/page/sign_up.html");
+        return modelAndView;
+    }
+
+    @GetMapping("/userInfo")
+    public ModelAndView userInfo(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("back-system/page/table.html");
         return modelAndView;
     }
 }
