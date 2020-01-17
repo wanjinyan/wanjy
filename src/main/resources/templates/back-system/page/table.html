@@ -10,6 +10,95 @@
     <link rel="stylesheet" href="../css/public.css" media="all">
 </head>
 <body>
+<form class="layui-form layui-form-pane" id="test" style="display:none">
+    <div class="layui-form-item" >
+    <input type="hidden" id="userId">
+    <div class="layui-inline" style="margin: 10px">
+        <label class="layui-form-label" style="width: 100px">用户昵称</label>
+        <div class="layui-input-inline">
+            <input type="text"  id="nickname" autocomplete="off" class="layui-input" style="width: 300px">
+        </div>
+    </div>
+    <div class="layui-inline" style="margin: 10px">
+        <label class="layui-form-label" style="width: 100px">用户角色</label>
+        <div class="layui-input-inline">
+            <input type="text" id="roleId" autocomplete="off" class="layui-input" style="width: 300px">
+        </div>
+    </div>
+    <div class="layui-inline" style="margin: 10px">
+        <label class="layui-form-label" style="width: 100px">用户状态</label>
+        <div class="layui-input-inline">
+            <input type="text" id="userStatus" autocomplete="off" class="layui-input" style="width: 300px">
+        </div>
+    </div>
+</div>
+</form>
+<form class="layui-form layui-form-pane" id="details" style="display:none">
+    <div style="margin: 10px; padding: 10px;">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">用户账号</label>
+                <div class="layui-input-inline">
+                    <input id="account" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">真实姓名</label>
+                <div class="layui-input-inline">
+                    <input id="realName" lay-verify="email" autocomplete="off" class="layui-input" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">用户昵称</label>
+                <div class="layui-input-inline">
+                    <input  lay-verify="required|phone" autocomplete="off" class="layui-input nickname">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">用户性别</label>
+                <div class="layui-input-inline">
+                    <input id="sex" lay-verify="email" autocomplete="off" class="layui-input" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" style="padding-right: 20px">
+            <label class="layui-form-label">身份证号</label>
+            <div class="layui-input-block">
+                <input id="idCard" lay-verify="title" autocomplete="off" placeholder="请输入身份证号" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">用户角色</label>
+                <div class="layui-input-inline">
+                    <input  lay-verify="required|phone" autocomplete="off" class="layui-input roleId">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">用户状态</label>
+                <div class="layui-input-inline">
+                    <input lay-verify="email" autocomplete="off" class="layui-input userStatus">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">联系方式</label>
+                <div class="layui-input-inline">
+                    <input id="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-inline">
+                    <input id="email" lay-verify="email" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 <div class="layuimini-container">
     <div class="layuimini-main">
 
@@ -19,27 +108,9 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户姓名</label>
+                            <label class="layui-form-label">用户昵称</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="username" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户性别</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="sex" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户城市</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="city" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户职业</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="classify" autocomplete="off" class="layui-input">
+                                <input type="text"  id="nickname2" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -51,7 +122,6 @@
         </fieldset>
 
         <div class="layui-btn-group">
-            <button class="layui-btn data-add-btn">添加</button>
             <button class="layui-btn layui-btn-danger data-delete-btn">删除</button>
         </div>
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
@@ -76,12 +146,12 @@
                 [
                     [
                         {type: "checkbox", width: 50, fixed: "left"},
-                        {field: 'userId', width: 150, title: '用户编号', sort: true},
-                        {field: 'account', width: 150, title: '用户账号', sort: true},
-                        {field: 'nickname', width: 150, title: '用户昵称'},
+                        {field: 'userId', width: 105, title: '用户编号', sort: true},
+                        {field: 'account', width: 105, title: '用户账号', sort: true},
+                        {field: 'nickname', width: 105, title: '用户昵称'},
                         {
                             field: 'roleId',
-                            width: 150,
+                            width: 105,
                             title: '用户角色',
                             templet: function(d){
                                 var val=RoleIdToName(d.roleId);
@@ -90,17 +160,10 @@
                         },
                         {
                             field: 'userStatus',
-                            width: 150,
+                            width: 105,
                             title: '用户状态',
                             templet: function(d){
-                               switch (d.userStatus)
-                               {
-                                   case 0: return "逻辑删除";
-                                   case 1: return "正常";
-                                   case 2: return "锁定";
-                                   case 3: return "违规";
-                                   default: return "数据异常";
-                               }
+                                return statusToName(d.userStatus);
                             }
                         },
                         {field: 'registerTime', title: '注册时间', minWidth: 150},
@@ -111,6 +174,20 @@
             limit: 15,
             page: true
         });
+
+        function statusToName(userStatus) {
+            switch (userStatus)
+            {
+                case 0: return "逻辑删除";
+                case 1: return "正常";
+                case 2: return "锁定";
+                case 3: return "违规";
+                default: return "数据异常";
+            }
+        }
+        /**
+         *角色id与角色名字的映射
+         */
         function RoleIdToName(roleId){
             var val=null;
             $.ajax({
@@ -135,34 +212,27 @@
         }
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
-            layer.alert(result, {
-                title: '最终的搜索信息'
-            });
-
-            //执行搜索重载
-            table.reload('currentTableId', {
-                page: {
-                    curr: 1
-                }
-                , where: {
-                    searchParams: result
-                }
-            }, 'data');
-
-            return false;
+            var name = $("#nickname2").val();
+            reload(name);
         });
 
         // 监听添加操作
         $(".data-add-btn").on("click", function () {
-            layer.msg('添加数据');
+            $("#userId").val("");
+            editBox();
         });
 
         // 监听删除操作
         $(".data-delete-btn").on("click", function () {
             var checkStatus = table.checkStatus('currentTableId')
                 , data = checkStatus.data;
-            layer.alert(JSON.stringify(data));
+           for(var i = 0; i < data.length; i++){
+               $("#userId").val(data[i].userId);
+               $("#nickname").val(data.nickname);
+               $("#roleId").val(data.roleId);
+               $("#userStatus").val(0);
+                saveUser(data[i].userId);
+           }
         });
 
         //监听表格复选框选择
@@ -173,18 +243,158 @@
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
-                layer.alert('编辑行：<br>' + JSON.stringify(data))
+                $("#userId").val(data.userId);
+                $("#nickname").val(data.nickname);
+                $("#roleId").val(RoleIdToName(data.roleId));
+                $("#userStatus").val(statusToName(data.userStatus));
+                editBox();
             } else if (obj.event === 'delete') {
                 layer.confirm('真的删除行么', function (index) {
-                    obj.del();
+                    $("#userId").val(data.userId);
+                    $("#nickname").val(data.nickname);
+                    $("#roleId").val(data.roleId);
+                    $("#userStatus").val(0);
+                    saveUser();
                     layer.close(index);
                 });
             }else if(obj.event === "userdetails"){
-                layer.msg("用户详情");
+                getUserDetailsByUserId(data.userId);
             }
         });
 
+        /**
+         * 弹出编辑框
+         */
+        function editBox() {
+            layer.open({
+                type:1,
+                area:['420px'],
+                title: '用户编辑',
+                content:$("#test"),
+                shade: 0,
+                btn: ['提交', '取消']
+                ,btn1: function(){
+                    saveUser();
+                },
+                btn2: function(){
+                    layer.closeAll();
+                },
+                cancel: function(layero,index){
+                    layer.closeAll();
+                }
+            });
+        }
+        /**
+         * 弹出详情框
+         */
+        function detailsBox() {
+            layer.open({
+                type:1,
+                area:[],
+                title: '用户详情',
+                content:$("#details"),
+                shade: 0,
+                btn: ['提交', '取消']
+                ,btn1: function(){
+
+                },
+                btn2: function(){
+                    layer.closeAll();
+                },
+                cancel: function(layero,index){
+                    layer.closeAll();
+                }
+            });
+        }
+
+        function getUserDetailsByUserId(userId) {
+            $.ajax({
+                url:"/user/getUserDetails",
+                type:'get',
+                dataType:"json",
+                data:{
+                    "userId":userId
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        var Data=data.data;
+                        $("#account").val(Data.account);
+                        $("#realName").val(Data.realName);
+                        $(".nickname").val(Data.nickname);
+                        $("#sex").val(Data.sex);
+                        $("#idCard").val(Data.idCard);
+                        $(".roleId").val(RoleIdToName(Data.roleId));
+                        $(".userStatus").val(statusToName(Data.userStatus));
+                        $("#phone").val(Data.phone);
+                        $("#email").val(Data.email);
+                        detailsBox();
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            { icon: 5,//失败的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            });
+        }
+
+        /**
+         * 重新加载数据
+         * @param name
+         */
+        function reload(name) {
+            table.reload('currentTableId', {
+                page: {
+                    curr: 1
+                }
+                , where: {
+                    "nickname":name
+                }
+            }, 'data');
+        }
+        function saveUser() {
+            var userId=$("#userId").val();
+            var nickname=$("#nickname").val();
+            var roleId=$("#roleId").val();
+            var userStatus=$("#userStatus").val();
+            if(userId=="") userId=null;
+            $.ajax({
+                url:"/user/saveOrUpdateUser",
+                type:'post',
+                data:{
+                    "userId":userId,
+                    "roleId":roleId,
+                    "nickname":nickname,
+                    "userStatus":userStatus,
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        layer.closeAll();
+                        layer.msg(
+                            data.msg,
+                            { icon: 6,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            },function(){
+                                reload("");
+                            })
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            { icon: 5,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            });
+        }
     });
+
+
 </script>
 <script>
 

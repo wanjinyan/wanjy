@@ -3,7 +3,9 @@ package com.wanjy.backSystem.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wanjy.backSystem.entity.MyUserDetails;
 import com.wanjy.common.entity.User;
+import com.wanjy.common.service.UserDetailsService;
 import com.wanjy.common.service.UserService;
 import com.wanjy.common.util.GenstrUtil;
 import com.wanjy.common.util.MD5;
@@ -21,6 +23,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class MyUserController {
     @Autowired private UserService userService;
+    @Autowired private UserDetailsService userDetailsService;
     @PostMapping(value = "/addUser")
     public Result addUser(User user) throws Exception {
         List<User> userList = new ArrayList<>();
@@ -70,9 +73,42 @@ public class MyUserController {
     }
 
     @GetMapping("/getAllUserInfo")
-    public Result getAllUserInfo(int page, int limit){
+    public Result getAllUserInfo(int page, int limit, String nickname){
         IPage<User> userIPage = new Page<>(page, limit);
-        userIPage = userService.page(userIPage);
+        if(nickname != null && !nickname.equals("")){
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.like("nickname",nickname);
+            userIPage = userService.page(userIPage,queryWrapper);
+        }else {
+            userIPage = userService.page(userIPage);
+        }
         return Result.success(userIPage.getRecords(),(int) userIPage.getTotal());
+    }
+
+    /**
+     * 编辑用户信息
+     * @param user
+     * @return
+     */
+    @PostMapping("/saveOrUpdateUser")
+    public Result saveOrUpdateUser(User user){
+        Boolean n = userService.saveOrUpdate(user);
+        if(n) return Result.success("编辑成功");
+        else return Result.error("编辑失败");
+    }
+
+    /**
+     * 根据userId查询用户详情
+     * @param userId
+     * @return
+     */
+    @GetMapping("/getUserDetails")
+    public Result getUserDetails(String userId){
+        QueryWrapper<MyUserDetails> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user.user_id",userId);
+        MyUserDetails myUserDetails = userDetailsService.getUserDetails(queryWrapper);
+        if(myUserDetails != null)
+            return Result.success(myUserDetails);
+        else return Result.error("数据异常");
     }
 }
