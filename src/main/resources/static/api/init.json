@@ -1,6 +1,6 @@
 {
   "clearInfo": {
-    "clearUrl": "api/clear.json"
+    "href": "api/clear.json"
   },
   "homeInfo": {
     "title": "首页",
@@ -9,13 +9,14 @@
   },
   "logoInfo": {
     "title": "农家蔬果直通车",
-    "image": "images/logo.png",
+    "icon": "images/logo.png",
     "href": ""
   },
   "menuInfo": {
     "currency": {
       "title": "后台管理系统",
       "icon": "fa fa-address-book",
+      "href":"",
       "child": [
         {
           "title": "系统菜单管理",
@@ -82,14 +83,14 @@
           "target": "_self",
           "child": [
             {
-              "title": "商家统计",
-              "href": "page/form.html",
+              "title": "商家信息",
+              "href": "/shopInfo",
               "icon": "fa fa-list-alt",
               "target": "_self"
             },
             {
               "title": "商家录入",
-              "href": "page/form-step.html",
+              "href": "/addshop",
               "icon": "fa fa-navicon",
               "target": "_self"
             }

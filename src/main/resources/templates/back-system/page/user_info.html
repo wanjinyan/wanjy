@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>用户信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+</head>
+<body>
+<form class="layui-form layui-form-pane" id="test" style="display:none">
+    <div class="layui-form-item" >
+    <input type="hidden" id="userId">
+    <div class="layui-inline" style="margin: 10px">
+        <label class="layui-form-label" style="width: 100px">用户昵称</label>
+        <div class="layui-input-inline">
+            <input type="text"  id="nickname" autocomplete="off" class="layui-input" style="width: 300px">
+        </div>
+    </div>
+    <div class="layui-inline" style="margin: 10px">
+        <label class="layui-form-label" style="width: 100px">用户角色</label>
+        <div class="layui-input-inline">
+            <input type="text" id="roleId" autocomplete="off" class="layui-input" style="width: 300px">
+        </div>
+    </div>
+    <div class="layui-inline" style="margin: 10px">
+        <label class="layui-form-label" style="width: 100px">用户状态</label>
+        <div class="layui-input-inline">
+            <input type="text" id="userStatus" autocomplete="off" class="layui-input" style="width: 300px">
+        </div>
+    </div>
+</div>
+</form>
+<form class="layui-form layui-form-pane" id="details" style="display:none">
+    <div style="margin: 10px; padding: 10px;">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">用户账号</label>
+                <div class="layui-input-inline">
+                    <input id="account" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">真实姓名</label>
+                <div class="layui-input-inline">
+                    <input id="realName" lay-verify="email" autocomplete="off" class="layui-input" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">用户昵称</label>
+                <div class="layui-input-inline">
+                    <input  lay-verify="required|phone" autocomplete="off" class="layui-input nickname">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">用户性别</label>
+                <div class="layui-input-inline">
+                    <input id="sex" lay-verify="email" autocomplete="off" class="layui-input" >
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" style="padding-right: 20px">
+            <label class="layui-form-label">身份证号</label>
+            <div class="layui-input-block">
+                <input id="idCard" lay-verify="title" autocomplete="off" placeholder="请输入身份证号" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">用户角色</label>
+                <div class="layui-input-inline">
+                    <input  lay-verify="required|phone" autocomplete="off" class="layui-input roleId">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">用户状态</label>
+                <div class="layui-input-inline">
+                    <input lay-verify="email" autocomplete="off" class="layui-input userStatus">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">联系方式</label>
+                <div class="layui-input-inline">
+                    <input id="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-inline">
+                    <input id="email" lay-verify="email" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="layui-elem-field layuimini-search">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户昵称</label>
+                            <div class="layui-input-inline">
+                                <input type="text"  id="nickname2" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <a class="layui-btn" lay-submit="" lay-filter="data-search-btn">搜索</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <div class="layui-btn-group">
+            <button class="layui-btn layui-btn-danger data-delete-btn">删除</button>
+        </div>
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+        <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="userdetails">查看详情</a>
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        </script>
+    </div>
+</div>
+<script src="../lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+
+        table.render({
+            elem: '#currentTableId',
+            url: '/user/getAllUserInfo',
+            cols:
+                [
+                    [
+                        {type: "checkbox", width: 50, fixed: "left"},
+                        {field: 'userId', width: 105, title: '用户编号', sort: true},
+                        {field: 'account', width: 105, title: '用户账号', sort: true},
+                        {field: 'nickname', width: 105, title: '用户昵称'},
+                        {
+                            field: 'roleId',
+                            width: 105,
+                            title: '用户角色',
+                            templet: function(d){
+                                var val=RoleIdToName(d.roleId);
+                                return val;
+                            }
+                        },
+                        {
+                            field: 'userStatus',
+                            width: 105,
+                            title: '用户状态',
+                            templet: function(d){
+                                return statusToName(d.userStatus);
+                            }
+                        },
+                        {field: 'registerTime', title: '注册时间', minWidth: 150},
+                        {title: '操作', minWidth: 50, templet: '#currentTableBar', fixed: "right", align: "center"}
+                    ]
+                ],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true
+        });
+
+        function statusToName(userStatus) {
+            switch (userStatus)
+            {
+                case 0: return "逻辑删除";
+                case 1: return "正常";
+                case 2: return "锁定";
+                case 3: return "违规";
+                default: return "数据异常";
+            }
+        }
+        /**
+         *角色id与角色名字的映射
+         */
+        function RoleIdToName(roleId){
+            var val=null;
+            $.ajax({
+                url:"/role/roleIdToName",
+                type:'get',
+                async:false,
+                dataType:"json",
+                data:{
+                    "roleId":roleId,
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        val= data.data.roleName;
+                    }
+                    else {
+                        val="数据映射错误";
+                    }
+
+                }
+            });
+            return val;
+        }
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            var name = $("#nickname2").val();
+            reload(name);
+        });
+
+        // 监听添加操作
+        $(".data-add-btn").on("click", function () {
+            $("#userId").val("");
+            editBox();
+        });
+
+        // 监听删除操作
+        $(".data-delete-btn").on("click", function () {
+            var checkStatus = user_info.checkStatus('currentTableId')
+                , data = checkStatus.data;
+           for(var i = 0; i < data.length; i++){
+               $("#userId").val(data[i].userId);
+               $("#nickname").val(data.nickname);
+               $("#roleId").val(data.roleId);
+               $("#userStatus").val(0);
+                saveUser(data[i].userId);
+           }
+        });
+
+        //监听表格复选框选择
+        table.on('checkbox(currentTableFilter)', function (obj) {
+            console.log(obj)
+        });
+
+        table.on('tool(currentTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'edit') {
+                $("#userId").val(data.userId);
+                $("#nickname").val(data.nickname);
+                $("#roleId").val(RoleIdToName(data.roleId));
+                $("#userStatus").val(statusToName(data.userStatus));
+                editBox();
+            } else if (obj.event === 'delete') {
+                layer.confirm('真的删除行么', function (index) {
+                    $("#userId").val(data.userId);
+                    $("#nickname").val(data.nickname);
+                    $("#roleId").val(data.roleId);
+                    $("#userStatus").val(0);
+                    saveUser();
+                    layer.close(index);
+                });
+            }else if(obj.event === "userdetails"){
+                getUserDetailsByUserId(data.userId);
+            }
+        });
+
+        /**
+         * 弹出编辑框
+         */
+        function editBox() {
+            layer.open({
+                type:1,
+                area:['420px'],
+                title: '用户编辑',
+                content:$("#test"),
+                shade: 0,
+                btn: ['提交', '取消']
+                ,btn1: function(){
+                    saveUser();
+                },
+                btn2: function(){
+                    layer.closeAll();
+                },
+                cancel: function(layero,index){
+                    layer.closeAll();
+                }
+            });
+        }
+        /**
+         * 弹出详情框
+         */
+        function detailsBox() {
+            layer.open({
+                type:1,
+                area:[],
+                title: '用户详情',
+                content:$("#details"),
+                shade: 0,
+                btn: ['提交', '取消']
+                ,btn1: function(){
+
+                },
+                btn2: function(){
+                    layer.closeAll();
+                },
+                cancel: function(layero,index){
+                    layer.closeAll();
+                }
+            });
+        }
+
+        function getUserDetailsByUserId(userId) {
+            $.ajax({
+                url:"/user/getUserDetails",
+                type:'get',
+                dataType:"json",
+                data:{
+                    "userId":userId
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        var Data=data.data;
+                        $("#account").val(Data.account);
+                        $("#realName").val(Data.realName);
+                        $(".nickname").val(Data.nickname);
+                        $("#sex").val(Data.sex);
+                        $("#idCard").val(Data.idCard);
+                        $(".roleId").val(RoleIdToName(Data.roleId));
+                        $(".userStatus").val(statusToName(Data.userStatus));
+                        $("#phone").val(Data.phone);
+                        $("#email").val(Data.email);
+                        detailsBox();
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            { icon: 5,//失败的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            });
+        }
+
+        /**
+         * 重新加载数据
+         * @param name
+         */
+        function reload(name) {
+            table.reload('currentTableId', {
+                page: {
+                    curr: 1
+                }
+                , where: {
+                    "nickname":name
+                }
+            }, 'data');
+        }
+        function saveUser() {
+            var userId=$("#userId").val();
+            var nickname=$("#nickname").val();
+            var roleId=$("#roleId").val();
+            var userStatus=$("#userStatus").val();
+            if(userId=="") userId=null;
+            $.ajax({
+                url:"/user/saveOrUpdateUser",
+                type:'post',
+                data:{
+                    "userId":userId,
+                    "roleId":roleId,
+                    "nickname":nickname,
+                    "userStatus":userStatus,
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        layer.closeAll();
+                        layer.msg(
+                            data.msg,
+                            { icon: 6,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            },function(){
+                                reload("");
+                            })
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            { icon: 5,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            });
+        }
+    });
+
+
+</script>
+<script>
+
+</script>
+
+</body>
+</html>

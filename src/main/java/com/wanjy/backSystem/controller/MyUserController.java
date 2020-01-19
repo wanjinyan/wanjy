@@ -85,6 +85,13 @@ public class MyUserController {
         return Result.success(userIPage.getRecords(),(int) userIPage.getTotal());
     }
 
+    @GetMapping("/getAllUser")
+    public Result getAllUser(){
+        List<User> users = userService.list();
+        if(users!=null)return Result.success(users,users.size());
+        else return Result.error("获取数据失败");
+    }
+
     /**
      * 编辑用户信息
      * @param user

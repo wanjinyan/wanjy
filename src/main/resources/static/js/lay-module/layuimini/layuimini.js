@@ -89,7 +89,7 @@ layui.define(["element", "jquery"], function (exports) {
          */
         this.initLogo = function (data) {
             var html = '<a href="' + data.href + '">\n' +
-                '<img src="' + data.image + '" alt="logo">\n' +
+                '<img src="' + data.icon + '" alt="logo">\n' +
                 '<h1>' + data.title + '</h1>\n' +
                 '</a>';
             $('.layui-layout-admin .layui-logo').html(html);
@@ -100,7 +100,7 @@ layui.define(["element", "jquery"], function (exports) {
          * @param data
          */
         this.initClear = function (data) {
-            $('.layuimini-clear').attr('data-href', data.clearUrl);
+            $('.layuimini-clear').attr('data-href', data.href);
         };
 
         /**

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("backmenu")
@@ -22,6 +24,15 @@ public class MyBackMenuController {
     @RequestMapping("/getAllBackMenu")
     public Result getAllBackMenu(String name){
         return myBackMenuService.getAllBackMenu(name);
+    }
+
+    /**
+     * 查询角色全部菜单
+     * @return
+     */
+    @RequestMapping("/getAllRoleBackMenu")
+    public Map getAllRoleBackMenu(){
+        return myBackMenuService.getAllRoleBackMenu();
     }
 
     /**

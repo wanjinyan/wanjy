@@ -5,6 +5,7 @@
     <title>menu</title>
     <link rel="stylesheet" href="../lib/layui-v2.5.4/css/layui.css" media="all">
     <link rel="stylesheet" href="../css/public.css" media="all">
+    <link rel="stylesheet" href="../lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
     <style>
         .layui-btn:not(.layui-btn-lg ):not(.layui-btn-sm):not(.layui-btn-xs) {
             height: 34px;
@@ -12,8 +13,73 @@
             padding: 0 8px;
         }
     </style>
+
 </head>
 <body>
+<form class="layui-form layui-form-pane" id="test" style="display:none">
+    <div class="layui-form-item" >
+        <input type="hidden" id="roleId">
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline" style="margin: 10px">
+            <label class="layui-form-label" style="width: 100px">菜单名称</label>
+            <div class="layui-input-inline">
+                <input type="text" id="title" autocomplete="off" class="layui-input" style="width: 300px">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline" style="margin: 10px">
+            <label for="" class="layui-form-label" style="width: 100px">菜单图标</label>
+            <div class="layui-input-inline" style="width: 300px">
+                    <input type="text" id="iconPicker" lay-filter="iconPicker" class="hide">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline" style="margin: 10px">
+            <label class="layui-form-label" style="width: 100px">权限标识</label>
+            <div class="layui-input-inline">
+                <input type="text" id="authority" autocomplete="off" class="layui-input" style="width: 300px">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline" style="margin: 10px">
+            <label class="layui-form-label" style="width: 100px">父级菜单</label>
+            <div class="layui-input-inline" style="width: 300px">
+                <select name="icon" id="parentId" lay-verify="required"  lay-search="" >
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline" style="margin: 10px">
+            <label class="layui-form-label" style="width: 100px">菜单url</label>
+            <div class="layui-input-inline">
+                <input type="text" id="href" autocomplete="off" class="layui-input" style="width: 300px">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline" style="margin: 10px">
+            <label class="layui-form-label" style="width: 100px">排序号</label>
+            <div class="layui-input-inline">
+                <input type="text" id="orderNumber" autocomplete="off" class="layui-input" style="width: 300px">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline" style="margin: 10px">
+            <label class="layui-form-label" style="width: 100px">类型</label>
+            <div class="layui-input-inline">
+                <input type="text" id="isMenu" autocomplete="off" class="layui-input" style="width: 300px">
+            </div>
+        </div>
+    </div>
+</form>
 <div class="layuimini-container">
     <div class="layuimini-main">
         <blockquote class="layui-elem-quote">
@@ -38,13 +104,30 @@
 <script src="../lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
 <script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script>
-    layui.use(['table', 'treetable'], function () {
+    layui.use(['table', 'treetable','iconPickerFa', 'form'], function () {
         var $ = layui.jquery;
         var table = layui.table;
         var treetable = layui.treetable;
+        var iconPickerFa = layui.iconPickerFa;
 
-        // 渲染表格
-        layer.load(2);
+        iconPickerFa.render({
+            // 选择器，推荐使用input
+            elem: '#iconPicker',
+            // fa 图标接口
+            url: "../lib/font-awesome-4.7.0/less/variables.less",
+            // 是否开启搜索：true/false，默认true
+            search: true,
+            // 是否开启分页：true/false，默认true
+            page: true,
+            // 每页显示数量，默认12
+            limit: 12,
+            // 点击回调
+            click: function (data) {
+            },
+            // 渲染成功后的回调
+            success: function (d) {
+            }
+        });
         treetable.render({
             treeColIndex: 1,
             treeSpid: -1,
@@ -57,9 +140,9 @@
                 [
                     [
                         {type: 'numbers'},
-                        {field: 'menuName', minWidth: 200, title: '菜单名称'},
+                        {field: 'title', minWidth: 200, title: '菜单名称'},
                         {field: 'authority', title: '权限标识'},
-                        {field: 'menuUrl', title: '菜单url'},
+                        {field: 'href', title: '菜单url'},
                         {field: 'orderNumber', width: 80, align: 'center', title: '排序号'},
                         {
                             field: 'isMenu', width: 80, align: 'center', templet: function (d) {
@@ -80,13 +163,24 @@
                 layer.closeAll('loading');
             }
         });
-
+        /**
+         * 全部展开
+         */
         $('#btn-expand').click(function () {
             treetable.expandAll('#munu-table');
         });
-
+        /**
+         * 全部折叠
+         */
         $('#btn-fold').click(function () {
             treetable.foldAll('#munu-table');
+        });
+        /**
+         * 添加
+         */
+        $('#btn-add').click(function () {
+
+            editBox();
         });
 
         //监听工具条
@@ -100,6 +194,29 @@
                 layer.msg('修改' + data.id);
             }
         });
+        /**
+         * 弹出编辑框
+         */
+        function editBox() {
+            layer.open({
+                type:1,
+                area:["600px"],
+                title: '菜单编辑',
+                content: $("#test"),
+                shade: 0,
+                btn: ['提交', '取消']
+                ,btn1: function(){
+                },
+                btn2: function(){
+                    layer.closeAll();
+                },
+                cancel: function(layero,index){
+                    layer.closeAll();
+                }
+            });
+        }
+
+
     });
 </script>
 </body>

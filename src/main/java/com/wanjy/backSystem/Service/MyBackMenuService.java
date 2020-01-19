@@ -6,7 +6,9 @@ import com.wanjy.common.util.Result;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface MyBackMenuService {
     public Result getAllBackMenu(String name);
+    public Map getAllRoleBackMenu();
 }

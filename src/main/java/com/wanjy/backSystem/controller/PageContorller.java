@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 页面控制层 负责页面跳转
@@ -83,7 +85,24 @@ public class PageContorller {
     @GetMapping("/userInfo")
     public ModelAndView userInfo(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("back-system/page/table.html");
+        modelAndView.setViewName("back-system/page/user_info.html");
         return modelAndView;
+    }
+    @GetMapping("/shopInfo")
+    public ModelAndView shopInfo(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("back-system/page/shop_store_info.html");
+        return modelAndView;
+    }
+    @GetMapping("/addshop")
+    public ModelAndView addshop(HttpServletRequest request,String shopStoreId){
+        Map map =new HashMap();
+        if(shopStoreId !=null && !shopStoreId.equals("")){
+            map.put("shopStoreId",shopStoreId);
+        }
+        else {
+            map.put("shopStoreId","");
+        }
+        return new ModelAndView("back-system/page/addshop.html",map);
     }
 }

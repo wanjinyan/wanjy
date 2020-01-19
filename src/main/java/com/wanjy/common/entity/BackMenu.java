@@ -33,7 +33,7 @@ public class BackMenu implements Serializable {
     /**
      * 菜单名字
      */
-    private String menuName;
+    private String title;
 
     /**
      * 排序
@@ -43,12 +43,12 @@ public class BackMenu implements Serializable {
     /**
      * 菜单地址
      */
-    private String menuUrl;
+    private String href;
 
     /**
      * 菜单图标
      */
-    private String menuIcon;
+    private String icon;
 
     /**
      * 创建时间
@@ -80,5 +80,8 @@ public class BackMenu implements Serializable {
      */
     private String parentId;
 
-
+    /**
+     * 展示方式
+     */
+    private String target;
 }
