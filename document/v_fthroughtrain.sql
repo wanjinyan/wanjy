@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : mysql
 Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : v_fthroughtrain
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2020-01-17 21:43:40
+Date: 2020-01-20 10:18:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,23 +21,38 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `back_menu`;
 CREATE TABLE `back_menu` (
   `menu_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '菜单id',
-  `menu_name` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '菜单名字',
+  `title` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '菜单名字',
   `order_number` int(11) DEFAULT NULL COMMENT '排序',
-  `menu_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '菜单地址',
-  `menu_icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '菜单图标',
+  `href` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '菜单地址',
+  `icon` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '菜单图标',
   `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `authority` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '权限',
   `checked` int(11) DEFAULT NULL COMMENT '选择',
   `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `is_menu` int(11) DEFAULT NULL COMMENT '菜单类型',
   `parent_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '父级菜单',
+  `target` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '展示方式',
   PRIMARY KEY (`menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='菜单表';
 
 -- ----------------------------
 -- Records of back_menu
 -- ----------------------------
-INSERT INTO `back_menu` VALUES ('1', '系统菜单管理', '1', 'menu', 'fa fa-window-maximize', '2020-01-14 15:34:56', 'admin:admin', '0', '2020-01-14 15:35:28', '0', '-1');
+INSERT INTO `back_menu` VALUES ('0', '管理员首页', '1', '/welcome', 'fa fa-home', '2020-01-19 12:32:50', 'admin:admin', '0', '2020-01-19 12:32:50', '0', '-1', '_self');
+INSERT INTO `back_menu` VALUES ('1', '农家蔬果直通车', '1', '', 'images/logo.png', '2020-01-19 12:32:51', 'admin:admin', '0', '2020-01-19 12:32:51', '0', '-1', '_self');
+INSERT INTO `back_menu` VALUES ('10', '角色管理', '1', '/role', 'fa fa-file-text', '2020-01-19 13:41:18', 'admin:admin', '0', '2020-01-19 13:41:18', '0', '8', '_self');
+INSERT INTO `back_menu` VALUES ('11', '授权管理', '1', '/rolepermission', 'fa fa-file-text', '2020-01-19 13:41:23', 'admin:admin', '0', '2020-01-19 13:41:23', '0', '8', '_self');
+INSERT INTO `back_menu` VALUES ('12', '商家管理', '3', '', 'fa fa-calendar', '2020-01-19 13:50:43', 'admin:admin', '0', '2020-01-19 13:50:43', '0', '2', '_self');
+INSERT INTO `back_menu` VALUES ('13', '商家信息', '1', '/shopInfo', 'fa fa-list-alt', '2020-01-19 13:43:19', 'admin:admin', '0', '2020-01-19 13:43:19', '0', '12', '_self');
+INSERT INTO `back_menu` VALUES ('14', '商家录入', '1', '/addshop', 'fa fa-navicon', '2020-01-19 13:43:22', 'admin:admin', '0', '2020-01-19 13:43:22', '0', '12', '_self');
+INSERT INTO `back_menu` VALUES ('2', '后台管理系统', '1', '', 'fa fa-address-book', '2020-01-19 12:32:53', 'admin:admin', '0', '2020-01-19 12:32:53', '0', '-1', '_self');
+INSERT INTO `back_menu` VALUES ('3', '系统菜单管理', '1', '/menu', 'fa fa-window-maximize', '2020-01-19 14:42:59', 'admin:admin', '0', '2020-01-19 14:42:59', '0', '2', '_self');
+INSERT INTO `back_menu` VALUES ('4', '清理缓存', null, 'api/clear.json', null, '2020-01-19 12:50:23', 'admin:admin', null, '2020-01-19 12:50:23', null, '-1', '');
+INSERT INTO `back_menu` VALUES ('5', '用户管理', '4', '', 'fa fa-calendar', '2020-01-19 13:50:34', 'admin:admin', '0', '2020-01-19 13:50:34', '0', '2', '_self');
+INSERT INTO `back_menu` VALUES ('6', '用户数据统计', '1', '/role', 'fa fa-file-text', '2020-01-19 13:38:31', 'admin:admin', '0', '2020-01-19 13:38:31', '0', '5', '_self');
+INSERT INTO `back_menu` VALUES ('7', '用户信息', '1', '/userInfo', 'fa fa-file-text', '2020-01-19 13:38:37', 'admin:admin', '0', '2020-01-19 13:38:37', '0', '5', '_self');
+INSERT INTO `back_menu` VALUES ('8', '权限管理', '2', '', 'fa fa-calendar', '2020-01-19 13:50:39', 'admin:admin', '0', '2020-01-19 13:50:39', '0', '2', '_self');
+INSERT INTO `back_menu` VALUES ('9', '资源管理', '1', '/permission', 'fa fa-file-text', '2020-01-19 13:41:17', 'admin:admin', '0', '2020-01-19 13:41:17', '0', '8', '_self');
 
 -- ----------------------------
 -- Table structure for banner
@@ -340,6 +355,11 @@ CREATE TABLE `shop_store` (
 -- ----------------------------
 -- Records of shop_store
 -- ----------------------------
+INSERT INTO `shop_store` VALUES ('1', '理发的', '就是理发的', '011732df4d5d9b6270e5b9ce59453d42', '2020-01-18 12:15:06', '0');
+INSERT INTO `shop_store` VALUES ('20cc494f788298aceb7c072bd09d0a7c', '苹果店', '买苹果的', 'b5966d135478ad38322f05f7998fb24b', '2020-01-19 11:58:06', '0');
+INSERT INTO `shop_store` VALUES ('531b593d35dc3557c513d707301e7b6f', '香蕉店', '买香蕉', '011732df4d5d9b6270e5b9ce59453d42', '2020-01-18 13:07:17', '1');
+INSERT INTO `shop_store` VALUES ('5503cb4690d70d7b621dd8716824fd71', '苹果店', '买苹果的', 'b5966d135478ad38322f05f7998fb24b', '2020-01-19 11:58:12', '1');
+INSERT INTO `shop_store` VALUES ('c8e1d9cd703a3aa311dcacf8b8782488', '洗头店', '洗头的', '011732df4d5d9b6270e5b9ce59453d42', null, '1');
 
 -- ----------------------------
 -- Table structure for user
