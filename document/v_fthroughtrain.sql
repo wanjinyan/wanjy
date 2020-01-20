@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2020-01-20 10:18:59
+Date: 2020-01-20 14:13:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,20 +39,32 @@ CREATE TABLE `back_menu` (
 -- Records of back_menu
 -- ----------------------------
 INSERT INTO `back_menu` VALUES ('0', '管理员首页', '1', '/welcome', 'fa fa-home', '2020-01-19 12:32:50', 'admin:admin', '0', '2020-01-19 12:32:50', '0', '-1', '_self');
-INSERT INTO `back_menu` VALUES ('1', '农家蔬果直通车', '1', '', 'images/logo.png', '2020-01-19 12:32:51', 'admin:admin', '0', '2020-01-19 12:32:51', '0', '-1', '_self');
+INSERT INTO `back_menu` VALUES ('1', '农家蔬果直通车', '1', '', 'images/logo.png', '2020-01-20 12:38:08', '', '0', '2020-01-20 12:38:08', '0', '-1', '_self');
 INSERT INTO `back_menu` VALUES ('10', '角色管理', '1', '/role', 'fa fa-file-text', '2020-01-19 13:41:18', 'admin:admin', '0', '2020-01-19 13:41:18', '0', '8', '_self');
 INSERT INTO `back_menu` VALUES ('11', '授权管理', '1', '/rolepermission', 'fa fa-file-text', '2020-01-19 13:41:23', 'admin:admin', '0', '2020-01-19 13:41:23', '0', '8', '_self');
 INSERT INTO `back_menu` VALUES ('12', '商家管理', '3', '', 'fa fa-calendar', '2020-01-19 13:50:43', 'admin:admin', '0', '2020-01-19 13:50:43', '0', '2', '_self');
 INSERT INTO `back_menu` VALUES ('13', '商家信息', '1', '/shopInfo', 'fa fa-list-alt', '2020-01-19 13:43:19', 'admin:admin', '0', '2020-01-19 13:43:19', '0', '12', '_self');
 INSERT INTO `back_menu` VALUES ('14', '商家录入', '1', '/addshop', 'fa fa-navicon', '2020-01-19 13:43:22', 'admin:admin', '0', '2020-01-19 13:43:22', '0', '12', '_self');
-INSERT INTO `back_menu` VALUES ('2', '后台管理系统', '1', '', 'fa fa-address-book', '2020-01-19 12:32:53', 'admin:admin', '0', '2020-01-19 12:32:53', '0', '-1', '_self');
+INSERT INTO `back_menu` VALUES ('15', '商家首页', '1', '/shopwelcome', 'fa fa-home', '2020-01-20 12:37:48', 'admin:shop', '0', '2020-01-20 12:37:48', '0', '-1', '_self');
+INSERT INTO `back_menu` VALUES ('15290d4ade6929166600962e1d933180', '优惠券管理', '6', '', 'fa fa-align-justify', '2020-01-20 13:19:26', '', '0', null, '0', '2', '_self');
+INSERT INTO `back_menu` VALUES ('2', '后台管理系统', '1', '', 'fa fa-address-book', '2020-01-20 12:38:24', '', '0', '2020-01-20 12:38:24', '0', '-1', '_self');
+INSERT INTO `back_menu` VALUES ('2d7d6459e88c186125c2c6ec4ddbda96', '订单管理', '8', '', 'fa ', '2020-01-20 13:37:11', 'admin:shop', '0', '2020-01-20 13:37:11', '0', '2', '_self');
 INSERT INTO `back_menu` VALUES ('3', '系统菜单管理', '1', '/menu', 'fa fa-window-maximize', '2020-01-19 14:42:59', 'admin:admin', '0', '2020-01-19 14:42:59', '0', '2', '_self');
-INSERT INTO `back_menu` VALUES ('4', '清理缓存', null, 'api/clear.json', null, '2020-01-19 12:50:23', 'admin:admin', null, '2020-01-19 12:50:23', null, '-1', '');
+INSERT INTO `back_menu` VALUES ('336deb632514c6eed96be86206517d57', '订单信息', '8', '/shoporder', 'fa fa-building-o', '2020-01-20 13:37:53', 'admin:shop', '0', '2020-01-20 13:37:53', '0', '2d7d6459e88c186125c2c6ec4ddbda96', '_self');
+INSERT INTO `back_menu` VALUES ('4', '清理缓存', null, 'api/clear.json', null, '2020-01-20 12:38:59', '', null, '2020-01-20 12:38:59', null, '-1', '');
+INSERT INTO `back_menu` VALUES ('424ce3991e7478cd25a2a8e033077b7d', '优惠券信息', '0', '/coupon', 'fa fa-align-justify', '2020-01-20 13:20:11', '', '0', null, '0', '15290d4ade6929166600962e1d933180', '_self');
 INSERT INTO `back_menu` VALUES ('5', '用户管理', '4', '', 'fa fa-calendar', '2020-01-19 13:50:34', 'admin:admin', '0', '2020-01-19 13:50:34', '0', '2', '_self');
 INSERT INTO `back_menu` VALUES ('6', '用户数据统计', '1', '/role', 'fa fa-file-text', '2020-01-19 13:38:31', 'admin:admin', '0', '2020-01-19 13:38:31', '0', '5', '_self');
 INSERT INTO `back_menu` VALUES ('7', '用户信息', '1', '/userInfo', 'fa fa-file-text', '2020-01-19 13:38:37', 'admin:admin', '0', '2020-01-19 13:38:37', '0', '5', '_self');
+INSERT INTO `back_menu` VALUES ('705d5ce1bd8cf779003832b5e4256fb8', '商城菜单管理', '10', '/shopmenu', 'fa fa-group', '2020-01-20 13:43:09', 'admin:admin', '0', null, '0', '2', '_self');
+INSERT INTO `back_menu` VALUES ('7f846532e9865511ee1710495ca07570', '上架商品', '1', '/addgoods', 'fa fa-columns', '2020-01-20 12:11:00', 'admin:shop', '0', null, '0', 'f0ed143af49c280899cc370d8ee5a7b5', '_self');
 INSERT INTO `back_menu` VALUES ('8', '权限管理', '2', '', 'fa fa-calendar', '2020-01-19 13:50:39', 'admin:admin', '0', '2020-01-19 13:50:39', '0', '2', '_self');
 INSERT INTO `back_menu` VALUES ('9', '资源管理', '1', '/permission', 'fa fa-file-text', '2020-01-19 13:41:17', 'admin:admin', '0', '2020-01-19 13:41:17', '0', '8', '_self');
+INSERT INTO `back_menu` VALUES ('b81203b2c06c1538d45f0061c872269a', '商品信息', '0', '/goodsInfo', 'fa fa-diamond', '2020-01-20 12:39:40', '', '0', '2020-01-20 12:39:40', '0', 'f0ed143af49c280899cc370d8ee5a7b5', '_self');
+INSERT INTO `back_menu` VALUES ('b83b2e0847bae9701624a21d652fba39', '轮播图管理', '9', '/bannner', 'fa fa-image', '2020-01-20 13:40:41', 'admin:admin', '0', null, '0', '2', '_self');
+INSERT INTO `back_menu` VALUES ('c5e1e0404a60f8ded6d087111cb6fe51', '分类管理', '7', '', 'fa fa-align-justify', '2020-01-20 13:20:57', 'admin:admin', '0', null, '0', '2', '_self');
+INSERT INTO `back_menu` VALUES ('e6401736e7ad7d15a97651aeb88ac5f0', '分类信息', '0', '/category', 'fa fa-500px', '2020-01-20 13:21:42', 'admin:admin', '0', null, '0', 'c5e1e0404a60f8ded6d087111cb6fe51', '_self');
+INSERT INTO `back_menu` VALUES ('f0ed143af49c280899cc370d8ee5a7b5', '商品管理', '5', '', 'fa fa-shopping-bag', '2020-01-20 12:39:47', '', '0', '2020-01-20 12:39:47', '0', '2', '_self');
 
 -- ----------------------------
 -- Table structure for banner
@@ -261,9 +273,15 @@ CREATE TABLE `permission` (
 -- ----------------------------
 -- Records of permission
 -- ----------------------------
+INSERT INTO `permission` VALUES ('0b528ff5e57b3632aa9e4702850cfc91', '上架商品', '/addgoods', '上架商品');
 INSERT INTO `permission` VALUES ('0c5408f54aef7788f4f303d457b1e2cf', '角色管理', '/role', '角色管理菜单');
 INSERT INTO `permission` VALUES ('1b06e3f7510f0b2670c3a2698643106f', '授权管理', '/rolepermission', '授权管理');
+INSERT INTO `permission` VALUES ('44a1f7b026a2bf03f6c23e6c64815d59', '系统菜单管理', '/menu', '系统菜单管理');
+INSERT INTO `permission` VALUES ('5a97617c30375fcd2073836de67b1572', '商家录入', '/addshop', '商家录入');
+INSERT INTO `permission` VALUES ('b622cdb149c1fb884c4497a104b51d79', '商家信息', '/shopInfo', '商家信息');
+INSERT INTO `permission` VALUES ('ea7eba60c0e0b27cd6d5ce92010c2de6', '商品信息', '/goodsInfo', '商品信息');
 INSERT INTO `permission` VALUES ('f7eb6804cacd39bbea73cf964d81a37a', '资源管理', '/permission', '资源管理');
+INSERT INTO `permission` VALUES ('fc7b96e96b28f895068c073d53683dc5', '用户信息', '/userInfo', '用户信息');
 
 -- ----------------------------
 -- Table structure for person_address
@@ -316,6 +334,11 @@ CREATE TABLE `role_permission` (
 -- Records of role_permission
 -- ----------------------------
 INSERT INTO `role_permission` VALUES ('27eef47f6cd0819d6b4043a872ad0ef0', '1b06e3f7510f0b2670c3a2698643106f', '4');
+INSERT INTO `role_permission` VALUES ('37e0e25209f9277e4503fa0af4e8304e', '0b528ff5e57b3632aa9e4702850cfc91', '3');
+INSERT INTO `role_permission` VALUES ('439840ff5a080c0364a94f13234ae00e', 'fc7b96e96b28f895068c073d53683dc5', '4');
+INSERT INTO `role_permission` VALUES ('4992ed4129466e4be8930a10a559832e', '5a97617c30375fcd2073836de67b1572', '4');
+INSERT INTO `role_permission` VALUES ('5d5b84b48ea0649279c02577c6e00bc0', 'debb8e6ad552ea69c665476cc4e11996', '4');
+INSERT INTO `role_permission` VALUES ('d2a7f183c9f1d7575fd7688e4b4a3ec7', '44a1f7b026a2bf03f6c23e6c64815d59', '4');
 INSERT INTO `role_permission` VALUES ('da71ec4a8b357f615b1a39f90ecab1fa', '0c5408f54aef7788f4f303d457b1e2cf', '4');
 INSERT INTO `role_permission` VALUES ('fe2168bd5da66d8085613dddf4e127e0', 'f7eb6804cacd39bbea73cf964d81a37a', '4');
 
@@ -380,7 +403,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('011732df4d5d9b6270e5b9ce59453d42', 'wanjy', '小猫咪', '72803f8d03ecd02e88976ea822ec260d', 'S8MX', '4', '1', '2020-01-17 15:46:25');
+INSERT INTO `user` VALUES ('011732df4d5d9b6270e5b9ce59453d42', 'wanjy', '小猫咪', '72803f8d03ecd02e88976ea822ec260d', 'S8MX', '3', '1', '2020-01-20 12:14:20');
 INSERT INTO `user` VALUES ('b5966d135478ad38322f05f7998fb24b', 'admin', '管理员', 'be056463f899115df56108efd5a33719', 'b8pt', '4', '1', '2020-01-16 19:26:07');
 
 -- ----------------------------

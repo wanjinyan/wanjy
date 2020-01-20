@@ -1,10 +1,15 @@
 package com.wanjy.backSystem.controller;
 
+import com.wanjy.common.entity.ActiveUser;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,15 +62,24 @@ public class PageContorller {
 
     @GetMapping("/index")
     public ModelAndView index(HttpServletRequest request){
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("back-system/index.html");
-        return modelAndView;
+        Subject subject = SecurityUtils.getSubject();
+        ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+        request.getSession().setAttribute("activeUser", activeUser);
+        Map map =new HashMap();
+        map.put("username",activeUser.getNickname());
+        return new ModelAndView("back-system/index.html",map);
     }
 
     @GetMapping("/welcome")
     public ModelAndView welcome(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("back-system/page/welcome-1.html");
+        return modelAndView;
+    }
+    @GetMapping("/shopwelcome")
+    public ModelAndView shopwelcome(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("back-system/page/welcome-2.html");
         return modelAndView;
     }
 
@@ -104,5 +118,23 @@ public class PageContorller {
             map.put("shopStoreId","");
         }
         return new ModelAndView("back-system/page/addshop.html",map);
+    }
+
+    @GetMapping("/goodsInfo")
+    public ModelAndView goodsInfo(HttpServletRequest request){
+        return new ModelAndView("back-system/page/goodsInfo.html");
+    }
+    @GetMapping("/addgoods")
+    public ModelAndView addgoods(HttpServletRequest request){
+        return new ModelAndView("back-system/page/addgoods.html");
+    }
+
+    @GetMapping("/logout")
+    public void logout(HttpServletRequest request,HttpServletResponse response) {
+        Subject lvSubject=SecurityUtils.getSubject();
+        lvSubject.logout();
+        response.setStatus(302);
+        request.getSession().removeAttribute("activeUser");
+        login1(request);
     }
 }

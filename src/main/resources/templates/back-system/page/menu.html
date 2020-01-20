@@ -18,7 +18,7 @@
 <body>
 <form class="layui-form layui-form-pane" id="test" style="display:none">
     <div class="layui-form-item" >
-        <input type="hidden" id="roleId">
+        <input type="hidden" id="menuId">
     </div>
     <div class="layui-form-item">
         <div class="layui-inline" style="margin: 10px">
@@ -47,11 +47,10 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-inline" style="margin: 10px">
+            <input type="hidden" name="parentId" id="parentId">
             <label class="layui-form-label" style="width: 100px">父级菜单</label>
             <div class="layui-input-inline" style="width: 300px">
-                <select name="icon" id="parentId" lay-verify="required"  lay-search="" >
-                    <option value=""></option>
-                </select>
+                <input type="text"  placeholder="请输入" autocomplete="off" class="layui-input" id="parentname">
             </div>
         </div>
     </div>
@@ -68,14 +67,6 @@
             <label class="layui-form-label" style="width: 100px">排序号</label>
             <div class="layui-input-inline">
                 <input type="text" id="orderNumber" autocomplete="off" class="layui-input" style="width: 300px">
-            </div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-inline" style="margin: 10px">
-            <label class="layui-form-label" style="width: 100px">类型</label>
-            <div class="layui-input-inline">
-                <input type="text" id="isMenu" autocomplete="off" class="layui-input" style="width: 300px">
             </div>
         </div>
     </div>
@@ -104,11 +95,37 @@
 <script src="../lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
 <script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script>
-    layui.use(['table', 'treetable','iconPickerFa', 'form'], function () {
+    layui.use(['table', 'treetable','iconPickerFa', 'form','tableSelect'], function () {
         var $ = layui.jquery;
         var table = layui.table;
         var treetable = layui.treetable;
+        var tableSelect = layui.tableSelect;
         var iconPickerFa = layui.iconPickerFa;
+
+        tableSelect.render({
+            elem: '#parentname',
+            checkedKey: 'title',
+            searchKey: 'name',
+            table: {
+                url: '/backmenu/getAllBackMenuPage',
+                cols:
+                    [
+                        [
+                            { type: 'radio' },
+                            {field: 'title', minWidth: 200, title: '菜单名称'},
+                            {field: 'href', title: '菜单url'}
+                        ]
+                    ]
+            },
+            done: function (elem, data) {
+               var NEWJSON = []
+                layui.each(data.data, function (index, item) {
+                    NEWJSON.push(item.title);
+                    $("#parentId").val(item.menuId);
+                })
+                elem.val(NEWJSON.join(","))
+            }
+        })
 
         iconPickerFa.render({
             // 选择器，推荐使用input
@@ -206,6 +223,7 @@
                 shade: 0,
                 btn: ['提交', '取消']
                 ,btn1: function(){
+                    saveBackMenu();
                 },
                 btn2: function(){
                     layer.closeAll();
@@ -215,7 +233,54 @@
                 }
             });
         }
+        function saveBackMenu() {
+            var title=$("#title").val();
+            var icon=$("#iconPicker").val();
+            var authority=$("#authority").val();
+            var href=$("#href").val();
+            var parentId=$("#parentId").val();
+            var orderNumber=$("#orderNumber").val();
+            var menuId=$("#menuId").val();
+            if(menuId=="") menuId=null;
+            $.ajax({
+                url:"/backmenu/saveOrUpdateBackMenu",
+                type:'post',
+                dataType:'json',
+                data:{
+                    "title":title,
+                    "icon":"fa "+icon,
+                    "authority":authority,
+                    "href":href,
+                    "parentId":parentId,
+                    "orderNumber":orderNumber,
+                    "menuId":menuId,
+                    "title":title,
+                    "isMenu":0,
+                    "checked":0,
+                    "target":"_self"
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        layer.closeAll();
+                        layer.msg(
+                            data.msg,
+                            { icon: 6,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            },function(){
+                                reload("");
+                            })
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            { icon: 5,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
 
+                }
+            });
+        }
 
     });
 </script>
