@@ -27,6 +27,7 @@
         .layui-icon-password {color:#a78369 !important;}
         .layui-icon-password:hover {color:#9dadce !important;}
         .admin-input-username {border-top-style:solid;border-radius:10px 10px 0 0;}
+        .admin-input-password {border-top-style:solid;border-radius:0px 0px 10px 10px;}
         .admin-input-verify {border-radius:0 0 10px 10px;}
         .admin-button {margin-top:20px;font-weight:bold;font-size:18px;width:300px;height:50px;border-radius:5px;background-color:#a78369;border:1px solid #d8b29f}
         .admin-icon {margin-left:260px;margin-top:10px;font-size:30px;}
@@ -48,7 +49,7 @@
             </div>
             <div>
                 <i class="layui-icon layui-icon-password admin-icon"></i>
-                <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input admin-input" value="">
+                <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input admin-input admin-input-password" value="">
             </div>
             <button  type="button" class="layui-btn admin-button" lay-submit="" lay-filter="sign_up">注 册</button>
         </form>

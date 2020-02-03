@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -37,6 +38,7 @@ public class MyUserController {
             user.setRoleId("2");
             user.setSalt(salt);
             user.setPassword(MD5.md5Password(user.getPassword(), salt, 1));
+            user.setRegisterTime(new Date());
             boolean n = userService.save(user);
             if (n) return Result.success("注册成功");
             else return Result.error("注册失败");

@@ -50,6 +50,12 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
         filterChainDefinitionMap.put("/user/login", "anon");
+        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/index", "anon");
+        filterChainDefinitionMap.put("/head", "anon");
+        filterChainDefinitionMap.put("/foot", "anon");
+        filterChainDefinitionMap.put("/product", "anon");
+        filterChainDefinitionMap.put("/products", "anon");
         filterChainDefinitionMap.put("/user/addUser", "anon");
         filterChainDefinitionMap.put("/signup", "anon");
         filterChainDefinitionMap.put("/logout", "logout");
@@ -59,6 +65,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/js/**","anon");
         filterChainDefinitionMap.put("/images/**","anon");
         filterChainDefinitionMap.put("/lib/**","anon");
+        filterChainDefinitionMap.put("/assets/**","anon");
         filterChainDefinitionMap.put("/plugin/**","anon");
         //这里去从数据库动态配置权限
         List<MyRolePermission> rolePermissionList = rolePermissionService.getAllRolePermission();

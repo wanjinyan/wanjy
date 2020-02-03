@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>分步表单</title>
+    <title>上架商品</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -22,44 +22,43 @@
                             <div>
                                 <form class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 40px;">
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">游戏ID:</label>
+                                        <label class="layui-form-label">商品名称:</label>
                                         <div class="layui-input-block">
-                                            <input type="text" placeholder="请填写入款人游戏ID" class="layui-input" lay-verify="number" required />
+                                            <input type="text" placeholder="请填写商品名称" class="layui-input" id="goodsName" required />
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">商品类别:</label>
+                                        <div class="layui-input-block">
+                                            <select lay-verify="required" id="goodsCategoryId">
+                                                <option value="1" selected>水果</option>
+                                                <option value="2">蔬菜</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">展示图片:</label>
+                                        <div class="layui-upload layui-input-block">
+                                            <button type="button" class="layui-btn" id="test1">单图片上传</button>
+                                            <div class="layui-upload-list">
+                                                <img class="layui-upload-img" id="demo1" style="width: 350px;height: 190px">
+                                                <p id="demoText"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">详情图片:</label>
+                                        <div class="layui-upload layui-input-block">
+                                            <button type="button" class="layui-btn" id="test2">多图片上传</button>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                            预览图：
+                                            <div class="layui-upload-list" id="demo2"></div>
+                                        </blockquote>
+                                    </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">入款金额:</label>
-                                        <div class="layui-input-block">
-                                            <input type="number" placeholder="请填写入款金额" value="" class="layui-input" lay-verify="number" required>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">入款类型:</label>
-                                        <div class="layui-input-block">
-                                            <select lay-verify="required">
-                                                <option value="1" selected>保险箱</option>
-                                                <option value="2">现金</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">入款方式:</label>
-                                        <div class="layui-input-block">
-                                            <select lay-verify="required">
-                                                <option value="1" selected>人工入款</option>
-                                                <option value="2">修正</option>
-                                                <option value="3">活动</option>
-                                                <option value="4">佣金</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">备注说明:</label>
-                                        <div class="layui-input-block">
-                                            <textarea placeholder="入款备注" value="" class="layui-textarea"></textarea>
-                                        </div>
-                                    </div>
                                     <div class="layui-form-item">
                                         <div class="layui-input-block">
                                             <button class="layui-btn" lay-submit lay-filter="formStep">
@@ -70,50 +69,34 @@
                                 </form>
                             </div>
                             <div>
-                                <form class="layui-form" style="margin: 0 auto;max-width: 460px;padding-top: 40px;">
+                                <form class="layui-form" style="margin: 0 auto;max-width: 1000px;padding-top: 40px;">
+                                    <table class="layui-table" id="goods_norms">
+                                        <colgroup>
+                                            <col width="200">
+                                            <col width="200">
+                                            <col width="200">
+                                            <col width="200">
+                                            <col width="200">
+                                            <col width="50">
+                                        </colgroup>
+                                        <thead>
+                                        <tr>
+                                            <th>规格名称</th>
+                                            <th>商品库存</th>
+                                            <th>商品原价</th>
+                                            <th>商品现价</th>
+                                            <th>商品状态</th>
+                                            <th><button type="button" class="layui-btn layui-btn-sm" onclick="add_tr()"><i class="layui-icon"></i></button></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
                                     <div class="layui-form-item">
-                                        <label class="layui-form-label">游戏ID:</label>
-                                        <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">639537</div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">账户余额:</label>
-                                        <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">3000 元（保险箱：1000，现金：2000）</div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">入款金额:</label>
-                                        <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">
-                                                <span style="font-size: 18px;color: #333;">1800 元</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">入款类型:</label>
-                                        <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">保险箱</div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">入款方式:</label>
-                                        <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">人工入款</div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">备注说明:</label>
-                                        <div class="layui-input-block">
-                                            <div class="layui-form-mid layui-word-aux">备注说明</div>
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <div class="layui-input-block">
+                                        <div class="layui-input-block" style="text-align: right">
                                             <button type="button" class="layui-btn layui-btn-primary pre">上一步</button>
                                             <button class="layui-btn" lay-submit lay-filter="formStep2">
-                                                &emsp;确认入款&emsp;
+                                                &emsp;确认上架
                                             </button>
                                         </div>
                                     </div>
@@ -149,24 +132,28 @@
 
     </div>
 </div>
+<script src="../lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
 <script src="../lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
 <script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script>
-    layui.use([ 'form', 'step'], function () {
+    layui.use([ 'form', 'step','upload'], function () {
         var $ = layui.$,
             form = layui.form,
-            step = layui.step;
+            step = layui.step,
+            upload = layui.upload;
+        var images=[];
+        var imagesUrl="";
 
         step.render({
             elem: '#stepForm',
             filter: 'stepForm',
             width: '100%', //设置容器宽度
-            stepWidth: '750px',
-            height: '500px',
+            stepWidth: '1000px',
+            height: '700px',
             stepItems: [{
-                title: '填写入款信息'
+                title: '填写商品基本信息'
             }, {
-                title: '确认入款信息'
+                title: '填写商品规格信息'
             }, {
                 title: '完成'
             }]
@@ -179,6 +166,7 @@
         });
 
         form.on('submit(formStep2)', function (data) {
+            addgoods();
             step.next('#stepForm');
             return false;
         });
@@ -190,6 +178,142 @@
         $('.next').click(function () {
             step.next('#stepForm');
         });
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,accept: 'file' //普通文件
+            ,exts: 'png|jpg|gif'
+            ,url: '/imagesUpload' //改成您自己的上传接口
+            ,data:{
+                "name":"file"
+            }
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                if(res.code == 0){
+                    images.push(res.data[0]);
+                    imagesUrl=images.toString();
+                }else {
+                    return layer.msg('上传失败');
+                }
+                console.log(images);
+                console.log(imagesUrl);
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
+        delete_tr = function (obj) {
+            var index=obj.parentNode.parentNode.rowIndex;
+            var tb = document.getElementById("goods_norms");
+            console.log(index);
+            if (tb.rows.length>1){
+                //tb.deleteRow(tb.rows.length-1);
+                tb.deleteRow(index);
+            }
+        }
+        getGoodsNorms = function() {
+            var GoodsNorms = [];
+            var tb=document.getElementById("goods_norms");    //获取table对像
+            for (i = 1; i < tb.rows.length; i++) {
+                var good_norms_temp =  {};
+                if (tb.rows[i].cells[0].getElementsByTagName("INPUT")[0].value==""){
+                    continue;
+                }
+                good_norms_temp['goodsName']=tb.rows[i].cells[0].getElementsByTagName("INPUT")[0].value;
+                good_norms_temp['goodsNumber']=tb.rows[i].cells[1].getElementsByTagName("INPUT")[0].value;
+                good_norms_temp['goodsOldPrice']=tb.rows[i].cells[2].getElementsByTagName("INPUT")[0].value;
+                good_norms_temp['goodsNowPrice']=tb.rows[i].cells[3].getElementsByTagName("INPUT")[0].value;
+                good_norms_temp['goodsStatus']=tb.rows[i].cells[4].getElementsByTagName("INPUT")[0].value;
+                GoodsNorms.push(good_norms_temp);
+            }
+            return GoodsNorms;
+        }
+        add_tr =function () {
+            var tb;
+            tb = document.getElementById("goods_norms");
+            var tr = document.createElement('tr');
+            var td = document.createElement('td');
+            td.innerHTML='<input type="text" placeholder="请填写商品规格名称" class="layui-input"  required />';
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.innerHTML='<input type="text" placeholder="请填写商品库存" class="layui-input"  required />';
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.innerHTML='<input type="text" placeholder="请填写商品原价" class="layui-input"  lay-verify="number" required />';
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.innerHTML='<input type="text" placeholder="请填写商品现价" class="layui-input"  lay-verify="number" required />';
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.innerHTML='<input type="text" placeholder="请填写商品状态" class="layui-input"  required />';
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.innerHTML='<button type="button" class="layui-btn layui-btn-sm" onclick="delete_tr(this)"><i class="layui-icon"></i></button>';
+            tr.appendChild(td);
+            tb.tBodies[0].appendChild(tr);
+        }
+        upload.render({
+            elem: '#test2'
+            ,url: '/imagesUpload' //改成您自己的上传接口
+            ,multiple: true
+            ,accept: 'file' //普通文件
+            ,exts: 'png|jpg|gif'
+            ,data:{
+                "name":"file"
+            }
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img" style="height: 50px">')
+                });
+            }
+            ,done: function(res){
+                if(res.code == 0){
+                    images.push(res.data[0]);
+                    imagesUrl=images.toString();
+                }else {
+                    return layer.msg('上传失败');
+                }
+            }
+        });
+
+        var addgoods=function() {
+            var goodsName=$("#goodsName").val();
+            var goodsCategoryId=$("#goodsCategoryId").val();
+            $.ajax({
+                url: '/goods/addGoods',
+                dataType: 'json',
+                type: 'post',
+                data:{
+                  "goodsName":goodsName,
+                    "goodsCategoryId":goodsCategoryId,
+                    "goodsImagesUrl":imagesUrl,
+                    "goodsNorms":JSON.stringify(getGoodsNorms())
+                },
+                success: function (data) {
+                    if(data.code==0){
+
+                    }
+                    else {
+                        layer.msg(
+                            "获取资源数据失败",
+                            {
+                                icon:6
+                            }
+                        )
+                    }
+                }
+            });
+        }
     })
 </script>
 </body>
