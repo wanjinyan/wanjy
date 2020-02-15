@@ -25,19 +25,14 @@ public class GoodsCategory implements Serializable {
     private String goodsCategoryId;
 
     /**
-     * 类别名字
+     * 类别编号
      */
-    private String goodsCategoryName;
+    private String CategoryId;
 
     /**
-     * 类别描述
+     * 商品编号
      */
-    private String goodsCategoryDescription;
-
-    /**
-     * 类别状态
-     */
-    private Integer goodsCategoryStatus;
+    private String goodsId;
 
 
 }

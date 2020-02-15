@@ -19,10 +19,49 @@ import java.util.Map;
 @Controller
 public class PageContorller {
     @GetMapping("/")
-    public ModelAndView login1(HttpServletRequest request){
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.setViewName("back-system/page/login-2.html");
-        return modelAndView;
+    public ModelAndView index(HttpServletRequest request){
+        return new ModelAndView("fronts/index.html");
+    }
+    @GetMapping("/cart")
+    public ModelAndView cart(HttpServletRequest request){
+        return new ModelAndView("fronts/cart.html");
+    }
+    @GetMapping("/product")
+    public ModelAndView product(String goodsId){
+        Map map = new HashMap();
+        map.put("goodsId",goodsId);
+        return new ModelAndView("fronts/product.html",map);
+    }
+    @GetMapping("/products")
+    public ModelAndView products(HttpServletRequest request){
+        return new ModelAndView("fronts/products.html");
+    }
+    @GetMapping("/head")
+    public ModelAndView head(HttpServletRequest request){
+        ActiveUser activeUser = (ActiveUser)request.getSession().getAttribute("activeUser");
+        Map map =new HashMap();
+        if(activeUser!=null){
+            map.put("username",activeUser.getNickname());
+        }
+        return new ModelAndView("fronts/head.html",map);
+    }
+    @GetMapping("/foot")
+    public ModelAndView foot(HttpServletRequest request){
+        return new ModelAndView("fronts/foot.html");
+    }
+    @GetMapping("/index")
+    public ModelAndView index2(HttpServletRequest request){
+        Subject subject = SecurityUtils.getSubject(); //获取登录凭证
+        ActiveUser activeUser = (ActiveUser) subject.getPrincipal(); //获取登录信息
+        request.getSession().setAttribute("activeUser", activeUser);//将登录信息放到session
+        if(activeUser==null || activeUser.getRole().equals("user:user"))//如果是用户登录往首页跳转
+        {
+            return index(request);
+        }
+        else //如果是管理员和商家登录往后台跳转
+        {
+            return backindex(request);
+        }
     }
 
 
@@ -60,14 +99,12 @@ public class PageContorller {
         return modelAndView;
     }
 
-    @GetMapping("/index")
-    public ModelAndView index(HttpServletRequest request){
-        Subject subject = SecurityUtils.getSubject();
-        ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
-        request.getSession().setAttribute("activeUser", activeUser);
+    @GetMapping("/backindex")
+    public ModelAndView backindex(HttpServletRequest request){
+        ActiveUser activeUser = (ActiveUser)request.getSession().getAttribute("activeUser");
         Map map =new HashMap();
         map.put("username",activeUser.getNickname());
-        return new ModelAndView("back-system/index.html",map);
+        return new ModelAndView("back-system/backindex.html",map);
     }
 
     @GetMapping("/welcome")
@@ -87,6 +124,18 @@ public class PageContorller {
     public ModelAndView notRole(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("back-system/page/404.html");
+        return modelAndView;
+    }
+    @GetMapping(value = "/viewbanner")
+    public ModelAndView viewBanner(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("back-system/page/viewbanner.html");
+        return modelAndView;
+    }
+    @GetMapping(value = "/addbanner")
+    public ModelAndView addBanner(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("back-system/page/addbanner.html");
         return modelAndView;
     }
     @GetMapping(value = "/signup")
@@ -135,6 +184,7 @@ public class PageContorller {
         lvSubject.logout();
         response.setStatus(302);
         request.getSession().removeAttribute("activeUser");
-        login1(request);
+        login(request);
     }
+
 }

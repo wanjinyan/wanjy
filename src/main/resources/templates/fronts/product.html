@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<!--[if lte IE 8]> <html class="oldie" lang="en"> <![endif]-->
+<!--[if IE 9]> <html class="ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="format-detection" content="telephone=no">
+	<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+	<title>Bambino</title>
+	<link rel="stylesheet" href="css/fancySelect.css" />
+	<link rel="stylesheet" href="css/uniform.css" />
+	<link rel="stylesheet" href="css/jquery.bxslider.css" />
+	<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/all.css" />
+	<link media="screen" rel="stylesheet" type="text/css" href="css/screen.css" />
+	<link rel="stylesheet" href="lib/layui-v2.5.4/css/layui.css" media="all">
+	<link rel="stylesheet" href="css/public.css" media="all">
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<input id="goodsId" type="hidden" th:value="${goodsId}"/>
+	<div id="wrapper">
+		<div class="wrapper-holder">
+			<div id="head"></div>
+			
+			<section class="main">
+				<div class="content">
+					<section class="bar">
+						<div class="bar-frame">
+							<ul class="breadcrumbs">
+								<li><a href="/index">首页</a></li>
+								<li>商品详情</li>
+							</ul>
+						</div>
+					</section>
+					<div class="details-info">
+						<div class="slid_box">
+							<ul class="bxslider">
+							</ul>
+							<div id="bx-pager">
+							</div>
+						</div>
+						<div class="description">
+							<div class="head">
+								<h1 class="title" id="goodsName"> </h1>
+								<h3>原价:<s id="goodsOldPrice" ></s>元</h3>
+								<h2>现价:<span id="goodsNowPrice"></span>元</h2>
+							</div>
+							<div class="section">
+								<form class="form-sort page">
+									<fieldset>
+										<div class="row" id="goodsNorms">
+										</div>
+									</fieldset>
+								</form>
+								<form class="form-sort page">
+									<fieldset>
+										<input type="button" value="加入购物车" onclick="addShopCar()" class="btn pink" />
+									</fieldset>
+								</form>
+								<form class="form-sort page">
+									<fieldset>
+										<input type="button" value="立即购买" class="btn pink" />
+									</fieldset>
+								</form>
+
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<hr/>
+					<div class="section">
+						<div id="tabs">
+							<ul>
+								<li><a href="#goodsReturn">评价</a></li>
+								<li><a href="#goodDetials">商品详情</a></li>
+							</ul>
+							<div id="goodDetials">
+								<ul class="goodsImages">
+								</ul>
+							</div>
+							<div id="goodsReturn">
+								<ul class="reviews">
+									<li>
+										<p class="name">John Smith, 25.05.2014</p>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+									</li>
+									<li class="light">
+										<p class="name">Glen Johnson, 24.05.2014</p>
+										<p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+									</li>
+									<li>
+										<p class="name">Susan Blumkin, 21.05.2014</p>
+										<p>Eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+									</li>
+									<li class="light">
+										<p class="name">Chris Harris, 24.05.2014</p>
+										<p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div id="foot"></div>
+	</div>
+	
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/jcarousellite.js"></script>
+	<script type="text/javascript" src="js/jquery.placeholder.js"></script>
+	<script type="text/javascript" src="js/jquery.uniform.min.js"></script>
+	<script type="text/javascript" src="js/fancySelect.js"></script>
+	<script type="text/javascript" src="js/jquery.bxslider.js"></script>
+	<script src="js/jquery-ui-1.10.4.custom.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script src="lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
+	<script>
+        layui.use(['form', ], function () {
+            var form = layui.form
+                , $ = layui.jquery;
+            var goodsNormsList;
+            function goodsNorms(goodsNormsList) {
+                var html = '<label for="goodsNorm">规格:</label>';
+				html += '<select id="goodsNorm" onchange="changInfo()">';
+                $.each(goodsNormsList, function (index, item) {
+                    html+='<option value="'+item.goodsNormsId+'">'+item.goodsName+'</option>>';
+                });
+                html+='</select>';
+                $("#goodsOldPrice").html(goodsNormsList[0].goodsOldPrice);
+                $("#goodsNowPrice").html(goodsNormsList[0].goodsNowPrice);
+                $("#goodsNorms").append(html);
+            }
+            changInfo=function(){
+                $.each(goodsNormsList, function (index, item) {
+                    if(item.goodsNormsId==$("#goodsNorm").val()){
+                        $("#goodsOldPrice").html(item.goodsOldPrice);
+                        $("#goodsNowPrice").html(item.goodsNowPrice);
+                    }
+                });
+            };
+            addShopCar=function(){
+                $.ajax({
+                    url: "/shopcar/addShopcar",
+                    type: 'post',
+                    dataType:'json',
+                    data:{
+                        "goodsId":$("#goodsId").val(),
+						"goodsNormsId":$("#goodsNorm").val()
+
+                    },
+                    success: function (data) {
+                        if (data.code == 0) {
+                            layer.msg(
+                                data.msg,
+								{
+                                    icon: 6,//成功的表情
+                                    time: 1000 //1秒关闭（如果不配置，默认是3秒）
+								}
+							)
+                        }
+                        else {
+                            layer.msg(
+                                data.msg,
+                                {
+                                    icon: 5,//失败的表情
+                                    time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                                })
+                        }
+
+                    },
+                    error:function (data) {
+                        layer.msg(
+                            "加入购物车失败 请登录",
+                            {
+                                icon: 5,//失败的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+                })
+            };
+            getGoodsInfo();
+            function getGoodsInfo() {
+                var goodsId=$("#goodsId").val();
+                console.log(goodsId);
+                $.ajax({
+                    url: "/goods/getGoodsInfoBygoodsId",
+                    type: 'get',
+                    dataType:'json',
+                    data:{
+                        "goodsId":goodsId
+                    },
+                    success: function (data) {
+                        if (data.code == 0) {
+                            var count = data.count;
+                            var data = data.data;
+                            var imagesUrl=data.goodsImages.goodsImagesUrl;
+                            var imageUrl=imagesUrl.split(',');
+                            goodsImages(imageUrl);
+                            var goods=data.goods;
+                            $("#goodsName").html(goods.goodsName);
+							goodsNormsList=data.goodsNormsList;
+                            goodsNorms(goodsNormsList);
+                        }
+                        else {
+                            layer.msg(
+                                data.msg,
+                                {
+                                    icon: 5,//失败的表情
+                                    time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                                })
+                        }
+
+                    }
+                })
+            }
+            function goodsImages(UrlList) {
+                var html1="";
+                var html2="";
+                var html3="";
+                html1+='<li><img src="'+UrlList[0]+'" /></li>'
+                for(var i=0;i<UrlList.length;i++){
+                    html3+='<li><img src="'+UrlList[i]+'" width="100%"/></li>'
+                }
+                for(var i=0;i<UrlList.length&&i<3;i++){
+                    html2+='<a data-slide-index="'+i+'"><img src="'+UrlList[i]+'" /></a>';
+                }
+                $(".bxslider").append(html1);
+                $("#bx-pager").append(html2);
+                $(".goodsImages").append(html3);
+            }
+        });
+        $("#head").load("/head");//加载头部
+        $("#foot").load("/foot");//加载尾部
+	</script>
+</body>
+</html>

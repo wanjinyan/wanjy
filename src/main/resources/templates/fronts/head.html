@@ -1,0 +1,47 @@
+
+<div class="header-holder">
+    <header id="header">
+        <span class="logo"><a href="/index">农家蔬果直通车</a></span>
+        <div class="tools-nav_holder">
+            <ul class="tools-nav" th:if="${username} eq null">
+                <li class="login"><a href="/index">首页</a></li>
+                <li class="login"><a href="/login">登录</a></li>
+                <li class="login"><a href="/signup">注册</a></li>
+            </ul>
+            <ul class="tools-nav" th:if="${username} ne null">
+                <li class="login"><a href="/index">首页</a></li>
+                <li class="login"><a href="/login" th:text="${username}"></a></li>
+                <li class="login"><a href="/logout">退出</a></li>
+            </ul>
+            <div class="checkout">
+                <span>3 products, <span class="pink">$380,50</span></span>
+                <a href="/cart" class="btn btn_checkout">购物车</a>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <nav id="nav">
+            <ul class="navi">
+                <li><a href="/products">Our collection</a></li>
+                <li><a href="/products">Top products </a></li>
+                <li><a href="/products">Best sellers</a></li>
+                <li><a href="/products">Gifts</a></li>
+                <li><a href="/products">Promotions</a></li>
+            </ul>
+            <div  class="ul_search">
+                <a class="search" href="#"><span>search</span></a>
+                <form method="get" class="searchform" action="#">
+                    <input type="text" class="field" name="s" id="s" placeholder="搜你所爱" />
+                    <input type="submit" class="submit" value=""  />
+                </form>
+            </div >
+        </nav>
+    </header>
+</div>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jcarousellite.js"></script>
+<script type="text/javascript" src="js/jquery.placeholder.js"></script>
+<script type="text/javascript" src="js/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="js/fancySelect.js"></script>
+<script type="text/javascript" src="js/jquery.bxslider.js"></script>
+<script src="js/jquery-ui-1.10.4.custom.js"></script>
+<script type="text/javascript" src="js/main.js"></script>

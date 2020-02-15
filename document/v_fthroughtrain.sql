@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2020-01-20 14:13:52
+Date: 2020-02-03 20:32:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -132,6 +132,8 @@ CREATE TABLE `goods` (
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
+INSERT INTO `goods` VALUES ('0988f90f2c1d5184e37a9dc93e46ec18', '苹果', '2020-02-03 13:59:24', '011732df4d5d9b6270e5b9ce59453d42');
+INSERT INTO `goods` VALUES ('6c9b0f1cbf04de7c8f5f36b3056b9b31', '香蕉', '2020-02-03 14:01:57', '011732df4d5d9b6270e5b9ce59453d42');
 
 -- ----------------------------
 -- Table structure for goods_category
@@ -155,7 +157,7 @@ CREATE TABLE `goods_category` (
 DROP TABLE IF EXISTS `goods_images`;
 CREATE TABLE `goods_images` (
   `goods_images_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `goods_images_url` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '图片地址',
+  `goods_images_url` varchar(1024) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '图片地址',
   `goods_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '商品编号',
   PRIMARY KEY (`goods_images_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='商品详情页表';
@@ -163,6 +165,8 @@ CREATE TABLE `goods_images` (
 -- ----------------------------
 -- Records of goods_images
 -- ----------------------------
+INSERT INTO `goods_images` VALUES ('dc369b82441e2350a1153ec473a30751', 'G:\\毕业设计\\images\\e0b32c4552784442bdb9353344347181.jpg,G:\\毕业设计\\images\\e27893ad9ff5486db5b438a6d4da24a0.jpg,G:\\毕业设计\\images\\d19f27f3a7a14e1ba04ea1e28faf8a92.jpg,G:\\毕业设计\\images\\507b2d62283f41ec84a90f8535285ab5.jpg', '6c9b0f1cbf04de7c8f5f36b3056b9b31');
+INSERT INTO `goods_images` VALUES ('e1f31cc91f58c32b00a9f11145840384', 'G:\\毕业设计\\images\\e0b32c4552784442bdb9353344347181.jpg,G:\\毕业设计\\images\\e27893ad9ff5486db5b438a6d4da24a0.jpg,G:\\毕业设计\\images\\d19f27f3a7a14e1ba04ea1e28faf8a92.jpg,G:\\毕业设计\\images\\507b2d62283f41ec84a90f8535285ab5.jpg', '0988f90f2c1d5184e37a9dc93e46ec18');
 
 -- ----------------------------
 -- Table structure for goods_norms
@@ -182,6 +186,11 @@ CREATE TABLE `goods_norms` (
 -- ----------------------------
 -- Records of goods_norms
 -- ----------------------------
+INSERT INTO `goods_norms` VALUES ('769d6a3b4a5aac818b228803c78b5a09', '0988f90f2c1d5184e37a9dc93e46ec18', '2.00', '2.00', '2', '2', '2');
+INSERT INTO `goods_norms` VALUES ('8a23d34eae2e77e5ac933cdb9e644052', '6c9b0f1cbf04de7c8f5f36b3056b9b31', '3.00', '3.00', '3', '3', '3');
+INSERT INTO `goods_norms` VALUES ('a767eda66352e3420ce6340db28bada3', '6c9b0f1cbf04de7c8f5f36b3056b9b31', '4.00', '4.00', '4', '4', '4');
+INSERT INTO `goods_norms` VALUES ('c4bc114245ef7a1f70c7b16ee62cd9c0', '6c9b0f1cbf04de7c8f5f36b3056b9b31', '5.00', '5.00', '5', '5', '5');
+INSERT INTO `goods_norms` VALUES ('cefcf484bded2a801d50e52ff69b85d4', '0988f90f2c1d5184e37a9dc93e46ec18', '1.00', '1.00', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for goods_return
@@ -404,7 +413,9 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('011732df4d5d9b6270e5b9ce59453d42', 'wanjy', '小猫咪', '72803f8d03ecd02e88976ea822ec260d', 'S8MX', '3', '1', '2020-01-20 12:14:20');
+INSERT INTO `user` VALUES ('4c0a8228f927b6b252e10f6b8323c347', 'zs', '大宝贝', '248e568de4e5525ed9bacc26ed79549c', '7gsR', '2', '1', '2020-02-03 10:02:20');
 INSERT INTO `user` VALUES ('b5966d135478ad38322f05f7998fb24b', 'admin', '管理员', 'be056463f899115df56108efd5a33719', 'b8pt', '4', '1', '2020-01-16 19:26:07');
+INSERT INTO `user` VALUES ('cf21724fde2550b3b9936842d6adbf83', 'zhousong', '大宝贝', '0b6d4e518e7217245af003f427b900e9', 'iPdD', '2', '1', '2020-02-03 10:03:48');
 
 -- ----------------------------
 -- Table structure for user_coupon
