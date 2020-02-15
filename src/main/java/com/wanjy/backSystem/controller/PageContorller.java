@@ -27,8 +27,10 @@ public class PageContorller {
         return new ModelAndView("fronts/cart.html");
     }
     @GetMapping("/product")
-    public ModelAndView product(HttpServletRequest request){
-        return new ModelAndView("fronts/product.html");
+    public ModelAndView product(String goodsId){
+        Map map = new HashMap();
+        map.put("goodsId",goodsId);
+        return new ModelAndView("fronts/product.html",map);
     }
     @GetMapping("/products")
     public ModelAndView products(HttpServletRequest request){
@@ -122,6 +124,18 @@ public class PageContorller {
     public ModelAndView notRole(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("back-system/page/404.html");
+        return modelAndView;
+    }
+    @GetMapping(value = "/viewbanner")
+    public ModelAndView viewBanner(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("back-system/page/viewbanner.html");
+        return modelAndView;
+    }
+    @GetMapping(value = "/addbanner")
+    public ModelAndView addBanner(HttpServletRequest request){
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("back-system/page/addbanner.html");
         return modelAndView;
     }
     @GetMapping(value = "/signup")

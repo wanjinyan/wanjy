@@ -607,7 +607,7 @@ div.selector {
 .breadcrumbs a {color: #b4aaa5;}
 .item-product{
 	border-radius:0;
-	text-align: center;
+	text-align: left;
 	margin: 0 0 0 -35px;
 	overflow: hidden;
 }
@@ -760,19 +760,19 @@ div.selector select {
 .list_table .braun.last{
 	border-radius: 0 5px 0 0;
 	behavior: url(css/PIE.htc);
-	width: 5%;
+	width: 7%;
 }
 .list_table .braun.price,.list_table  .white.two{
-	width: 10%;
+	width: 9%;
 }
 .list_table .braun.qua,.list_table .white.three{
-	width: 15%;
+	width: 10%;
 }
 .list_table .braun.total,.list_table .white.four{
 	width: 10%;
 }
 .list_table  .white.first{
-	width: 58%;
+	width: 50%;
 	padding:10px 45px 10px 10px;
 	border-left:1px solid #ece8e2; 
 	border-right:1px solid #ece8e2; 

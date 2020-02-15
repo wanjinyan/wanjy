@@ -15,6 +15,7 @@
 	<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/all.css" />
 	<link media="screen" rel="stylesheet" type="text/css" href="css/screen.css" />
+
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -33,151 +34,20 @@
 							</ul>
 						</div>
 					</section>
-					<table class="list_table">
+					<table class="list_table" id="shopcar">
 						<tr>
 							<td class="braun first">
-								<span>Item</span>
+								<span>商品</span>
 							</td>
 							<td class="braun price">
-								<span>Price</span>
+								<span>单价(元)</span>
 							</td>
-							<td class="braun qua"><span>Quantity</span></td>
-							<td class="braun total"><span>Total</span></td>
+							<td class="braun last">数量</td>
+							<td class="braun qua"><span>规格</span></td>
+							<td class="braun total"><span>总价(元)</span></td>
 							<td class="braun last"></td>
 						</tr>
-						<tr>
-							<td class="white first">
-								<img src="images/pic_13.png" height="131" width="90" alt="" />
-								<div class="description">
-									<h3><a href="#"> Lorem ipsum dolor sit</a></h3>
-									<p>Dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.</p>
-								</div>
-							</td>
-							<td class="white two">$80.50</td>
-							<td class="white three">
-								<div class="row">
-									<select id="size">
-										<option>1</option>
-										<option>2</option>
-									</select>
-								</div>
-							</td>
-							<td class="white four">$80.50</td>
-							<td class="white last"><div class="row"><a class="btn-delete" href="#">delete</a></div></td>
-						</tr>
-						<tr>
-							<td class="white first">
-								<img src="images/pic_14.png" height="131" width="90" alt="" />
-								<div class="description">
-									<div class="description">
-										<h3><a href="#">Ducimus qui blanditiis praesentium</a></h3>
-										<p>Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime.</p>
-									</div>
-								</div>
-							</td>
-							<td class="white two">$125.00</td>
-							<td class="white three">
-								<div class="row">
-									<select id="quantity">
-										<option>1</option>
-										<option>2</option>
-									</select>
-								</div>
-							</td>
-							<td class="white four">$125.00</td>
-							<td class="white last"><div class="row"><a class="btn-delete" href="#">delete</a></div></td>
-						</tr>
-						<tr>
-							<td class="white first">
-								<img src="images/pic_15.png" height="131" width="90" alt="" />
-								<div class="description">
-									<div class="description">
-										<h3><a href="#">Temporibus autem quibusdam</a></h3>
-										<p>Omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas</p>
-									</div>
-								</div>
-							</td>
-							<td class="white two">$125.00</td>
-							<td class="white three">
-								<div class="row">
-									<select id="quantity-2">
-										<option>1</option>
-										<option>2</option>
-									</select>
-								</div>
-							</td>
-							<td class="white four">$125.00</td>
-							<td class="white last"><div class="row"><a class="btn-delete" href="#">delete</a></div></td>
-						</tr>
 					</table>
-					<ul class="list-table" style="display: none;">
-					<li>
-						<div class="rows rows-item">
-							<img src="images/pic_13.png" height="131" width="90" alt="" />
-							<h3><a href="#">Lorem ipsum dolor sit</a></h3>
-						</div>
-						<div class="rows-holder">
-							<div class="rows rows-select">
-								<div class="row">
-									<select id="quantity">
-										<option>1</option>
-										<option>2</option>
-									</select>
-								</div>
-							</div>
-							<div class="rows rows-price">
-								<span>$80.50</span>
-							</div>
-							<div class="rows rows-delete">
-								<a class="btn-delete" href="#">delete</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="rows rows-item">
-							<img src="images/pic_14.png" height="131" width="90" alt="" />
-							<h3><a href="#">Ducimus qui blanditiis praesentium</a></h3>
-						</div>
-						<div class="rows-holder">
-							<div class="rows rows-select">
-								<div class="row">
-									<select id="quantity-2">
-										<option>1</option>
-										<option>2</option>
-									</select>
-								</div>
-							</div>
-							<div class="rows rows-price">
-								<span>$125.00</span>
-							</div>
-							<div class="rows rows-delete">
-								<a class="btn-delete" href="#">delete</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="rows rows-item">
-							<img src="images/pic_15.png" height="131" width="90" alt="" />
-							<h3><a href="#">Temporibus autem quibusdam</a></h3>
-						</div>
-						<div class="rows-holder">
-							<div class="rows rows-select">
-								<div class="row">
-									<select id="quantity-2">
-										<option>1</option>
-										<option>2</option>
-									</select>
-								</div>
-							</div>
-							<div class="rows rows-price">
-								<span>$125.00</span>
-							</div>
-							<div class="rows rows-delete">
-								<a class="btn-delete" href="#">delete</a>
-							</div>
-						</div>
-					</li>
-				</ul>
 					<div class="box_sub_total">
 						<h4>Subtotal: $380.50</h4>
 						<p>+ shippment: $9.99</p>
@@ -198,9 +68,106 @@
 	<script type="text/javascript" src="js/jquery.bxslider.js"></script>
 	<script src="js/jquery-ui-1.10.4.custom.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script src="lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
+
 	<script>
+        layui.use(['form', ], function () {
+            var form = layui.form
+                , $ = layui.jquery;
+            getshopcar();
+            choseNorms=function(obj){
+
+                console.log(obj);
+              alert(obj.value);
+			};
+            deleteShopCar = function(shopCarId) {
+                $.ajax({
+                    url: "/shopcar/deleteShopCar",
+                    type: 'delete',
+                    dataType:'json',
+                    data:{
+                        "shopCarId":shopCarId
+                    },
+                    success: function (data) {
+                        if (data.code == 0) {
+                            layer.config(
+                                data.msg,
+                                {
+                                    icon: 6,//成功的表情
+                                    time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                                });
+                            setTimeout(2000,window.location="/cart");
+                        }
+                        else {
+                            layer.msg(
+                                data.msg,
+                                {
+                                    icon: 5,//失败的表情
+                                    time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                                })
+                        }
+
+                    }
+                })
+            };
+            function getshopcar() {
+                $.ajax({
+                    url: "/shopcar/getshopcar",
+                    type: 'get',
+                    dataType:'json',
+                    success: function (data) {
+                        if (data.code == 0) {
+                            var count = data.count;
+                            var data = data.data;
+                            var tr;
+                            for(var i=0;i<count;i++){
+                                var thisData=data[i];
+                                var image=thisData.imgUrl.split(",");
+                                var goods=thisData.goods;
+                                var goodsNorms=thisData.goodsNorms;
+                                var number=thisData.count;
+                                var shopcarId=thisData.shopcarId;
+                                tr+='<tr>'+
+                                    '<td class="white first">'+
+                                    '<img src="'+image[0]+'" height="131" width="90" alt="" />'+
+                                    '<div class="description">'+
+                                    '<h3><a href="#">'+goods.goodsName+'</a></h3>'+
+                                    '</div>'+
+                                    '</td>'+
+                                    '<td class="white two">'+goodsNorms[0].goodsNowPrice+'</td>'+
+                                    '<td class="white last">'+number+'</td>'+
+                                    '<td class="white three">'+
+                                    '<div class="row">'+
+                                    '<select onchange="choseNorms(this)">';
+									for (var j=0;j<goodsNorms.length;j++){
+									    var goodsNorm=goodsNorms[j];
+										tr+='<option value="'+goodsNorm.goodsNormsId+'">'+goodsNorm.goodsName+'</option>';
+									}
+                                    tr+='</select>'+
+                                    '</div>'+
+                                    '</td>'+
+                                    '<td class="white four">'+goodsNorms[0].goodsNowPrice*number+'</td>'+
+                                    '<td class="white last"><div class="row"><a class="btn-delete" onclick="deleteShopCar(\''+shopcarId+'\')">删除</a></div></td>'+
+                                    '</tr>';
+                            }
+                            $("#shopcar").append(tr);
+                        }
+                        else {
+                            layer.msg(
+                                data.msg,
+                                {
+                                    icon: 5,//失败的表情
+                                    time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                                })
+                        }
+
+                    }
+                })
+            }
+		})
         $("#head").load("/head");//加载头部
         $("#foot").load("/foot");//加载尾部
+
 	</script>
 </body>
 </html>

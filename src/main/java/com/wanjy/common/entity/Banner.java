@@ -42,6 +42,10 @@ public class Banner implements Serializable {
      * 关联商品
      */
     private String goodsId;
+    /**
+     * 是否展示
+     */
+    private Integer isShow;
 
 
 }

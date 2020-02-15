@@ -15,11 +15,17 @@
 	<link rel="stylesheet" href="css/jquery.bxslider.css" />
 	<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/all.css" />
+	<link rel="stylesheet" href="lib/layui-v2.5.4/css/layui.css" media="all">
+	<link rel="stylesheet" href="css/public.css" media="all">
 	<link media="screen" rel="stylesheet" type="text/css" href="css/screen.css" />
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
-
+	<style>
+		.container>a:hover{
+			text-decoration: none;
+		}
+	</style>
 </head>
 <body>
 	<div id="wrapper">
@@ -29,7 +35,9 @@
 			<section class="main">
 				<div class="content">
 					<div class="box_images">
-						<a href="#"><img src="images/pic_01.png" alt="" ></a>
+						<div class="layui-carousel" id="banner" >
+
+						</div>
 					</div>
 					<ul class="box_image_list">
 						<li><a href="#"><img src="images/pic_02.png" alt="" ></a></li>
@@ -37,143 +45,13 @@
 						<li><a href="#"><img src="images/pic_04.png" alt="" ></a></li>
 					</ul>
 					<div class="clear"></div>
+
 					<section class="container">
-						<div class="bottom-slider">
-							<a href="#" class="btn-left"></a>
-							<div class="slides">
-								<p>Last added products</p>
-								<ul class="item-list">
-									<li>
-										<div class="item">
-											<div class="image">
-											<a href="#"><img src="images/pic_carusel_01.png"  alt="" /></a>
-												<div class="hover">
-													<p>Perspiciatis unde omnis iste natus voluptatem</p>
-													<strong>$55.00</strong>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="item">
-											<div class="image">
-												<a href="#"><img src="images/pic_carusel_02.png"  alt="" /></a>
-												<div class="hover">
-													<p>Perspiciatis unde omnis iste natus voluptatem</p>
-													<strong>$55.00</strong>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="item">
-											<div class="image">
-												<a href="#"><img src="images/pic_carusel_03.png"  alt="" /></a>
-												<div class="hover">
-													<p>Perspiciatis unde omnis iste natus voluptatem</p>
-													<strong>$55.00</strong>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="item">
-											<div class="image">
-												<a href="#"><img src="images/pic_carusel_02_2.png"  alt="" /></a>
-												<div class="hover">
-													<p>Perspiciatis unde omnis iste natus voluptatem</p>
-													<strong>$55.00</strong>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li class="last">
-										<div class="item">
-											<div class="image">
-												<a href="#"><img src="images/pic_carusel_04.png"  alt="" /></a>
-												<div class="hover">
-													<p>Perspiciatis unde omnis iste natus voluptatem</p>
-													<strong>$55.00</strong>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="item">
-											<div class="image">
-												<a href="#"><img src="images/pic_carusel_02.png"  alt="" /></a>
-												<div class="hover">
-													<p>Perspiciatis unde omnis iste natus voluptatem</p>
-													<strong>$55.00</strong>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="item">
-											<div class="image">
-												<a href="#"><img src="images/pic_carusel_03.png"  alt="" /></a>
-												<div class="hover">
-													<p>Perspiciatis unde omnis iste natus voluptatem</p>
-													<strong>$55.00</strong>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="item">
-											<div class="image">
-												<a href="#"><img src="images/pic_carusel_02_2.png"  alt="" /></a>
-												<div class="hover">
-													<p>Perspiciatis unde omnis iste natus voluptatem</p>
-													<strong>$55.00</strong>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="item">
-											<div class="image">
-												<a href="#"><img src="images/pic_carusel_03.png"  alt="" /></a>
-												<div class="hover">
-													<p>Perspiciatis unde omnis iste natus voluptatem</p>
-													<strong>$55.00</strong>
-												</div>
-											</div>
-										</div>
-									</li>
-									<li class="last">
-										<div class="item">
-											<div class="image">
-												<a href="#"><img src="images/pic_carusel_02.png"  alt="" /></a>
-												<div class="hover">
-													<p>Perspiciatis unde omnis iste natus voluptatem</p>
-													<strong>$55.00</strong>
-												</div>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<a href="#" class="btn-right"></a>
-						</div>
+						<a><p style="line-height: 50px;font-size: 30px">热销商品</p></a>
+						<hr/>
+						<ul class="item-product" id="goodList">
+						</ul>
 					</section>
-					<div class="block-advice">
-						<div class="advice-holder">
-							<p>Join our newsletter</p>
-						</div>
-						<form action="#" class="form-newsletter">
-							<fieldset>
-								<input type="text" placeholder="Put your email..." />
-								<input class="btn black normal" type="submit" value="Subscribe" />
-							</fieldset>
-						</form>
-					</div>
-					<div class="banner_box">
-						<p>Take a part in our competition</p>
-						<span>and get 80% discount for shopping</span>
-					</div>
-					<div class="clear"></div>
 				</div>
 			</section>
 		</div>
@@ -188,7 +66,108 @@
 	<script type="text/javascript" src="js/jquery.bxslider.js"></script>
 	<script src="js/jquery-ui-1.10.4.custom.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
+	<script src="lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
 <script>
+
+    layui.use('carousel', function(){
+        var carousel = layui.carousel,
+			$ = layui.jquery;
+        //建造实例
+
+        getBanner();
+        getGoods();
+        /**
+		 * 获取轮播图
+         */
+        function getBanner() {
+            $.ajax({
+                url: "/banner/getbanner",
+                type: 'get',
+                success: function (data) {
+                    if (data.code == 0) {
+                        var count = data.count;
+                        var data = data.data;
+                        var html = '<div carousel-item>';
+                        for (var i = 0; i < count; i++) {
+                            html += '<div><a href="#"><img src="'+data[i].bannerUrl+'" alt="" ></a></div>'
+                        }
+                        html += '</div>';
+                        $("#banner").append(html);
+                        carousel.render({
+                            elem: '#banner'
+                            ,width: '100%' //设置容器宽度
+                            ,height:'500px'
+                            ,arrow: 'hover' //始终显示箭头
+                            ,indicator:'none'
+                            ,anim:'default'
+                        });
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            {
+                                icon: 5,//失败的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            })
+        }
+
+        /**
+		 * 获取商品
+         */
+        function getGoods() {
+            $.ajax({
+                url: "/goods/getGoodsInfo",
+                type: 'get',
+				dataType:'json',
+				data:{
+                  	"page":1,
+					"limit":8
+				},
+                success: function (data) {
+                    if (data.code == 0) {
+                        var count = data.count;
+                        var data = data.data;
+                        var html = '';
+                        for (var i = 0; i < count; i++) {
+                            var imagesUrl=data[i].goodsImages.goodsImagesUrl;
+                            var imageUrl=imagesUrl.split(',');
+                            var goods=data[i].goods;
+                            var goodsNormsList=data[i].goodsNormsList;
+                            var goodsId=goods.goodsId;
+							html +=
+								'<li>'+
+									'<div class="item">'+
+										'<a href="/product?goodsId='+goodsId+'">'+
+										'<div class="image" style="width: 250px;height: 290px">'+
+											'<img src="'+imageUrl[0]+'" alt="图片加载失败" lay-src="images/loading.gif">'+
+										'</div>'+
+										'<span class="name">'+goods.goodsName+'</span>'+
+										'<span>'+goodsNormsList[0].goodsOldPrice+'</span>'+
+										'</a>'+
+									'</div>'+
+								'</li>';
+                        }
+                        html += '</div>';
+                        $("#goodList").append(html);
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            {
+                                icon: 5,//失败的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            })
+        }
+    });
+
     $("#head").load("/head");//加载头部
     $("#foot").load("/foot");//加载尾部
 </script>
