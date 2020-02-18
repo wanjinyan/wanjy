@@ -13,10 +13,7 @@ import com.wanjy.common.entity.*;
 import com.wanjy.common.service.*;
 import com.wanjy.common.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -31,36 +28,19 @@ import java.util.List;
 @RequestMapping("/goods")
 public class MyGoodsConteroller {
     @Autowired private GoodsService goodsService;
-    @Autowired private GoodsNormsService goodsNormsService;
-    @Autowired private GoodsImagesService goodsImagesService;
-    @Autowired private GoodsCategoryService goodsCategoryService;
     @Autowired private ShopStoreService shopStoreService;
     @Autowired private MyGoodsService myGoodsService;
     @PostMapping(value = "/addGoods")
     public Result addGoods(HttpServletRequest request, MyGoods myGoods){
         ActiveUser activeUser = (ActiveUser) request.getSession().getAttribute("activeUser");
-        //根据登录的用户去查询相应的商家
-        QueryWrapper<ShopStore> shopStoreQueryWrapper=new QueryWrapper<>();
-        shopStoreQueryWrapper.eq("shop_store_owner_id",activeUser.getUser_id());
-        ShopStore shopStore=shopStoreService.getOne(shopStoreQueryWrapper);
-        Goods goods = new Goods();
-        goods.setCreateTime(new Date());
-        goods.setGoodsName(myGoods.getGoodsName());
-        goods.setShopStoreId(shopStore.getShopStoreId());
-        goodsService.save(goods);
-        GoodsImages goodsImages=new GoodsImages();
-        goodsImages.setGoodsId(goods.getGoodsId());
-        goodsImages.setGoodsImagesUrl(myGoods.getGoodsImagesUrl());
-        goodsImagesService.save(goodsImages);
-        List<GoodsNorms> goodsNorms = new ArrayList<>();
-        String goodsNormstr=myGoods.getGoodsNorms();
-        goodsNorms= JSONObject.parseArray(goodsNormstr, GoodsNorms.class);
-        for (GoodsNorms goodsNorm : goodsNorms) {
-            goodsNorm.setGoodsId(goods.getGoodsId());
-        }
-        goodsNormsService.saveBatch(goodsNorms);
-        System.out.println(myGoods);
-
+        //保存商品信息
+        Goods goods = myGoodsService.saveGoods(myGoods, activeUser.getUser_id());
+        //保存商品图片
+        myGoodsService.saveImage(goods.getGoodsId(),myGoods.getGoodsImagesUrl());
+        //保存商品规格
+        myGoodsService.saveGoodsNorms(goods.getGoodsId(),myGoods.getGoodsNorms());
+        //保存商品分类
+        myGoodsService.saveCategory(goods.getGoodsId(),myGoods.getGoodsCategoryId());
         return Result.success();
     }
 
@@ -71,56 +51,64 @@ public class MyGoodsConteroller {
         //获取登录用户的信息
         ActiveUser activeUser = (ActiveUser) request.getSession().getAttribute("activeUser");
         //根据登录的用户去查询相应的商家
-        ShopStore shopStore=shopStoreService.getById(activeUser.getUser_id());
+        ShopStore shopStore=myGoodsService.getShopStoreByUserId(activeUser.getUser_id());
         //根据商家去获取相应店铺下的商品信息
         List<Goods> goodsList = myGoodsService.getGoodsByShopStoreId(shopStore.getShopStoreId());
-        List<MyGoodsInfo> myGoodsInfos = new ArrayList<>();
-        //由于数据库设计商品信息表关联了 商品表 商品规格表 商品分类表 所以我们需要去查询其他的相关信息封装在一个类里，传给前端。
-        for (Goods goods : goodsList) {
-            MyGoodsInfo myGoodsInfo = new MyGoodsInfo();
-            myGoodsInfo.setGoods(goods);
-            //查询商品的图片
-            GoodsImages goodsImages = myGoodsService.getGoodsImagesByGoodsId(goods.getGoodsId());
-            myGoodsInfo.setGoodsImages(goodsImages);
-            //查询商品的类别
-            List<GoodsCategory> goodsCategoryList = myGoodsService.getGoodsCategoryByGoodsId(goods.getGoodsId());
-            myGoodsInfo.setGoodsCategoryList(goodsCategoryList);
-            //查询商品规格
-            List<GoodsNorms> goodsNorms=myGoodsService.getGoodsNormsByGoodsId(goods.getGoodsId());
-            myGoodsInfo.setGoodsNormsList(goodsNorms);
-            myGoodsInfos.add(myGoodsInfo);
-        }
+        //根据商品表获取商品详细信息
+        List<MyGoodsInfo> myGoodsInfos = myGoodsService.goodsToGoodsInfo(goodsList);
         result=Result.success(myGoodsInfos,myGoodsInfos.size());
 
       return result;
     }
     @GetMapping("/getGoodsInfo")
-    public Result getGoodsInfo(int page, int limit){
+    public Result getGoodsInfo(int page, int limit,String categoryId ,String goodsName){
         Result result = null;
-        //根据商家去获取相应店铺下的商品信息
-        IPage<Goods> goodsIPage = new Page<>(page,limit);
-        goodsIPage=goodsService.page(goodsIPage);
-        List<Goods> goodsList = goodsIPage.getRecords();
-        List<MyGoodsInfo> myGoodsInfos = new ArrayList<>();
-        //由于数据库设计商品信息表关联了 商品表 商品规格表 商品分类表 所以我们需要去查询其他的相关信息封装在一个类里，传给前端。
-        for (Goods goods : goodsList) {
-            MyGoodsInfo myGoodsInfo = new MyGoodsInfo();
-            myGoodsInfo.setGoods(goods);
-            //查询商品的图片
-            GoodsImages goodsImages = myGoodsService.getGoodsImagesByGoodsId(goods.getGoodsId());
-            myGoodsInfo.setGoodsImages(goodsImages);
-            //查询商品的类别
-            List<GoodsCategory> goodsCategoryList = myGoodsService.getGoodsCategoryByGoodsId(goods.getGoodsId());
-            myGoodsInfo.setGoodsCategoryList(goodsCategoryList);
-            //查询商品规格
-            List<GoodsNorms> goodsNorms=myGoodsService.getGoodsNormsByGoodsId(goods.getGoodsId());
-            myGoodsInfo.setGoodsNormsList(goodsNorms);
-            myGoodsInfos.add(myGoodsInfo);
+        List<Goods> goodsList = new ArrayList<>();
+        int total = 0;
+        //根据商品类别分页查询
+        if(categoryId != null && !categoryId.equals("")){
+            IPage<GoodsCategory> goodsCategory = myGoodsService.getGoodsCategoryByCategoryId(page, limit, categoryId);
+            goodsList = myGoodsService.getGoodsByCategry(goodsCategory.getRecords());
+            total = (int)goodsCategory.getTotal();
+        }else {
+            IPage<Goods> goodsIPage = new Page<>(page,limit);
+            QueryWrapper<Goods> goodsQueryWrapper = new QueryWrapper<>();
+            goodsQueryWrapper.eq("is_delete",0);
+            if(goodsName != null && !goodsName.equals("")){
+                goodsQueryWrapper.like("goods_name",goodsName);
+            }
+            goodsIPage=goodsService.page(goodsIPage,goodsQueryWrapper);
+            goodsList = goodsIPage.getRecords();
+            total = (int)goodsIPage.getTotal();
         }
-        result=Result.success(myGoodsInfos,myGoodsInfos.size());
 
+        //根据商品表获取商品详细信息
+        List<MyGoodsInfo> myGoodsInfos = myGoodsService.goodsToGoodsInfo(goodsList);
+        result=Result.success(myGoodsInfos,total);
         return result;
     }
+
+    @GetMapping("/getGoods")
+    public Result getGoods(HttpServletRequest request,int page, int limit,String goodsName){
+        Result result = null;
+        //获取登录用户的信息
+        ActiveUser activeUser = (ActiveUser) request.getSession().getAttribute("activeUser");
+        //根据登录的用户去查询相应的商家
+        ShopStore shopStore=myGoodsService.getShopStoreByUserId(activeUser.getUser_id());
+        //根据商家去获取相应店铺下的商品信息
+        IPage<Goods> goodsIPage = new Page<>(page,limit);
+        if(goodsName != null && !goodsName.equals("")){
+            QueryWrapper<Goods> goodsQueryWrapper = new QueryWrapper<>();
+            goodsQueryWrapper.eq("is_delete",0);
+            goodsQueryWrapper.eq("shop_store_id",shopStore.getShopStoreId());
+            goodsQueryWrapper.like("goods_name", goodsName);
+            goodsIPage = goodsService.page(goodsIPage,goodsQueryWrapper);
+        }else {
+            goodsIPage = goodsService.page(goodsIPage);
+        }
+        return Result.success(goodsIPage.getRecords(),(int)goodsIPage.getTotal());
+    }
+
     @GetMapping("/getGoodsInfoBygoodsId")
     public Result getGoodsInfo(String goodsId){
         Result result = null;
@@ -146,6 +134,15 @@ public class MyGoodsConteroller {
         List<Goods> goodsList = myGoodsService.getGoodsByShopStoreId(shopId);
         result=Result.success(goodsList,goodsList.size());
         return result;
+    }
+
+    @DeleteMapping("/deleteGoods")
+    public Result deleteGoods(String goodsId){
+        Goods goods = new Goods();
+        goods.setGoodsId(goodsId);
+        goods.setIsDelete(1);
+        boolean b = goodsService.updateById(goods);
+        return Result.isSuccess(b,"更新");
     }
 
 }

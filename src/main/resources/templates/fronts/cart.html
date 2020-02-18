@@ -49,10 +49,7 @@
 						</tr>
 					</table>
 					<div class="box_sub_total">
-						<h4>Subtotal: $380.50</h4>
-						<p>+ shippment: $9.99</p>
-						<h2>Total to pay: $80.99</h2>
-						<a class="btn btn_finalize" href="#">Finalize and pay</a>
+						<a class="btn btn_finalize" href="/index">立 即 购 买</a>
 					</div>
 				</div>
 			</section>
@@ -71,15 +68,16 @@
 	<script src="lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
 
 	<script>
+        $("#head").load("/head");//加载头部
+        $("#foot").load("/foot");//加载尾部
         layui.use(['form', ], function () {
             var form = layui.form
                 , $ = layui.jquery;
             getshopcar();
             choseNorms=function(obj){
-
-                console.log(obj);
-              alert(obj.value);
+				alert(obj.value);
 			};
+
             deleteShopCar = function(shopCarId) {
                 $.ajax({
                     url: "/shopcar/deleteShopCar",
@@ -90,6 +88,7 @@
                     },
                     success: function (data) {
                         if (data.code == 0) {
+                            getShopCarTotal();
                             layer.config(
                                 data.msg,
                                 {
@@ -165,8 +164,6 @@
                 })
             }
 		})
-        $("#head").load("/head");//加载头部
-        $("#foot").load("/foot");//加载尾部
 
 	</script>
 </body>

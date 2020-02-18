@@ -33,8 +33,11 @@ public class PageContorller {
         return new ModelAndView("fronts/product.html",map);
     }
     @GetMapping("/products")
-    public ModelAndView products(HttpServletRequest request){
-        return new ModelAndView("fronts/products.html");
+    public ModelAndView products(HttpServletRequest request, String categoryId,String goodsName){
+        Map map = new HashMap();
+        map.put("goodsName",goodsName);
+        map.put("categoryId",categoryId);
+        return new ModelAndView("fronts/products.html",map);
     }
     @GetMapping("/head")
     public ModelAndView head(HttpServletRequest request){
@@ -178,6 +181,16 @@ public class PageContorller {
         return new ModelAndView("back-system/page/addgoods.html");
     }
 
+    @GetMapping("/category")
+    public ModelAndView category(HttpServletRequest request){
+        return new ModelAndView("back-system/page/categoryInfo.html");
+    }
+
+    @GetMapping("/shopmenu")
+    public ModelAndView shopmenu(HttpServletRequest request){
+        return new ModelAndView("back-system/page/menuInfo.html");
+    }
+
     @GetMapping("/logout")
     public void logout(HttpServletRequest request,HttpServletResponse response) {
         Subject lvSubject=SecurityUtils.getSubject();
@@ -186,5 +199,6 @@ public class PageContorller {
         request.getSession().removeAttribute("activeUser");
         login(request);
     }
+
 
 }

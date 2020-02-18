@@ -41,5 +41,5 @@ public class Goods implements Serializable {
      */
     private String shopStoreId;
 
-
+    private int isDelete;
 }

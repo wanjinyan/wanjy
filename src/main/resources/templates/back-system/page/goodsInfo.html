@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>商家信息</title>
+    <title>商品信息</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -21,7 +21,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">商品名称</label>
                             <div class="layui-input-inline">
-                                <input type="text"  id="shopstorename" autocomplete="off" class="layui-input">
+                                <input type="text"  id="goodsName" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -38,7 +38,6 @@
         </div>
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
         </script>
     </div>
@@ -52,28 +51,15 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/shop/getAllShopStore',
+            url: '/goods/getGoods',
             cols:
                 [
                     [
                         {type: "checkbox", width: 50, fixed: "left"},
-                        {field: 'shopStoreId', width: 105, title: '商家编号', sort: true},
-                        {field: 'shopStoreName', width: 105, title: '商家名称', sort: true},
-                        {field: 'shopStoreOwnerId', width: 105, title: '归属用户'},
-                        {
-                            field: 'delStatus',
-                            width: 105,
-                            title: '店铺状态',
-                            templet: function(d){
-                                return statusToName(d.delStatus);
-                            }
-                        },
-                        {
-                            field: 'createTime',
-                            width: 105,
-                            title: '创建时间'
-                        },
-                        {field: 'shopStoreDescription', title: "商家描述", minWidth: 150},
+                        {field: 'goodsId', width: 105, title: '商品编号', sort: true},
+                        {field: 'goodsName', width: 105, title: '商品名字', sort: true},
+                        {field: 'createTime',width: 105,title: '商品创建时间'},
+                        {field: 'shopStoreId', title: "归属商家", minWidth: 150},
                         {title: '操作', minWidth: 50, templet: '#currentTableBar', fixed: "right", align: "center"}
                     ]
                 ],
@@ -93,13 +79,13 @@
         }
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var name = $("#shopstorename").val();
+            var name = $("#goodsName").val();
             reload(name);
         });
 
         // 监听添加操作
         $(".data-add-btn").on("click", function () {
-            window.location = '/addshop';
+            window.location = '/addgoods';
         });
 
         // 监听删除操作
@@ -107,7 +93,7 @@
             var checkStatus = user_info.checkStatus('currentTableId')
                 , data = checkStatus.data;
            for(var i = 0; i < data.length; i++){
-               saveShop(data.shopStoreId);
+               deleteGoods(data.goodsId);
            }
         });
 
@@ -117,18 +103,14 @@
         });
 
         table.on('tool(currentTableFilter)', function (obj) {
-            var data = obj.data;
-            /**
-             * 编辑
-             */
-            if (obj.event === 'edit') {
-                window.location = '/addshop?shopStoreId='+data.shopStoreId;
-            }
+
             /**
              * 删除
              */
-            else if (obj.event === 'delete') {
-                saveShop(data.shopStoreId)
+            if (obj.event === 'delete') {
+                var data = obj.data;
+                deleteGoods(data.goodsId);
+
             }
         });
 
@@ -143,19 +125,18 @@
                     curr: 1
                 }
                 , where: {
-                    "name":name
+                    "goodsName":name
                 }
             }, 'data');
         }
 
-        function saveShop(shopStoreId) {
-            if(shopStoreId=="") shopStoreId=null;
+        function deleteGoods(goodsId) {
+            if(goodsId=="") goodsId=null;
             $.ajax({
-                url:"/shop/saveOrUpdateShopStore",
-                type:'post',
+                url:"/goods/deleteGoods",
+                type:'delete',
                 data:{
-                    "shopStoreId":shopStoreId,
-                    "delStatus":0,
+                    "goodsId":goodsId
                 },
                 success:function(data){
                     if(data.code == 0){

@@ -69,6 +69,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/plugin/**","anon");
         filterChainDefinitionMap.put("/banner/getbanner","anon");
         filterChainDefinitionMap.put("/goods/getGoodsInfo","anon");
+        filterChainDefinitionMap.put("/menu/getShowMenu","anon");
+        filterChainDefinitionMap.put("/shopcar/getShopCarTotal","anon");
         filterChainDefinitionMap.put("/goods/getGoodsInfoBygoodsId","anon");
         //这里去从数据库动态配置权限
         List<MyRolePermission> rolePermissionList = rolePermissionService.getAllRolePermission();

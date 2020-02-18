@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2020-02-16 12:32:45
+Date: 2020-02-18 14:59:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,22 +46,21 @@ INSERT INTO `back_menu` VALUES ('12', '商家管理', '3', '', 'fa fa-calendar',
 INSERT INTO `back_menu` VALUES ('13', '商家信息', '1', '/shopInfo', 'fa fa-list-alt', '2020-01-19 13:43:19', 'admin:admin', '0', '2020-01-19 13:43:19', '0', '12', '_self');
 INSERT INTO `back_menu` VALUES ('14', '商家录入', '1', '/addshop', 'fa fa-navicon', '2020-01-19 13:43:22', 'admin:admin', '0', '2020-01-19 13:43:22', '0', '12', '_self');
 INSERT INTO `back_menu` VALUES ('15', '商家首页', '1', '/shopwelcome', 'fa fa-home', '2020-01-20 12:37:48', 'admin:shop', '0', '2020-01-20 12:37:48', '0', '-1', '_self');
-INSERT INTO `back_menu` VALUES ('15290d4ade6929166600962e1d933180', '优惠券管理', '6', '', 'fa fa-align-justify', '2020-01-20 13:19:26', '', '0', null, '0', '2', '_self');
 INSERT INTO `back_menu` VALUES ('2', '后台管理系统', '1', '', 'fa fa-address-book', '2020-01-20 12:38:24', '', '0', '2020-01-20 12:38:24', '0', '-1', '_self');
 INSERT INTO `back_menu` VALUES ('2d7d6459e88c186125c2c6ec4ddbda96', '订单管理', '8', '', 'fa ', '2020-01-20 13:37:11', 'admin:shop', '0', '2020-01-20 13:37:11', '0', '2', '_self');
 INSERT INTO `back_menu` VALUES ('3', '系统菜单管理', '1', '/menu', 'fa fa-window-maximize', '2020-01-19 14:42:59', 'admin:admin', '0', '2020-01-19 14:42:59', '0', '2', '_self');
-INSERT INTO `back_menu` VALUES ('32d51dc9a8a1910e0135e14cb8c2559f', '添加轮播图', '1', '/addbanner', 'fa ', '2020-02-05 11:00:09', 'admin:admin', '0', null, '0', 'b83b2e0847bae9701624a21d652fba39', '_self');
+INSERT INTO `back_menu` VALUES ('32d51dc9a8a1910e0135e14cb8c2559f', '添加轮播图', '1', '/addbanner', 'fa fa-diamond', '2020-02-17 22:04:39', 'admin:admin', '0', '2020-02-17 22:04:39', '0', 'b83b2e0847bae9701624a21d652fba39', '_self');
 INSERT INTO `back_menu` VALUES ('336deb632514c6eed96be86206517d57', '订单信息', '8', '/shoporder', 'fa fa-building-o', '2020-01-20 13:37:53', 'admin:shop', '0', '2020-01-20 13:37:53', '0', '2d7d6459e88c186125c2c6ec4ddbda96', '_self');
 INSERT INTO `back_menu` VALUES ('4', '清理缓存', null, 'api/clear.json', null, '2020-01-20 12:38:59', '', null, '2020-01-20 12:38:59', null, '-1', '');
-INSERT INTO `back_menu` VALUES ('424ce3991e7478cd25a2a8e033077b7d', '优惠券信息', '0', '/coupon', 'fa fa-align-justify', '2020-01-20 13:20:11', '', '0', null, '0', '15290d4ade6929166600962e1d933180', '_self');
 INSERT INTO `back_menu` VALUES ('5', '用户管理', '4', '', 'fa fa-calendar', '2020-01-19 13:50:34', 'admin:admin', '0', '2020-01-19 13:50:34', '0', '2', '_self');
 INSERT INTO `back_menu` VALUES ('6', '用户数据统计', '1', '/role', 'fa fa-file-text', '2020-01-19 13:38:31', 'admin:admin', '0', '2020-01-19 13:38:31', '0', '5', '_self');
 INSERT INTO `back_menu` VALUES ('7', '用户信息', '1', '/userInfo', 'fa fa-file-text', '2020-01-19 13:38:37', 'admin:admin', '0', '2020-01-19 13:38:37', '0', '5', '_self');
 INSERT INTO `back_menu` VALUES ('705d5ce1bd8cf779003832b5e4256fb8', '商城菜单管理', '10', '/shopmenu', 'fa fa-group', '2020-01-20 13:43:09', 'admin:admin', '0', null, '0', '2', '_self');
+INSERT INTO `back_menu` VALUES ('7c701e22ca6b9dfb69ff0973d163d62f', '商家审核', '3', '/userToshop', 'fa fa-eye', '2020-02-18 14:57:18', 'admin:admin', '0', null, '0', '12', '_self');
 INSERT INTO `back_menu` VALUES ('7f846532e9865511ee1710495ca07570', '上架商品', '1', '/addgoods', 'fa fa-columns', '2020-01-20 12:11:00', 'admin:shop', '0', null, '0', 'f0ed143af49c280899cc370d8ee5a7b5', '_self');
 INSERT INTO `back_menu` VALUES ('8', '权限管理', '2', '', 'fa fa-calendar', '2020-01-19 13:50:39', 'admin:admin', '0', '2020-01-19 13:50:39', '0', '2', '_self');
 INSERT INTO `back_menu` VALUES ('9', '资源管理', '1', '/permission', 'fa fa-file-text', '2020-01-19 13:41:17', 'admin:admin', '0', '2020-01-19 13:41:17', '0', '8', '_self');
-INSERT INTO `back_menu` VALUES ('912fa4eb2112bf7f80c6d72a5d237bb7', '查看轮播图', '0', '/viewbanner', 'fa ', '2020-02-05 10:59:41', 'admin:admin', '0', null, '0', 'b83b2e0847bae9701624a21d652fba39', '_self');
+INSERT INTO `back_menu` VALUES ('912fa4eb2112bf7f80c6d72a5d237bb7', '查看轮播图', '0', '/viewbanner', 'fa fa-diamond', '2020-02-17 22:04:33', 'admin:admin', '0', '2020-02-17 22:04:33', '0', 'b83b2e0847bae9701624a21d652fba39', '_self');
 INSERT INTO `back_menu` VALUES ('b81203b2c06c1538d45f0061c872269a', '商品信息', '0', '/goodsInfo', 'fa fa-diamond', '2020-01-20 12:39:40', '', '0', '2020-01-20 12:39:40', '0', 'f0ed143af49c280899cc370d8ee5a7b5', '_self');
 INSERT INTO `back_menu` VALUES ('b83b2e0847bae9701624a21d652fba39', '轮播图管理', '9', '/bannner', 'fa fa-image', '2020-01-20 13:40:41', 'admin:admin', '0', null, '0', '2', '_self');
 INSERT INTO `back_menu` VALUES ('c5e1e0404a60f8ded6d087111cb6fe51', '分类管理', '7', '', 'fa fa-align-justify', '2020-01-20 13:20:57', 'admin:admin', '0', null, '0', '2', '_self');
@@ -84,10 +83,9 @@ CREATE TABLE `banner` (
 -- ----------------------------
 -- Records of banner
 -- ----------------------------
-INSERT INTO `banner` VALUES ('1b210b8ec016eaf2dce98975d8c0990d', '苹果', 'http://localhost:8080/photo/057f298540ce49d1bbc0b810ee44d58d.jpg', '0988f90f2c1d5184e37a9dc93e46ec18', '1');
-INSERT INTO `banner` VALUES ('7f8b0694e4e2517225f596972e5fce29', '苹果', 'http://localhost:8080/photo/15192650f2584b48800df3577d550bd6.jpg', '0988f90f2c1d5184e37a9dc93e46ec18', '1');
-INSERT INTO `banner` VALUES ('9a099ceff9cc9fe0169c6608dba569b7', '香蕉', 'http://localhost:8080/photo/180488e2ae25498498cdf70b4538be9e.jpg', '6c9b0f1cbf04de7c8f5f36b3056b9b31', '0');
-INSERT INTO `banner` VALUES ('cbfa5808cb6e71023b4ba2b3e8d236c7', '香蕉', 'http://localhost:8080/photo/168b4381540c4cff96e2dbc6cf8be62a.jpg', '6c9b0f1cbf04de7c8f5f36b3056b9b31', '0');
+INSERT INTO `banner` VALUES ('00ccaeeed920c306c22869c5c8a43515', '新鲜蔬菜', 'http://localhost:8080/photo/65ed4bf4add34e959994d5b780391c07.jpg', 'cdb54f1f07bf5bd325615d03a7e50485', '1');
+INSERT INTO `banner` VALUES ('04534f04e55c856d6a76356395f97ea1', '新鲜水果', 'http://localhost:8080/photo/6dc0f11cdf3b427580f7b22fa5287e46.jpg', 'fd24703545f0438636b14df021b8dd4e', '1');
+INSERT INTO `banner` VALUES ('d254c5d8a96407430f2806da7022ecf5', '新鲜蔬果', 'http://localhost:8080/photo/6deafadf53934273a824b97455317d21.jpg', 'fd24703545f0438636b14df021b8dd4e', '1');
 
 -- ----------------------------
 -- Table structure for category
@@ -103,26 +101,8 @@ CREATE TABLE `category` (
 -- ----------------------------
 -- Records of category
 -- ----------------------------
-
--- ----------------------------
--- Table structure for coupon
--- ----------------------------
-DROP TABLE IF EXISTS `coupon`;
-CREATE TABLE `coupon` (
-  `coupon_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `shop_store_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '商家编号',
-  `coupon_price` double(32,0) DEFAULT NULL COMMENT '优惠金额',
-  `coupon_factor` double(32,0) DEFAULT NULL COMMENT '优惠条件',
-  `coupon_start_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '开始时间',
-  `coupon_end_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '结束时间',
-  `coupon_number` int(11) DEFAULT NULL COMMENT '优惠券数量',
-  `coupon_status` int(1) DEFAULT NULL COMMENT '优惠券状态',
-  PRIMARY KEY (`coupon_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='优惠券表';
-
--- ----------------------------
--- Records of coupon
--- ----------------------------
+INSERT INTO `category` VALUES ('9619cee863ea3c48e1f35e0d37114dbd', '蔬菜', '绿色的蔬菜');
+INSERT INTO `category` VALUES ('a51045578d1bb20556da2760c0c178aa', '水果', '香甜的水果');
 
 -- ----------------------------
 -- Table structure for goods
@@ -133,23 +113,23 @@ CREATE TABLE `goods` (
   `goods_name` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '商品名字',
   `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '商品创建时间',
   `shop_store_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '归属商家',
+  `is_delete` int(1) DEFAULT '0' COMMENT '逻辑删除，1表示删除，0表示未删除',
   PRIMARY KEY (`goods_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='商品表';
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('107b05ec70b99d5672c5bb303d60430a', '香蕉', '2020-02-06 19:24:34', '531b593d35dc3557c513d707301e7b6f');
-INSERT INTO `goods` VALUES ('1fe1378ad78f95be2eab2649a52d0eb8', '香蕉', '2020-02-06 19:25:03', '531b593d35dc3557c513d707301e7b6f');
-INSERT INTO `goods` VALUES ('45055ae5dac9af9a94a3976a62a84bc4', '美女', '2020-02-06 19:36:48', '531b593d35dc3557c513d707301e7b6f');
-INSERT INTO `goods` VALUES ('4e7ab0234ea644b996489d065c2b19fa', '香蕉', '2020-02-06 19:24:38', '531b593d35dc3557c513d707301e7b6f');
-INSERT INTO `goods` VALUES ('7df0c96ec19f4d9c89f14272200b0a38', '香蕉', '2020-02-06 19:25:00', '531b593d35dc3557c513d707301e7b6f');
-INSERT INTO `goods` VALUES ('8085adea03dbbe82bd7f828ae8ac2bfe', '香蕉', '2020-02-06 19:24:53', '531b593d35dc3557c513d707301e7b6f');
-INSERT INTO `goods` VALUES ('859ee48679290a41ce70dd94467b5857', '香蕉', '2020-02-06 19:24:57', '531b593d35dc3557c513d707301e7b6f');
-INSERT INTO `goods` VALUES ('96a709334b50e2e0fab7056abae52753', '香蕉', '2020-02-06 19:25:11', '531b593d35dc3557c513d707301e7b6f');
-INSERT INTO `goods` VALUES ('a2270d0ac635e0fac03d9599c3268665', '香蕉', '2020-02-06 19:25:06', '531b593d35dc3557c513d707301e7b6f');
-INSERT INTO `goods` VALUES ('ba955b281bb5a33686d5070672302a79', '香蕉', '2020-02-06 19:24:43', '531b593d35dc3557c513d707301e7b6f');
-INSERT INTO `goods` VALUES ('f11dfefaeed4d1bda7b31a63f4fe38d1', '香蕉', '2020-02-06 19:23:59', '531b593d35dc3557c513d707301e7b6f');
+INSERT INTO `goods` VALUES ('07235d02713e12ee96751879aec8ebc3', '南瓜', '2020-02-17 19:34:22', 'e9b736feed13141c436a385aead46464', '0');
+INSERT INTO `goods` VALUES ('13acec17a6347ee186657e98693e7702', '李子', '2020-02-16 19:35:33', 'e9b736feed13141c436a385aead46464', '0');
+INSERT INTO `goods` VALUES ('141ef5cdd72a539dc2d499a77bbf3773', '香蕉2', '2020-02-14 15:27:12', 'e9b736feed13141c436a385aead46464', '0');
+INSERT INTO `goods` VALUES ('3841760a3f562457bb1b0fca7d0af5b9', '蒜苗', '2020-02-17 15:31:34', 'e9b736feed13141c436a385aead46464', '0');
+INSERT INTO `goods` VALUES ('735822a82d67f7c25bebb8cbccc56ee8', '香蕉', '2020-02-14 15:27:00', 'e9b736feed13141c436a385aead46464', '0');
+INSERT INTO `goods` VALUES ('a2e46ae2132a3f32ee45455b380d6ddc', '黄瓜', '2020-02-09 15:34:15', 'e9b736feed13141c436a385aead46464', '0');
+INSERT INTO `goods` VALUES ('bcfc1e77f8cdb1724d71eaff0baf6005', '大白菜', '2020-02-17 15:30:44', 'e9b736feed13141c436a385aead46464', '0');
+INSERT INTO `goods` VALUES ('cdb54f1f07bf5bd325615d03a7e50485', '可口苹果', '2020-02-12 13:49:47', 'e9b736feed13141c436a385aead46464', '0');
+INSERT INTO `goods` VALUES ('fd24703545f0438636b14df021b8dd4e', '红富士苹果', '2020-02-15 13:48:20', 'e9b736feed13141c436a385aead46464', '0');
+INSERT INTO `goods` VALUES ('fd3c8edfb4391a0f57d4689e15bc84de', '梨子', '2020-02-17 15:29:31', 'e9b736feed13141c436a385aead46464', '0');
 
 -- ----------------------------
 -- Table structure for goods_category
@@ -165,6 +145,16 @@ CREATE TABLE `goods_category` (
 -- ----------------------------
 -- Records of goods_category
 -- ----------------------------
+INSERT INTO `goods_category` VALUES ('006e5db227e14c96d7870a8731fb16fc', '9619cee863ea3c48e1f35e0d37114dbd', '07235d02713e12ee96751879aec8ebc3');
+INSERT INTO `goods_category` VALUES ('111453746f42bd5ef523b0b205671afe', '9619cee863ea3c48e1f35e0d37114dbd', 'a2e46ae2132a3f32ee45455b380d6ddc');
+INSERT INTO `goods_category` VALUES ('23153f78109af1604c95e45cf1e162b4', 'a51045578d1bb20556da2760c0c178aa', '735822a82d67f7c25bebb8cbccc56ee8');
+INSERT INTO `goods_category` VALUES ('23759b27c7feef242de69ad7ab036737', '9619cee863ea3c48e1f35e0d37114dbd', 'bcfc1e77f8cdb1724d71eaff0baf6005');
+INSERT INTO `goods_category` VALUES ('49d701081cec4a40c6e642e15be85399', 'a51045578d1bb20556da2760c0c178aa', 'fd24703545f0438636b14df021b8dd4e');
+INSERT INTO `goods_category` VALUES ('5bfa8aa02c0e5adb5ff291ddcd299738', 'a51045578d1bb20556da2760c0c178aa', 'cdb54f1f07bf5bd325615d03a7e50485');
+INSERT INTO `goods_category` VALUES ('5ddc13fc913a7975e2d4844663131194', '9619cee863ea3c48e1f35e0d37114dbd', '3841760a3f562457bb1b0fca7d0af5b9');
+INSERT INTO `goods_category` VALUES ('8f0b568347697f6cb7a620778a59418b', 'a51045578d1bb20556da2760c0c178aa', '13acec17a6347ee186657e98693e7702');
+INSERT INTO `goods_category` VALUES ('a8f7c25765b47ef31b771762dd81b107', 'a51045578d1bb20556da2760c0c178aa', 'fd3c8edfb4391a0f57d4689e15bc84de');
+INSERT INTO `goods_category` VALUES ('bcacb33c6bd9705b5df15b4939a91303', 'a51045578d1bb20556da2760c0c178aa', '141ef5cdd72a539dc2d499a77bbf3773');
 
 -- ----------------------------
 -- Table structure for goods_images
@@ -180,19 +170,16 @@ CREATE TABLE `goods_images` (
 -- ----------------------------
 -- Records of goods_images
 -- ----------------------------
-INSERT INTO `goods_images` VALUES ('005d6ccf74851d8c135b5054fe638c5c', 'http://localhost:8080/photo/c439a5eab4c443fa9d4295dad5bb1d3e.jpg,http://localhost:8080/photo/8da83278448e408db1b42be5f1462d14.jpg,http://localhost:8080/photo/0f3b4ddb73664fa08116ecbb711dbaaf.jpg', '7df0c96ec19f4d9c89f14272200b0a38');
-INSERT INTO `goods_images` VALUES ('20b5d4ab8cc49ca76e0d1564c30c7aa6', 'http://localhost:8080/photo/c439a5eab4c443fa9d4295dad5bb1d3e.jpg,http://localhost:8080/photo/8da83278448e408db1b42be5f1462d14.jpg,http://localhost:8080/photo/0f3b4ddb73664fa08116ecbb711dbaaf.jpg', '8085adea03dbbe82bd7f828ae8ac2bfe');
-INSERT INTO `goods_images` VALUES ('2e81845cc41ab755bcec4be3c0cfccf0', 'http://localhost:8080/photo/c439a5eab4c443fa9d4295dad5bb1d3e.jpg,http://localhost:8080/photo/8da83278448e408db1b42be5f1462d14.jpg,http://localhost:8080/photo/0f3b4ddb73664fa08116ecbb711dbaaf.jpg', '859ee48679290a41ce70dd94467b5857');
-INSERT INTO `goods_images` VALUES ('91eaa1b7000583f16a6ffe61bced10b4', 'http://localhost:8080/photo/c439a5eab4c443fa9d4295dad5bb1d3e.jpg,http://localhost:8080/photo/8da83278448e408db1b42be5f1462d14.jpg,http://localhost:8080/photo/0f3b4ddb73664fa08116ecbb711dbaaf.jpg', '107b05ec70b99d5672c5bb303d60430a');
-INSERT INTO `goods_images` VALUES ('9392cdcae205b5bc34217ef7b6edb714', 'http://localhost:8080/photo/c439a5eab4c443fa9d4295dad5bb1d3e.jpg,http://localhost:8080/photo/8da83278448e408db1b42be5f1462d14.jpg,http://localhost:8080/photo/0f3b4ddb73664fa08116ecbb711dbaaf.jpg', 'ba955b281bb5a33686d5070672302a79');
-INSERT INTO `goods_images` VALUES ('a261bd44c455c13ee4280251ad69731d', 'http://localhost:8080/photo/c439a5eab4c443fa9d4295dad5bb1d3e.jpg,http://localhost:8080/photo/8da83278448e408db1b42be5f1462d14.jpg,http://localhost:8080/photo/0f3b4ddb73664fa08116ecbb711dbaaf.jpg', '1fe1378ad78f95be2eab2649a52d0eb8');
-INSERT INTO `goods_images` VALUES ('a6df9f39681486125975614d7827e3ca', 'http://localhost:8080/photo/c439a5eab4c443fa9d4295dad5bb1d3e.jpg,http://localhost:8080/photo/8da83278448e408db1b42be5f1462d14.jpg,http://localhost:8080/photo/0f3b4ddb73664fa08116ecbb711dbaaf.jpg', 'f11dfefaeed4d1bda7b31a63f4fe38d1');
-INSERT INTO `goods_images` VALUES ('b0a3679ec8f2e2e707b0f699f792d630', 'http://localhost:8080/photo/721b205fff2b4705b4f8e497f11b4ead.jpg,http://localhost:8080/photo/b7d2fe1eb8cd4595969b2e0ae3a56486.jpg,http://localhost:8080/photo/f785fbcd1b264a618c964331ec0bab58.jpg,http://localhost:8080/photo/1630d6a26fef48e6b37a5b29d869e34b.jpg', '45055ae5dac9af9a94a3976a62a84bc4');
-INSERT INTO `goods_images` VALUES ('dc369b82441e2350a1153ec473a30751', 'G:\\毕业设计\\images\\e0b32c4552784442bdb9353344347181.jpg,G:\\毕业设计\\images\\e27893ad9ff5486db5b438a6d4da24a0.jpg,G:\\毕业设计\\images\\d19f27f3a7a14e1ba04ea1e28faf8a92.jpg,G:\\毕业设计\\images\\507b2d62283f41ec84a90f8535285ab5.jpg', '6c9b0f1cbf04de7c8f5f36b3056b9b31');
-INSERT INTO `goods_images` VALUES ('dc4382b48af0c3610bebc8c965c37168', 'http://localhost:8080/photo/c439a5eab4c443fa9d4295dad5bb1d3e.jpg,http://localhost:8080/photo/8da83278448e408db1b42be5f1462d14.jpg,http://localhost:8080/photo/0f3b4ddb73664fa08116ecbb711dbaaf.jpg', '4e7ab0234ea644b996489d065c2b19fa');
-INSERT INTO `goods_images` VALUES ('dd25e0ae7036e2dea0d37d3feb5e395c', 'http://localhost:8080/photo/c439a5eab4c443fa9d4295dad5bb1d3e.jpg,http://localhost:8080/photo/8da83278448e408db1b42be5f1462d14.jpg,http://localhost:8080/photo/0f3b4ddb73664fa08116ecbb711dbaaf.jpg', 'a2270d0ac635e0fac03d9599c3268665');
-INSERT INTO `goods_images` VALUES ('e1f31cc91f58c32b00a9f11145840384', 'G:\\毕业设计\\images\\e0b32c4552784442bdb9353344347181.jpg,G:\\毕业设计\\images\\e27893ad9ff5486db5b438a6d4da24a0.jpg,G:\\毕业设计\\images\\d19f27f3a7a14e1ba04ea1e28faf8a92.jpg,G:\\毕业设计\\images\\507b2d62283f41ec84a90f8535285ab5.jpg', '0988f90f2c1d5184e37a9dc93e46ec18');
-INSERT INTO `goods_images` VALUES ('f34230103a16aefdeefbad0a2b7e61e6', 'http://localhost:8080/photo/c439a5eab4c443fa9d4295dad5bb1d3e.jpg,http://localhost:8080/photo/8da83278448e408db1b42be5f1462d14.jpg,http://localhost:8080/photo/0f3b4ddb73664fa08116ecbb711dbaaf.jpg', '96a709334b50e2e0fab7056abae52753');
+INSERT INTO `goods_images` VALUES ('0414e5283c485b41401d80bcfe108780', 'http://localhost:8080/photo/9e477f2166894300a9acbd8350d4e240.jpg,http://localhost:8080/photo/e5179e66b9ea4fbd8867b825675a6c73.jpg,http://localhost:8080/photo/0ee6b0ecd6ee4e20ad05ecbbfa28b7fd.jpg', 'fd24703545f0438636b14df021b8dd4e');
+INSERT INTO `goods_images` VALUES ('07597eaab6fda163f6df76a043d6fbfd', 'http://localhost:8080/photo/929e2cf1e4754c1a90699f2c4d2c1b35.jpg,http://localhost:8080/photo/126378cee22a491eb314a92a48b679f1.jpg', 'a2e46ae2132a3f32ee45455b380d6ddc');
+INSERT INTO `goods_images` VALUES ('87b8b48bc3b8cac54279a1ac3a27ec84', 'http://localhost:8080/photo/300535c4ff174a0bbb551b375f14fa54.jpg,http://localhost:8080/photo/81a3240efca34e35bcf4aa6a8e079708.jpg', 'bcfc1e77f8cdb1724d71eaff0baf6005');
+INSERT INTO `goods_images` VALUES ('a16633ba57a0c5d06e4a15ae311eae09', 'http://localhost:8080/photo/10367a00eafd44fda94623eab2715cd0.jpg,http://localhost:8080/photo/771c4b6dd33a493da5fa7f0c09cffa8e.jpg', '07235d02713e12ee96751879aec8ebc3');
+INSERT INTO `goods_images` VALUES ('b1698e06ecd470e38c31621e197d17a5', 'http://localhost:8080/photo/6a8be4a6fe7b4552a65c01f97cce2c6e.jpg,http://localhost:8080/photo/2f284630949244a4b461056e24f9cf74.jpg', '141ef5cdd72a539dc2d499a77bbf3773');
+INSERT INTO `goods_images` VALUES ('b91dfb48c8b0e62ba33bfeb919ece8c8', 'http://localhost:8080/photo/6a8be4a6fe7b4552a65c01f97cce2c6e.jpg,http://localhost:8080/photo/2f284630949244a4b461056e24f9cf74.jpg', '735822a82d67f7c25bebb8cbccc56ee8');
+INSERT INTO `goods_images` VALUES ('cd48e5324e51786147091cbf897eac39', 'http://localhost:8080/photo/b739cdb087af4780ab9d2929b02144ff.jpg,http://localhost:8080/photo/2699c446c50141469d5ee83b31dd0bba.jpg', '3841760a3f562457bb1b0fca7d0af5b9');
+INSERT INTO `goods_images` VALUES ('cea008c7cd606a8dcab9f9a80ec99aa2', 'http://localhost:8080/photo/3e3499d7622946e49b3fac90da57463f.jpg,http://localhost:8080/photo/59bf2b0b210b4a9c8462815a55b7e3f8.jpg,http://localhost:8080/photo/dfd4ab43b97640f084acfbfa5e938660.jpg', 'fd3c8edfb4391a0f57d4689e15bc84de');
+INSERT INTO `goods_images` VALUES ('e0eb6b6749efa1e8d908ca57c76ba96f', 'http://localhost:8080/photo/b857dca3e81048eb8c317413df8d7a07.jpg,http://localhost:8080/photo/2457a4f67ff04a2a9c96e942f304a7e8.jpg', '13acec17a6347ee186657e98693e7702');
+INSERT INTO `goods_images` VALUES ('fbf16c68a6d8944b2b37e38d7c3c2116', 'http://localhost:8080/photo/129419646d624a73b31498b867f2cfa4.jpg,http://localhost:8080/photo/ae90e43bdfab402b949a5bc7108d1084.jpg,http://localhost:8080/photo/2452d18f972e485b9cb274b910175eff.jpg', 'cdb54f1f07bf5bd325615d03a7e50485');
 
 -- ----------------------------
 -- Table structure for goods_norms
@@ -212,33 +199,17 @@ CREATE TABLE `goods_norms` (
 -- ----------------------------
 -- Records of goods_norms
 -- ----------------------------
-INSERT INTO `goods_norms` VALUES ('0338bef24fbd4e36a0520f86b7aa7751', '859ee48679290a41ce70dd94467b5857', '99.99', '88.88', '10Kg', '1', '999');
-INSERT INTO `goods_norms` VALUES ('0484091ddf1449b3229396504492c619', 'f11dfefaeed4d1bda7b31a63f4fe38d1', '9.99', '8.88', '1000g', '1', '999');
-INSERT INTO `goods_norms` VALUES ('1b50b168eeac656495f3ce30807d703b', '96a709334b50e2e0fab7056abae52753', '99.99', '88.88', '10Kg', '1', '999');
-INSERT INTO `goods_norms` VALUES ('1cd7eef67f336aa67b2adeba8018b136', '96a709334b50e2e0fab7056abae52753', '9.99', '8.88', '1000g', '1', '999');
-INSERT INTO `goods_norms` VALUES ('23eedde90f1ba07a90730ecf8af6aae4', '4e7ab0234ea644b996489d065c2b19fa', '9.99', '8.88', '1000g', '1', '999');
-INSERT INTO `goods_norms` VALUES ('297b23c923ebed8a1444c91a84121126', '8085adea03dbbe82bd7f828ae8ac2bfe', '99.99', '88.88', '10Kg', '1', '999');
-INSERT INTO `goods_norms` VALUES ('38de51f789f925379de8fcff4b8217e2', 'ba955b281bb5a33686d5070672302a79', '99.99', '88.88', '10Kg', '1', '999');
-INSERT INTO `goods_norms` VALUES ('447277c5f0c08f9bbfbc4a7fd9f889fb', '859ee48679290a41ce70dd94467b5857', '9.99', '8.88', '1000g', '1', '999');
-INSERT INTO `goods_norms` VALUES ('4b05ab07f080a93d760ae6d0983b84df', '45055ae5dac9af9a94a3976a62a84bc4', '1.00', '1.00', '1', '1', '1');
-INSERT INTO `goods_norms` VALUES ('4d6c6bc1d460e61cbe5c2a71b4f64faa', '7df0c96ec19f4d9c89f14272200b0a38', '99.99', '88.88', '10Kg', '1', '999');
-INSERT INTO `goods_norms` VALUES ('5bef7680eee7a87a7c8bc2d0c944bf1c', '7df0c96ec19f4d9c89f14272200b0a38', '9.99', '8.88', '1000g', '1', '999');
-INSERT INTO `goods_norms` VALUES ('619eca96a5381cea66862477f79fc02a', '107b05ec70b99d5672c5bb303d60430a', '9.99', '8.88', '1000g', '1', '999');
-INSERT INTO `goods_norms` VALUES ('769d6a3b4a5aac818b228803c78b5a09', '0988f90f2c1d5184e37a9dc93e46ec18', '2.00', '2.00', '2', '2', '2');
-INSERT INTO `goods_norms` VALUES ('77d6f47ec4098d609abf31fa341df9fc', 'a2270d0ac635e0fac03d9599c3268665', '99.99', '88.88', '10Kg', '1', '999');
-INSERT INTO `goods_norms` VALUES ('7b65eff179824b467d3a9b66c05edbac', '1fe1378ad78f95be2eab2649a52d0eb8', '99.99', '88.88', '10Kg', '1', '999');
-INSERT INTO `goods_norms` VALUES ('8a23d34eae2e77e5ac933cdb9e644052', '6c9b0f1cbf04de7c8f5f36b3056b9b31', '3.00', '3.00', '3', '3', '3');
-INSERT INTO `goods_norms` VALUES ('a767eda66352e3420ce6340db28bada3', '6c9b0f1cbf04de7c8f5f36b3056b9b31', '4.00', '4.00', '4', '4', '4');
-INSERT INTO `goods_norms` VALUES ('c4bc114245ef7a1f70c7b16ee62cd9c0', '6c9b0f1cbf04de7c8f5f36b3056b9b31', '5.00', '5.00', '5', '5', '5');
-INSERT INTO `goods_norms` VALUES ('c803bf30b0e2b57f5d3fecdc86c55e8c', '45055ae5dac9af9a94a3976a62a84bc4', '2.00', '2.00', '2', '2', '2');
-INSERT INTO `goods_norms` VALUES ('cd08858e0942e9ef98ac153f143bd715', 'f11dfefaeed4d1bda7b31a63f4fe38d1', '99.99', '88.88', '10Kg', '1', '999');
-INSERT INTO `goods_norms` VALUES ('cefcf484bded2a801d50e52ff69b85d4', '0988f90f2c1d5184e37a9dc93e46ec18', '1.00', '1.00', '1', '1', '1');
-INSERT INTO `goods_norms` VALUES ('d114cda5dd6fc6e7a05325168944266e', '107b05ec70b99d5672c5bb303d60430a', '99.99', '88.88', '10Kg', '1', '999');
-INSERT INTO `goods_norms` VALUES ('e10f002420ab0049ee4b40b5aad75dda', 'ba955b281bb5a33686d5070672302a79', '9.99', '8.88', '1000g', '1', '999');
-INSERT INTO `goods_norms` VALUES ('e182348697072ead2bb4da1218ec14a4', '1fe1378ad78f95be2eab2649a52d0eb8', '9.99', '8.88', '1000g', '1', '999');
-INSERT INTO `goods_norms` VALUES ('e9f89e00111c6583f387a5013b92e1cb', '4e7ab0234ea644b996489d065c2b19fa', '99.99', '88.88', '10Kg', '1', '999');
-INSERT INTO `goods_norms` VALUES ('f27aff85ece3030ff32b65393578850d', '8085adea03dbbe82bd7f828ae8ac2bfe', '9.99', '8.88', '1000g', '1', '999');
-INSERT INTO `goods_norms` VALUES ('f733311948b2a97deceaa759c8ae79f2', 'a2270d0ac635e0fac03d9599c3268665', '9.99', '8.88', '1000g', '1', '999');
+INSERT INTO `goods_norms` VALUES ('17d277c57e4af9b18b11f0a50a01ab01', '735822a82d67f7c25bebb8cbccc56ee8', '12.00', '11.00', '2kg', '1', '50');
+INSERT INTO `goods_norms` VALUES ('357283861119af6382a143303985ce11', 'fd24703545f0438636b14df021b8dd4e', '9.90', '8.80', '1kg', '1', '50');
+INSERT INTO `goods_norms` VALUES ('6b31deaaf1015f7778ff9e1d34c77763', '07235d02713e12ee96751879aec8ebc3', '30.00', '25.50', '5kg', '1', '100');
+INSERT INTO `goods_norms` VALUES ('76982adf0049872d2933e5acf79a701b', '141ef5cdd72a539dc2d499a77bbf3773', '12.00', '11.00', '2kg', '1', '50');
+INSERT INTO `goods_norms` VALUES ('7d043bd2a9e25f9dbeb3807c76e8dc31', '3841760a3f562457bb1b0fca7d0af5b9', '8.00', '6.60', '1kg', '1', '35');
+INSERT INTO `goods_norms` VALUES ('8af16cbcb2a606c13d0ec43e57da4f2c', 'fd3c8edfb4391a0f57d4689e15bc84de', '36.00', '29.90', '3kg', '1', '150');
+INSERT INTO `goods_norms` VALUES ('bb7920f9142708cf7a9b75283abfccd7', 'fd24703545f0438636b14df021b8dd4e', '49.90', '45.90', '5kg', '1', '20');
+INSERT INTO `goods_norms` VALUES ('c391e1db5a5da53409111ac747b84f38', 'cdb54f1f07bf5bd325615d03a7e50485', '5.99', '5.59', '1kg', '1', '50');
+INSERT INTO `goods_norms` VALUES ('d10208653789892ac492dccf6f2ce93b', 'a2e46ae2132a3f32ee45455b380d6ddc', '4.00', '3.99', '2kg', '1', '60');
+INSERT INTO `goods_norms` VALUES ('eb08da3bcd7ae880f9e2f7c89e2587fd', 'bcfc1e77f8cdb1724d71eaff0baf6005', '3.00', '2.80', '1kg', '1', '40');
+INSERT INTO `goods_norms` VALUES ('fc71a6fe5fcae74c860fa70ecad0b74d', '13acec17a6347ee186657e98693e7702', '30.00', '28.80', '5kg', '1', '200');
 
 -- ----------------------------
 -- Table structure for goods_return
@@ -273,6 +244,8 @@ CREATE TABLE `menu` (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
+INSERT INTO `menu` VALUES ('7e566abd4e238ca115ee3fe0ad6ed54d', '本地水果', 'a51045578d1bb20556da2760c0c178aa', '', '1');
+INSERT INTO `menu` VALUES ('7fda963e53a594ffb557d64ba05af19f', '本地蔬菜', '9619cee863ea3c48e1f35e0d37114dbd', '', '1');
 
 -- ----------------------------
 -- Table structure for orders
@@ -335,6 +308,7 @@ INSERT INTO `permission` VALUES ('0c5408f54aef7788f4f303d457b1e2cf', '角色管�
 INSERT INTO `permission` VALUES ('1b06e3f7510f0b2670c3a2698643106f', '授权管理', '/rolepermission', '授权管理');
 INSERT INTO `permission` VALUES ('44a1f7b026a2bf03f6c23e6c64815d59', '系统菜单管理', '/menu', '系统菜单管理');
 INSERT INTO `permission` VALUES ('5a97617c30375fcd2073836de67b1572', '商家录入', '/addshop', '商家录入');
+INSERT INTO `permission` VALUES ('9a2319763f830e56caecdb6d7b16a37e', null, null, null);
 INSERT INTO `permission` VALUES ('b622cdb149c1fb884c4497a104b51d79', '商家信息', '/shopInfo', '商家信息');
 INSERT INTO `permission` VALUES ('ea7eba60c0e0b27cd6d5ce92010c2de6', '商品信息', '/goodsInfo', '商品信息');
 INSERT INTO `permission` VALUES ('f7eb6804cacd39bbea73cf964d81a37a', '资源管理', '/permission', '资源管理');
@@ -417,9 +391,7 @@ CREATE TABLE `shop_car` (
 -- ----------------------------
 -- Records of shop_car
 -- ----------------------------
-INSERT INTO `shop_car` VALUES ('2ab243e2155d275632f21b5ee9da7536', 'cf21724fde2550b3b9936842d6adbf83', '45055ae5dac9af9a94a3976a62a84bc4', '4b05ab07f080a93d760ae6d0983b84df', '1', '1', '1');
-INSERT INTO `shop_car` VALUES ('4cf819c35c7b7a9a583faa99f362c422', '4c0a8228f927b6b252e10f6b8323c347', '45055ae5dac9af9a94a3976a62a84bc4', '4b05ab07f080a93d760ae6d0983b84df', '1', '1', '1');
-INSERT INTO `shop_car` VALUES ('9fc718e9ebf44d077d7445435fd95cb6', 'cf21724fde2550b3b9936842d6adbf83', '45055ae5dac9af9a94a3976a62a84bc4', 'c803bf30b0e2b57f5d3fecdc86c55e8c', '1', '2', '2');
+INSERT INTO `shop_car` VALUES ('cb528f23b931b825835edbe761342971', '4c0a8228f927b6b252e10f6b8323c347', '735822a82d67f7c25bebb8cbccc56ee8', '17d277c57e4af9b18b11f0a50a01ab01', '4', '11', '44');
 
 -- ----------------------------
 -- Table structure for shop_store
@@ -438,9 +410,7 @@ CREATE TABLE `shop_store` (
 -- ----------------------------
 -- Records of shop_store
 -- ----------------------------
-INSERT INTO `shop_store` VALUES ('20cc494f788298aceb7c072bd09d0a7c', '苹果店', '买苹果的', 'b5966d135478ad38322f05f7998fb24b', '2020-01-19 11:58:06', '0');
-INSERT INTO `shop_store` VALUES ('531b593d35dc3557c513d707301e7b6f', '香蕉店', '买香蕉', '011732df4d5d9b6270e5b9ce59453d42', '2020-01-18 13:07:17', '1');
-INSERT INTO `shop_store` VALUES ('5503cb4690d70d7b621dd8716824fd71', '苹果店', '买苹果的', 'b5966d135478ad38322f05f7998fb24b', '2020-01-19 11:58:12', '1');
+INSERT INTO `shop_store` VALUES ('e9b736feed13141c436a385aead46464', '苹果旗舰店', '各种苹果，又甜又鲜', '011732df4d5d9b6270e5b9ce59453d42', null, '1');
 
 -- ----------------------------
 -- Table structure for user
@@ -465,23 +435,6 @@ INSERT INTO `user` VALUES ('011732df4d5d9b6270e5b9ce59453d42', 'wanjy', '小猫�
 INSERT INTO `user` VALUES ('4c0a8228f927b6b252e10f6b8323c347', 'zs', '大宝贝', '248e568de4e5525ed9bacc26ed79549c', '7gsR', '2', '1', '2020-02-03 10:02:20');
 INSERT INTO `user` VALUES ('b5966d135478ad38322f05f7998fb24b', 'admin', '管理员', 'be056463f899115df56108efd5a33719', 'b8pt', '4', '1', '2020-01-16 19:26:07');
 INSERT INTO `user` VALUES ('cf21724fde2550b3b9936842d6adbf83', 'zhousong', '大宝贝', '0b6d4e518e7217245af003f427b900e9', 'iPdD', '2', '1', '2020-02-03 10:03:48');
-
--- ----------------------------
--- Table structure for user_coupon
--- ----------------------------
-DROP TABLE IF EXISTS `user_coupon`;
-CREATE TABLE `user_coupon` (
-  `user_coupon_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户编号',
-  `coupon_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '卡券编号',
-  `use_status` int(1) DEFAULT NULL COMMENT '使用状态',
-  `get_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '领取时间',
-  PRIMARY KEY (`user_coupon_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户优惠券表';
-
--- ----------------------------
--- Records of user_coupon
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for user_details

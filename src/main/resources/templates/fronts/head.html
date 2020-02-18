@@ -1,4 +1,13 @@
+<style>
+    .persion{
+        position: absolute;
+        display: none;
+    }
 
+    .username:hover .persion{
+        display: block;
+    }
+</style>
 <div class="header-holder">
     <header id="header">
         <span class="logo"><a href="/index">农家蔬果直通车</a></span>
@@ -10,27 +19,28 @@
             </ul>
             <ul class="tools-nav" th:if="${username} ne null">
                 <li class="login"><a href="/index">首页</a></li>
-                <li class="login"><a href="/login" th:text="${username}"></a></li>
+                <li class="login username">
+                    <a th:text="${username}"></a>
+                    <dl class="persion">
+                        <dd><a href="/login">个人中心</a></dd>
+                        <dd><a href="/login">我的订单</a></dd>
+                    </dl>
+                </li>
                 <li class="login"><a href="/logout">退出</a></li>
             </ul>
             <div class="checkout">
-                <span>3 products, <span class="pink">$380,50</span></span>
+                <span id="ShopCarTotal"></span>
                 <a href="/cart" class="btn btn_checkout">购物车</a>
             </div>
         </div>
         <div class="clear"></div>
         <nav id="nav">
-            <ul class="navi">
-                <li><a href="/products">Our collection</a></li>
-                <li><a href="/products">Top products </a></li>
-                <li><a href="/products">Best sellers</a></li>
-                <li><a href="/products">Gifts</a></li>
-                <li><a href="/products">Promotions</a></li>
+            <ul class="navi" id="showMenu">
             </ul>
             <div  class="ul_search">
                 <a class="search" href="#"><span>search</span></a>
-                <form method="get" class="searchform" action="#">
-                    <input type="text" class="field" name="s" id="s" placeholder="搜你所爱" />
+                <form method="get" class="searchform" action="/products">
+                    <input type="text" class="field" name="goodsName" id="goodsName" placeholder="搜你所爱" />
                     <input type="submit" class="submit" value=""  />
                 </form>
             </div >
@@ -45,3 +55,56 @@
 <script type="text/javascript" src="js/jquery.bxslider.js"></script>
 <script src="js/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
+<script>
+    getShopCarTotal();
+    $.ajax({
+        url:"/menu/getShowMenu",
+        type:'get',
+        dataType:'json',
+        success:function(data){
+            if(data.code == 0){
+                data = data.data;
+                var li ="";
+                for(var i = 0; i <data.length; i++){
+                    li += '<li><a href="/products?categoryId='+data[i].categoryId+'">'+data[i].menuName+'</a></li>';
+                }
+                $("#showMenu").append(li);
+
+            }
+            else {
+                layer.msg(
+                    data.msg,
+                    { icon: 5,//失败的表情
+                        time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                    })
+            }
+
+        }
+    });
+
+    function getShopCarTotal() {
+        $.ajax({
+            url:"/shopcar/getShopCarTotal",
+            type:'get',
+            dataType:'json',
+            success:function(data){
+                var total = 0;
+                var price = 0;
+                if(data.code == 0){
+                    data = data.data;
+                    for(var i = 0; i <data.length; i++){
+                        total += data[i].goodNumber;
+                        price += data[i].goodAllPrice;
+                    }
+                    var html=total+' 商品  <span class="pink"> ￥'+price+' 元</span>';
+                    $("#ShopCarTotal").html(html);
+                }
+                else {
+                    var html=data.msg;
+                    $("#ShopCarTotal").html(html);
+                }
+
+            }
+        });
+    }
+</script>

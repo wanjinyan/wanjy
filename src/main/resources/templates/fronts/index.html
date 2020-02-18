@@ -25,6 +25,7 @@
 		.container>a:hover{
 			text-decoration: none;
 		}
+
 	</style>
 </head>
 <body>
@@ -40,9 +41,7 @@
 						</div>
 					</div>
 					<ul class="box_image_list">
-						<li><a href="#"><img src="images/pic_02.png" alt="" ></a></li>
-						<li><a href="#"><img src="images/pic_03.png" alt="" ></a></li>
-						<li><a href="#"><img src="images/pic_04.png" alt="" ></a></li>
+
 					</ul>
 					<div class="clear"></div>
 
@@ -85,14 +84,18 @@
                 type: 'get',
                 success: function (data) {
                     if (data.code == 0) {
-                        var count = data.count;
                         var data = data.data;
                         var html = '<div carousel-item>';
-                        for (var i = 0; i < count; i++) {
-                            html += '<div><a href="#"><img src="'+data[i].bannerUrl+'" alt="" ></a></div>'
+                        var li="";
+                        for (var i = 0; i < data.length; i++) {
+                            html += '<div><a href="/product?goodsId='+data[i].goodsId+'"><img src="'+data[i].bannerUrl+'" alt="" ></a></div>'
+                        }
+                        for (var i = 0; i < data.length && i< 3; i++) {
+                            li+='<li style="width:270px;height:147px;overflow: hidden"><a href="/product?goodsId='+data[i].goodsId+'"><img src="'+data[i].bannerUrl+'" alt="" ></a></li>';
                         }
                         html += '</div>';
                         $("#banner").append(html);
+                        $(".box_image_list").html(li);
                         carousel.render({
                             elem: '#banner'
                             ,width: '100%' //设置容器宽度
@@ -129,10 +132,9 @@
 				},
                 success: function (data) {
                     if (data.code == 0) {
-                        var count = data.count;
                         var data = data.data;
                         var html = '';
-                        for (var i = 0; i < count; i++) {
+                        for (var i = 0; i < data.length; i++) {
                             var imagesUrl=data[i].goodsImages.goodsImagesUrl;
                             var imageUrl=imagesUrl.split(',');
                             var goods=data[i].goods;
@@ -142,11 +144,11 @@
 								'<li>'+
 									'<div class="item">'+
 										'<a href="/product?goodsId='+goodsId+'">'+
-										'<div class="image" style="width: 250px;height: 290px">'+
+										'<div class="image" style="width: 250px;height: 290px;overflow: hidden">'+
 											'<img src="'+imageUrl[0]+'" alt="图片加载失败" lay-src="images/loading.gif">'+
 										'</div>'+
 										'<span class="name">'+goods.goodsName+'</span>'+
-										'<span>'+goodsNormsList[0].goodsOldPrice+'</span>'+
+										'<span>￥ '+goodsNormsList[0].goodsOldPrice+'元</span>'+
 										'</a>'+
 									'</div>'+
 								'</li>';

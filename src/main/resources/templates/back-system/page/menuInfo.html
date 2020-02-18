@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>分类</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui-v2.5.4/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css" media="all">
+</head>
+<body>
+<form class="layui-form layui-form-pane" id="test" style="display:none">
+    <div class="layui-form-item" >
+        <input type="hidden" id="menuId">
+        <div class="layui-inline" style="margin: 10px">
+            <label class="layui-form-label" style="width: 100px">菜单名字</label>
+            <div class="layui-input-inline">
+                <input type="text" id="menuName" autocomplete="off" class="layui-input" style="width: 300px">
+            </div>
+        </div>
+        <div class="layui-inline" style="margin: 10px">
+            <input type="hidden" name="categoryId" id="categoryId">
+            <label class="layui-form-label" style="width: 100px">关联分类</label>
+            <div class="layui-input-inline" style="width: 290px">
+                <input type="text" placeholder="请选择" id="categoryName" autocomplete="off" class="layui-input" >
+            </div>
+        </div>
+        <div class="layui-inline" style="margin: 10px">
+            <input type="hidden" name="perMenuId" id="perMenuId">
+            <label class="layui-form-label" style="width: 100px">上级菜单</label>
+            <div class="layui-input-inline" style="width: 290px">
+                <input type="text"  placeholder="请选择" autocomplete="off" class="layui-input" id="perMenuName">
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin: 10px">
+            <label class="layui-form-label" style="width: 100px">菜单状态</label>
+            <div class="layui-input-block">
+                <select id="menuStatus" lay-verify="required" style="width: 300px">
+                    <option value="0" style="width: 300px">不展示</option>
+                    <option value="1" style="width: 300px">展示</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="layui-elem-field layuimini-search">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">菜单名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="name" name="name" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <a class="layui-btn" lay-submit="" lay-filter="data-search-btn">搜索</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <div class="layui-btn-group">
+            <button class="layui-btn data-add-btn">添加</button>
+            <button class="layui-btn layui-btn-danger data-delete-btn">删除</button>
+        </div>
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+        <script type="text/html" id="isShow">
+            <input type="checkbox" value="{{d.menuStatus}}" data="{{d.menuId}}" {{d.menuStatus=="1"?"checked":""}} lay-filter="menuStatus" lay-event="switch" name="menuStatus" lay-skin="switch"  lay-text="是|否">
+        </script>
+        <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        </script>
+    </div>
+</div>
+<script src="../lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
+<script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table','tableSelect'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+        var tableSelect = layui.tableSelect;
+
+        //上级菜单的选择框
+        tableSelect.render({
+            elem: '#perMenuName',
+            checkedKey: 'menuName',
+            searchKey: 'menuName',
+            table: {
+                url: '/menu/getMenu',
+                cols:
+                    [
+                        [
+                            { type: 'radio' },
+                            {field: 'menuName', minWidth: 200, title: '菜单名称'}
+                        ]
+                    ]
+            },
+            done: function (elem, data) {
+                var NEWJSON = []
+                layui.each(data.data, function (index, item) {
+                    NEWJSON.push(item.menuName);
+                    $("#perMenuId").val(item.menuId);
+                })
+                elem.val(NEWJSON.join(","))
+            }
+        });
+
+        //关联分类的选择框
+        tableSelect.render({
+            elem: '#categoryName',
+            checkedKey: 'categoryName',
+            searchKey: 'categoryName',
+            table: {
+                url: '/category/getCategory',
+                cols:
+                    [
+                        [
+                            { type: 'radio' },
+                            {field: 'categoryName', minWidth: 200, title: '分类名称'}
+                        ]
+                    ]
+            },
+            done: function (elem, data) {
+                var NEWJSON = []
+                layui.each(data.data, function (index, item) {
+                    NEWJSON.push(item.categoryName);
+                    $("#categoryId").val(item.categoryId);
+                })
+                elem.val(NEWJSON.join(","))
+            }
+        });
+        table.render({
+            elem: '#currentTableId',
+            url: '/menu/getMenu',
+            cols:
+                [
+                    [
+                        {type: "checkbox", width: 50, fixed: "left"},
+                        {field: 'menuId', width: 120, title: '菜单编号', sort: true},
+                        {field: 'menuName', width: 120, title: '菜单名字', sort: true},
+                        {field: 'categoryId', width: 120, title: '关联分类', sort: true},
+                        {field: 'perMenuId', width: 120, title: '上级菜单', sort: true},
+                        {
+                            field: 'menuStatus',
+                            title: '是否展示',
+                            templet: '#isShow'
+                        },
+                        {title: '操作', minWidth: 50, templet: '#currentTableBar', fixed: "right", align: "center"}
+                    ]
+                ],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            var name = $("#name").val();
+            //location.reload();
+            //执行搜索重载
+            reload(name);
+        });
+
+        //监听是否展示的开关
+        form.on('switch(menuStatus)', function(data){
+            var menuId=$(this).attr("data");
+            var menuStatus=this.checked?1:0;
+            var Data={
+                "menuId":menuId,
+                "menuStatus":menuStatus
+            }
+            saveMenu(Data);
+            //alert(isShow);
+        });
+
+        //保存或更新
+        function saveMenu(data) {
+            if(data.menuId == "")
+                data.menuId = null;
+            $.ajax({
+                url:"/menu/saveOrUpdateMenu",
+                type:'post',
+                data:{
+                    "menuId":data.menuId,
+                    "menuName":data.menuName,
+                    "categoryId":data.categoryId,
+                    "perMenuId":data.perMenuId,
+                    "menuStatus":data.menuStatus
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        layer.msg(
+                            data.msg,
+                            { icon: 6,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            },function(){
+                                layer.closeAll();
+                                reload("");
+                            })
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            { icon: 5,//失败的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            });
+        }
+
+        // 监听添加操作
+        $(".data-add-btn").on("click", function () {
+            $("#menuId").val("");
+            $("#menuName").val("");
+            $("#categoryId").val("");
+            $("#perMenuId").val("");
+            $("#menuStatus").val("");
+            editBox();
+        });
+
+        // 监听删除操作
+        $(".data-delete-btn").on("click", function () {
+            var checkStatus = table.checkStatus('currentTableId')
+                , data = checkStatus.data;
+            for(var i = 0; i < data.length; i++){
+                //alert(data[i].permissionId);
+                deletemenuById(data[i].menuId);
+            }
+        });
+
+        //监听表格复选框选择
+        table.on('checkbox(currentTableFilter)', function (obj) {
+            console.log(obj)
+        });
+
+        //操作栏
+        table.on('tool(currentTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'edit') {
+                $("#menuId").val(data.menuId);
+                $("#menuName").val(data.menuName);
+                $("#perMenuId").val(data.perMenuId);
+                $("#menuStatus").val(data.menuStatus);
+                $("#categoryId").val(data.categoryId);
+                editBox();
+            } else if (obj.event === 'delete') {
+                layer.confirm('真的删除行么', function (index) {
+                    var id=data.menuId;
+                    deletemenuById(id);
+                    layer.close(index);
+                });
+            }
+        });
+
+        /**
+         * 重新加载数据
+         * @param name
+         */
+        function reload(name) {
+            table.reload('currentTableId', {
+                page: {
+                    curr: 1
+                }
+                , where: {
+                    "menuName":name,
+                }
+            }, 'data');
+        }
+
+        /**
+         * 根据id删除数据
+         * @param id
+         */
+        function deletemenuById(id) {
+            $.ajax({
+                url:"/menu/deleteMenu",
+                type:'delete',
+                data:{
+                    "menuId":id
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        layer.msg(
+                            data.msg,
+                            { icon: 6,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            },function(){
+                                reload("");
+                            })
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            { icon: 5,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            });
+        }
+
+
+        /**
+         * 弹出编辑框
+         */
+        function editBox() {
+            layer.open({
+                type:1,
+                area:['420px','450px'],
+                title: '菜单编辑'
+                ,content: $("#test"),
+                shade: 0,
+                btn: ['提交', '取消']
+                ,btn1: function(){
+                    var Data={
+                        "menuId":$("#menuId").val(),
+                        "menuName":$("#menuName").val(),
+                        "categoryId":$("#categoryId").val(),
+                        "perMenuId":$("#perMenuId").val(),
+                        "menuStatus":$("#menuStatus").val()
+                    }
+                    saveMenu(Data);
+                },
+                btn2: function(){
+                    layer.closeAll();
+                },
+                cancel: function(layero,index){
+                    layer.closeAll();
+                }
+            });
+        }
+    });
+
+</script>
+<script>
+
+</script>
+
+</body>
+</html>

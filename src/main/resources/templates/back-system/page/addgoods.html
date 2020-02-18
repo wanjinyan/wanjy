@@ -28,12 +28,10 @@
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
+                                        <input type="hidden" name="goodsCategoryId" id="goodsCategoryId">
                                         <label class="layui-form-label">商品类别:</label>
                                         <div class="layui-input-block">
-                                            <select lay-verify="required" id="goodsCategoryId">
-                                                <option value="1" selected>水果</option>
-                                                <option value="2">蔬菜</option>
-                                            </select>
+                                            <input type="text" placeholder="请选择" id="goodsCategoryName" autocomplete="off" class="layui-input" >
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
@@ -135,10 +133,11 @@
 <script src="../lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
 <script src="../js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script>
-    layui.use([ 'form', 'step','upload'], function () {
+    layui.use([ 'form', 'step','upload','tableSelect'], function () {
         var $ = layui.$,
             form = layui.form,
             step = layui.step,
+            tableSelect=layui.tableSelect,
             upload = layui.upload;
         var images=[];
         var imagesUrl="";
@@ -157,7 +156,30 @@
                 title: '完成'
             }]
         });
-
+        //关联分类的选择框
+        tableSelect.render({
+            elem: '#goodsCategoryName',
+            checkedKey: 'categoryName',
+            searchKey: 'categoryName',
+            table: {
+                url: '/category/getCategory',
+                cols:
+                    [
+                        [
+                            { type: 'radio' },
+                            {field: 'categoryName', minWidth: 200, title: '分类名称'}
+                        ]
+                    ]
+            },
+            done: function (elem, data) {
+                var NEWJSON = []
+                layui.each(data.data, function (index, item) {
+                    NEWJSON.push(item.categoryName);
+                    $("#goodsCategoryId").val(item.categoryId);
+                })
+                elem.val(NEWJSON.join(","))
+            }
+        });
 
         form.on('submit(formStep)', function (data) {
             step.next('#stepForm');
@@ -293,7 +315,7 @@
                 dataType: 'json',
                 type: 'post',
                 data:{
-                  "goodsName":goodsName,
+                    "goodsName":goodsName,
                     "goodsCategoryId":goodsCategoryId,
                     "goodsImagesUrl":imagesUrl,
                     "goodsNorms":JSON.stringify(getGoodsNorms())

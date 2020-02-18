@@ -153,10 +153,10 @@
                     data:{
                         "goodsId":$("#goodsId").val(),
 						"goodsNormsId":$("#goodsNorm").val()
-
                     },
                     success: function (data) {
                         if (data.code == 0) {
+                            getShopCarTotal();
                             layer.msg(
                                 data.msg,
 								{

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <!--[if lte IE 8]> <html class="oldie" lang="en"> <![endif]-->
 <!--[if IE 9]> <html class="ie9" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
@@ -20,6 +21,8 @@
 	<![endif]-->
 </head>
 <body>
+<input type="hidden" id="categoryId" th:value="${categoryId}">
+<input type="hidden" id="goodsName" th:value="${goodsName}">
 	<div id="wrapper">
 		<div class="wrapper-holder">
 			<div id="head"></div>
@@ -34,125 +37,15 @@
 							</ul>
 						</div>
 					</section>
-					<div class="top-bar">
-						<form class="form-sort" action="#">
-							<fieldset>
-								<div class="row">
-									<label for="sort">Sort by :</label>
-									<select id="sort">
-										<option>price</option>
-										<option>price</option>
-									</select>
-								</div>
-								<div class="row">
-									<label for="page">Products per page:</label>
-									<select id="page">
-										<option>8</option>
-										<option>8</option>
-									</select>
-								</div>
-								<div class="row">
-									<label for="page">Type of product:</label>
-									<select id="page">
-										<option>Boxed</option>
-										<option>Boxed</option>
-									</select>
-								</div>
-							</fieldset>
-						</form>
-						<ul class="paging">
-							<li class="prev"><a href="#">prev</a></li>
-							<li><a href="#">1</a></li>
-							<li class="active"><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li class="next"><a href="#">next</a></li>
-						</ul>
-					</div>
-					<ul class="item-product">
-						<li>
-							<div class="item">
-								<div class="image">
-									<a href="/product"><img src="images/pic_05.png"  alt="" /></a>
-								</div>
-								<span class="name"><a href="/product">Lorem ipsum dolor</a></span>
-								<span>$65.00</span>
-							</div>
-						</li>
-						<li>
-							<div class="item">
-								<div class="image">
-									<a href="/product"><img src="images/pic_06.png"  alt="" /></a>
-								</div>
-								<span class="name"><a href="/product">Lorem ipsum dolor</a></span>
-								<span>$49.99</span>
-							</div>
-						</li>
-						<li>
-							<div class="item">
-								<div class="image">
-									<a href="/product"><img src="images/pic_07.png"  alt="" /></a>
-								</div>
-								<span class="name"><a href="/product">Lorem ipsum dolor</a></span>
-								<span>$20.00</span>
-							</div>
-						</li>
-						<li>
-							<div class="item">
-								<div class="image">
-									<a href="/product"><img src="images/pic_08.png"  alt="" /></a>
-								</div>
-								<span class="name"><a href="/product">Lorem ipsum dolor</a></span>
-								<span>$59.99</span>
-							</div>
-						</li>
-						<li>
-							<div class="item">
-								<div class="image">
-									<a href="/product"><img src="images/pic_09.png"  alt="" /></a>
-								</div>
-								<span class="name"><a href="/product">Lorem ipsum dolor</a></span>
-								<span>$15.99</span>
-							</div>
-						</li>
-						<li>
-							<div class="item">
-								<div class="image">
-									<a href="/product"><img src="images/pic_10.png"  alt="" /></a>
-								</div>
-								<span class="name"><a href="/product">Lorem ipsum dolor</a></span>
-								<span>$9.99</span>
-							</div>
-						</li>
-						<li>
-							<div class="item">
-								<div class="image">
-									<a href="/product"><img src="images/pic_11.png"  alt="" /></a>
-								</div>
-								<span class="name"><a href="/product">Lorem ipsum dolor</a></span>
-								<span>$80.00</span>
-							</div>
-						</li>
-						<li>
-							<div class="item">
-								<div class="image">
-									<a href="#"><img src="images/pic_12.png"  alt="" /></a>
-								</div>
-								<span class="name"><a href="/product">Lorem ipsum dolor</a></span>
-								<span>$49.99</span>
-							</div>
-						</li>
+					<ul class="item-product" id="goodList">
 					</ul>
 					<div class="top-bar top-bar-add">
 						<ul class="paging">
-							<li class="prev"><a href="#">prev</a></li>
-							<li><a href="#">1</a></li>
-							<li class="active"><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li class="next"><a href="#">next</a></li>
+							<li><a onclick="getGoods('f')">首页</a></li>
+							<li class="prev"><a onclick="getGoods('p')">上一页</a></li>
+							<li><a id="current">1</a></li>
+							<li class="next"><a onclick="getGoods('n')">下一页</a></li>
+							<li><a onclick="getGoods('e')">尾页</a></li>
 						</ul>
 					</div>
 				</div>
@@ -170,6 +63,73 @@
 	<script src="js/jquery-ui-1.10.4.custom.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script>
+		//商品列表的展示控制函数
+        getGoods('f');
+        var page=1;
+        var total=1;
+        function getGoods(opt) {
+            switch (opt) {
+                case 'f':page=1;break;
+                case 'p':page=page<=1?1:page-1;break;
+                case 'n':page=page>=Math.ceil(total/8)?Math.ceil(total/8):page+1;break;
+                case 'e':page=Math.ceil(total/8);break;
+				default:return;
+            }
+            $.ajax({
+                url: "/goods/getGoodsInfo",
+                type: 'get',
+                dataType:'json',
+                data:{
+                    "page":page,
+                    "limit":8,
+					"categoryId":$("#categoryId").val(),
+					"goodsName":$("#goodsName").val()
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        total=data.count;
+                        var data = data.data;
+                        var html = '';
+                        for (var i = 0; i < data.length; i++) {
+                            var imagesUrl=data[i].goodsImages.goodsImagesUrl;
+                            var imageUrl=imagesUrl.split(',');
+                            var goods=data[i].goods;
+                            var goodsNormsList=data[i].goodsNormsList;
+                            var goodsId=goods.goodsId;
+                            html +=
+                                '<li>'+
+                                '<div class="item">'+
+                                '<a href="/product?goodsId='+goodsId+'">'+
+                                '<div class="image" style="width: 250px;height: 290px">'+
+                                '<img src="'+imageUrl[0]+'" alt="图片加载失败" lay-src="images/loading.gif">'+
+                                '</div>'+
+                                '<span class="name">'+goods.goodsName+'</span>'+
+                                '<span>'+goodsNormsList[0].goodsOldPrice+'</span>'+
+                                '</a>'+
+                                '</div>'+
+                                '</li>';
+                        }
+                        if(data.length == 0){
+                            html += '<p style="width: 100%;text-align: center">暂无商品</p>';
+						}
+                        html += '</div>';
+
+                        $("#goodList").html(html);
+                        $("#current").html(page);
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            {
+                                icon: 5,//失败的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            })
+        }
+
         $("#head").load("/head");//加载头部
         $("#foot").load("/foot");//加载尾部
 	</script>

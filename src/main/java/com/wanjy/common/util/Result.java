@@ -19,6 +19,20 @@ public class Result {
 
     public Result() {
     }
+
+    /**
+     * bool值得判断
+     * @param b
+     * @param msg
+     * @return
+     */
+    public static Result isSuccess(Boolean b,String msg){
+        if(b){
+            return success(msg+"成功");
+        }else {
+            return error(msg+"失败");
+        }
+    }
     /**
      * 失败返回 默认
      */
