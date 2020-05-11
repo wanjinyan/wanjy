@@ -7,6 +7,7 @@ import com.wanjy.common.service.RoleService;
 import com.wanjy.common.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,7 +38,6 @@ public class MyRoleController {
         List<Role> roles = roleService.list();
         return Result.success(roles,roles.size());
     }
-
     /**
      * 根据ID查询角色
      * @param roleId
@@ -68,7 +68,8 @@ public class MyRoleController {
      * @return
      */
     @RequestMapping("/saveOrUpdateRole")
-    public Result saveOrUpdateRole(Role role){
+    public Result saveOrUpdateRole(
+            Role role){
         Boolean n = roleService.saveOrUpdate(role);
         if(n) return Result.success("保存成功");
         else return Result.error("保存失败");

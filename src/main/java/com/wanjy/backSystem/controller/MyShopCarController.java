@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 12068
+ * @author wjy
  * @date 2020/2/8  13:21
  */
 @RestController
@@ -125,7 +125,7 @@ public class MyShopCarController {
         }else {
             QueryWrapper<ShopCar> shopCarQueryWrapper = new QueryWrapper<>();
             shopCarQueryWrapper.eq("user_id",activeUser.getUser_id());
-            List<ShopCar> list = shopCarService.list();
+            List<ShopCar> list = shopCarService.list(shopCarQueryWrapper);
             return Result.success(list);
         }
     }

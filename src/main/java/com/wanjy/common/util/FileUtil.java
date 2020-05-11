@@ -17,7 +17,8 @@ public class FileUtil {
     /**
      * 多文件上传工具类
      *
-     * @author ZCL
+     *
+     * @author wjy
      * @date 2019/12/23 10:02
      * @param request       用户的上传请求
      * @param nameToForm    前端表单中file字段的名字

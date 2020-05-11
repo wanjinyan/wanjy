@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--[if lte IE 8]> <html class="oldie" lang="en"> <![endif]-->
+<!--[if IE 9]> <html class="ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+	<title>个人中心</title>
+	<link rel="stylesheet" href="css/fancySelect.css" />
+	<link rel="stylesheet" href="css/uniform.css" />
+	<link rel="stylesheet" href="css/jquery.bxslider.css" />
+	<link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/all.css" />
+	<link media="screen" rel="stylesheet" type="text/css" href="css/screen.css" />
+	<link rel="stylesheet" href="../lib/layui-v2.5.4/css/layui.css" media="all">
+	<link rel="stylesheet" href="../css/public.css" media="all">
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div id="wrapper">
+		<div class="wrapper-holder">
+
+			<div id="head"></div>
+
+				<form class="layui-form layui-form-pane" id="details" style="">
+				<div style="text-align: center">
+					<div class="layui-form-item" style="padding-left: 265px">
+						<label class="layui-form-label">商家名称</label>
+						<div class="layui-input-block">
+							<input id="idCard" lay-verify="title" autocomplete="off" class="layui-input" style="width: 510px">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label">客户</label>
+							<div class="layui-input-inline">
+								<input id="account" lay-verify="required|phone" autocomplete="off" class="layui-input" >
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">订单号</label>
+							<div class="layui-input-inline">
+								<input id="realName" lay-verify="email" autocomplete="off" class="layui-input" >
+							</div>
+						</div>
+					</div>
+					<div style="width:800px;margin:50px auto;">
+						<form class="layui-form">
+							<div class="layui-form-item">
+								<label class="layui-form-label">选择地区</label>
+								<div class="layui-input-inline">
+									<select name="provid" id="provid" lay-filter="provid">
+										<option value="">请选择省</option>
+									</select>
+								</div>
+								<div class="layui-input-inline">
+									<select name="cityid" id="cityid" lay-filter="cityid">
+										<option value="">请选择市</option>
+									</select>
+								</div>
+								<div class="layui-input-inline">
+									<select name="areaid" id="areaid" lay-filter="areaid">
+										<option value="">请选择县/区</option>
+									</select>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="layui-form-item" style="padding-left: 265px">
+						<label class="layui-form-label">详细地址</label>
+						<div class="layui-input-block">
+							<input id="idCard2" lay-verify="title" autocomplete="off" class="layui-input" style="width: 510px">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-inline">
+							<label class="layui-form-label">销售时间</label>
+							<div class="layui-input-inline">
+								<input id="sex" lay-verify="email" autocomplete="off" class="layui-input" >
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">客服电话</label>
+							<div class="layui-input-inline">
+								<input  lay-verify="required|phone" autocomplete="off" placeholder="客服电话" class="layui-input roleId">
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+
+				<table class="list_table" id="shopcar">
+				<tr>
+					<td class="braun first">
+						<span>商品名</span>
+					</td>
+					<td class="braun price">
+						<span>单价(元)</span>
+					</td>
+					<td class="braun last">数量</td>
+					<td class="braun qua"><span>规格</span></td>
+					<td class="braun total"><span>总价(元)</span></td>
+					<td class="braun last"></td>
+				</tr>
+			</table>
+			<div class="box_sub_total">
+				<a class="btn btn_finalize" href="">确认 提交</a>
+			</div>
+			<div class="box_sub_total">
+				<a onclick="popup1()"><i class="layui-icon layui-icon-login-wechat" style="font-size: 50px; color: #1E9FFF;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a onclick="popup2()"><i class="layui-icon layui-icon-rmb" style="font-size: 50px; color: #1E9FFF;"></i></a>
+			</div>
+
+		</div>
+		<div id="foot"></div>
+	</div>
+	
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/jcarousellite.js"></script>
+	<script type="text/javascript" src="js/jquery.placeholder.js"></script>
+	<script type="text/javascript" src="js/jquery.uniform.min.js"></script>
+	<script type="text/javascript" src="js/fancySelect.js"></script>
+	<script type="text/javascript" src="js/jquery.bxslider.js"></script>
+	<script src="js/jquery-ui-1.10.4.custom.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script src="lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
+	<script src="assets/jquery-1.12.4.js"></script>
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script type="text/javascript" src="assets/data.js"></script>
+	<script type="text/javascript" src="assets/province.js"></script>
+
+	<script>
+        $("#head").load("/head");//加载头部
+        $("#foot").load("/foot");//加载尾部
+
+            var defaults = {
+                s1: 'provid',
+                s2: 'cityid',
+                s3: 'areaid',
+                v1: null,
+                v2: null,
+                v3: null
+            };
+        layui.use(['layer', 'form'], function(){
+            var layer = layui.layer
+                ,form = layui.form;
+			
+            popup1 = function () {
+                layer.open({
+                    type:1,
+                    area:[],
+                    title: '支付',
+                    shade: 0,
+                    btn: ['确认', '取消']
+                    ,btn1: function(){
+                       layer.msg('微信支付中......');
+                    },
+                    btn2: function(){
+                        layer.closeAll();
+                    },
+                    cancel: function(layero,index){
+                        layer.closeAll();
+                    }
+                });
+            }
+            popup2 = function () {
+                layer.open({
+                    type:1,
+                    area:[],
+                    title: '支付',
+                    shade: 0,
+                    btn: ['确认', '取消']
+                    ,btn1: function(){
+                        layer.msg('支付宝支付中......');
+                    },
+                    btn2: function(){
+                        layer.closeAll();
+                    },
+                    cancel: function(layero,index){
+                        layer.closeAll();
+                    }
+                });
+            }
+        });
+	</script>
+</body>
+</html>

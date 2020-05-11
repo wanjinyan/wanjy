@@ -224,8 +224,8 @@
 
         // 监听删除操作
         $(".data-delete-btn").on("click", function () {
-            var checkStatus = user_info.checkStatus('currentTableId')
-                , data = checkStatus.data;
+            var checkStatus = user_info.checkStatus('currentTableId'),
+                data = checkStatus.data;
            for(var i = 0; i < data.length; i++){
                $("#userId").val(data[i].userId);
                $("#nickname").val(data.nickname);

@@ -1,6 +1,5 @@
 package com.wanjy.common.entity;
 
-import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -34,6 +33,7 @@ public class User implements Serializable {
      * 用户账号
      */
     private String account;
+
 
     /**
      * 用户昵称

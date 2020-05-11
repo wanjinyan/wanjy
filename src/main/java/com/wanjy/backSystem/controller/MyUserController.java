@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wanjy.backSystem.entity.MyUserDetails;
+import com.wanjy.common.entity.ActiveUser;
 import com.wanjy.common.entity.User;
 import com.wanjy.common.service.UserDetailsService;
 import com.wanjy.common.service.UserService;
@@ -16,6 +17,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +27,13 @@ import java.util.List;
 public class MyUserController {
     @Autowired private UserService userService;
     @Autowired private UserDetailsService userDetailsService;
+
+    /**
+     *注册
+     * @param user
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/addUser")
     public Result addUser(User user) throws Exception {
         List<User> userList = new ArrayList<>();
@@ -45,6 +54,12 @@ public class MyUserController {
         }
     }
 
+    /**
+     *登录
+     * @param account
+     * @param password
+     * @return
+     */
     @PostMapping("/login")
     public Result login(String account,String password) {
         Result result = null;
@@ -94,6 +109,20 @@ public class MyUserController {
         else return Result.error("获取数据失败");
     }
 
+    @PostMapping("/editPassword")
+    public Result editPassword(HttpServletRequest request,String oldPassword,String newPassword){
+        ActiveUser activeUser = (ActiveUser) request.getSession().getAttribute("activeUser");
+        String userId = activeUser.getUser_id();
+        User user = userService.getById(userId);
+        oldPassword = MD5.md5Password(oldPassword,user.getSalt(),1);
+        if(user.getPassword().equals(oldPassword)){
+            newPassword = MD5.md5Password(newPassword,user.getSalt(),1);
+            user.setPassword(newPassword);
+            return saveOrUpdateUser(user);
+        }else {
+            return Result.error("密码错误");
+        }
+    }
     /**
      * 编辑用户信息
      * @param user
@@ -105,14 +134,17 @@ public class MyUserController {
         if(n) return Result.success("编辑成功");
         else return Result.error("编辑失败");
     }
-
     /**
      * 根据userId查询用户详情
      * @param userId
      * @return
      */
     @GetMapping("/getUserDetails")
-    public Result getUserDetails(String userId){
+    public Result getUserDetails(HttpServletRequest request,String userId){
+        if (userId == null || userId.equals("")){
+            ActiveUser activeUser =(ActiveUser) request.getSession().getAttribute("activeUser");
+            userId = activeUser.getUser_id();
+        }
         QueryWrapper<MyUserDetails> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user.user_id",userId);
         MyUserDetails myUserDetails = userDetailsService.getUserDetails(queryWrapper);

@@ -1,12 +1,12 @@
 package com.wanjy.backSystem.controller;
 
 import com.wanjy.common.entity.ActiveUser;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,18 +17,23 @@ import java.util.Map;
  * 页面控制层 负责页面跳转
  */
 @Controller
+@Api("页面控制")
 public class PageContorller {
     @GetMapping("/")
+    @ApiOperation(value = "跳转到前端首页",notes = "跳转到前端首页")
     public ModelAndView index(HttpServletRequest request){
         return new ModelAndView("fronts/index.html");
     }
     @GetMapping("/cart")
+    @ApiOperation(value = "跳转到购物车",notes = "跳转到购物车")
     public ModelAndView cart(HttpServletRequest request){
         return new ModelAndView("fronts/cart.html");
     }
     @GetMapping("/product")
     public ModelAndView product(String goodsId){
+        //创建map对象
         Map map = new HashMap();
+        //给map中添加元素
         map.put("goodsId",goodsId);
         return new ModelAndView("fronts/product.html",map);
     }
@@ -41,10 +46,14 @@ public class PageContorller {
     }
     @GetMapping("/head")
     public ModelAndView head(HttpServletRequest request){
-        ActiveUser activeUser = (ActiveUser)request.getSession().getAttribute("activeUser");
+        ActiveUser activeUser = (ActiveUser)request.getSession().getAttribute("activeUser");//获取当前用户的信息
         Map map =new HashMap();
         if(activeUser!=null){
-            map.put("username",activeUser.getNickname());
+            if(activeUser.getNickname()!=null){
+                map.put("username",activeUser.getNickname());
+            }else {
+                map.put("username",activeUser.getAccount());
+            }
         }
         return new ModelAndView("fronts/head.html",map);
     }
@@ -52,6 +61,21 @@ public class PageContorller {
     public ModelAndView foot(HttpServletRequest request){
         return new ModelAndView("fronts/foot.html");
     }
+
+    @GetMapping("/userDetails")
+    public ModelAndView userDetails(HttpServletRequest request){
+        return new ModelAndView("fronts/user-details.html");
+    }
+
+    @GetMapping("/order")
+    public ModelAndView order(HttpServletRequest request){
+        return new ModelAndView("fronts/order.html");
+    }
+    /**
+     *
+     * @param request
+     * @return
+     */
     @GetMapping("/index")
     public ModelAndView index2(HttpServletRequest request){
         Subject subject = SecurityUtils.getSubject(); //获取登录凭证
@@ -66,7 +90,6 @@ public class PageContorller {
             return backindex(request);
         }
     }
-
 
     @GetMapping("/login")
     public ModelAndView login(HttpServletRequest request){
@@ -141,6 +164,12 @@ public class PageContorller {
         modelAndView.setViewName("back-system/page/addbanner.html");
         return modelAndView;
     }
+
+    /**
+     * 注册页面
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/signup")
     public ModelAndView signUp(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
@@ -154,12 +183,20 @@ public class PageContorller {
         modelAndView.setViewName("back-system/page/user_info.html");
         return modelAndView;
     }
+
     @GetMapping("/shopInfo")
     public ModelAndView shopInfo(HttpServletRequest request){
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.setViewName("back-system/page/shop_store_info.html");
         return modelAndView;
     }
+
+    /**
+     * 商家录入
+     * @param request
+     * @param shopStoreId
+     * @return
+     */
     @GetMapping("/addshop")
     public ModelAndView addshop(HttpServletRequest request,String shopStoreId){
         Map map =new HashMap();
@@ -191,6 +228,11 @@ public class PageContorller {
         return new ModelAndView("back-system/page/menuInfo.html");
     }
 
+    /**
+     *退出
+     * @param request
+     * @param response
+     */
     @GetMapping("/logout")
     public void logout(HttpServletRequest request,HttpServletResponse response) {
         Subject lvSubject=SecurityUtils.getSubject();

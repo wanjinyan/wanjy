@@ -3,6 +3,7 @@ package com.wanjy.common.entity;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -18,6 +19,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@ApiModel(description="角色")
 public class Role implements Serializable {
 
     private static final long serialVersionUID=1L;
