@@ -3,10 +3,14 @@
     .persion{
         position: absolute;
         display: none;
+        z-index: 10;
     }
 
     .username:hover .persion{
         display: block;
+    }
+    .smin{
+        margin-top: 5px;
     }
 </style>
 <div class="header-holder">
@@ -23,9 +27,9 @@
                 <li class="login username">
                     <a th:text="${username}"></a>
                     <dl class="persion">
-                        <dd><a href="/userDetails">个人中心</a></dd>
-                        <dd><a href="/myorder">我的订单</a></dd>
-                        <dd><a href="/address">收货地址</a></dd>
+                        <dd class="smin"><a href="/userDetails">个人中心</a></dd>
+                        <dd class="smin"><a href="/myorder">我的订单</a></dd>
+                        <dd class="smin"><a href="/address">收货地址</a></dd>
                     </dl>
                 </li>
                 <li class="login"><a href="/logout">退出</a></li>

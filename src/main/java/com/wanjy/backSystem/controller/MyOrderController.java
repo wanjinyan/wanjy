@@ -13,6 +13,8 @@ package com.wanjy.backSystem.controller;/**
  */
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wanjy.backSystem.Service.MyAddressService;
 import com.wanjy.backSystem.Service.MyGoodsService;
 import com.wanjy.backSystem.Service.MyOrderService;
@@ -88,19 +90,24 @@ public class MyOrderController {
         return Result.isSuccess(list,"获取订单");
     }
     @GetMapping("/getOrdersByStoreId")
-    public Result getOrdersByStoreId(HttpServletRequest request){
+    public Result getOrdersByStoreId(HttpServletRequest request,int page,int limit,String name){
         String userId= HttpUtils.getUserId(request);
         ShopStore store = myGoodsService.getShopStoreByUserId(userId);
+        IPage<Orders> iPage = new Page<>(page,limit);
         QueryWrapper<Orders> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("shop_store_id",store.getShopStoreId());
-        List<Orders> list = orderService.list(queryWrapper);
+        if (name!=null && !name.equals("")){
+            queryWrapper.like("order_name",name);
+        }
+        iPage=orderService.page(iPage,queryWrapper);
+        List<Orders> list = iPage.getRecords();
         for (Orders orders : list) {
             PersonAddress address = addressService.getById(orders.getPersonAddressId());
             orders.setPersonAddressId(address.getAddressDescription());
         }
         return Result.isSuccess(list,"获取订单");
     }
-    @GetMapping("/updateOderByStroeId")
+    @PostMapping("/updateOderByStroeId")
     public Result updateOderByStroeId(HttpServletRequest request,Orders orders){
         boolean b = orderService.updateById(orders);
         return Result.isSuccess(b,"操作成功");

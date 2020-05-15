@@ -77,6 +77,10 @@ public class PageContorller {
     public ModelAndView myorder(HttpServletRequest request){
         return new ModelAndView("fronts/myorder.html");
     }
+    @GetMapping("/shoporder")
+    public ModelAndView shoporder(HttpServletRequest request){
+        return new ModelAndView("back-system/page/shoporder.html");
+    }
     @GetMapping("/address")
     public ModelAndView address(HttpServletRequest request){
         return new ModelAndView("fronts/address.html");
