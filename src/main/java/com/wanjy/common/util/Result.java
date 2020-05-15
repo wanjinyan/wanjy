@@ -2,6 +2,8 @@ package com.wanjy.common.util;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Result {
 
@@ -29,6 +31,32 @@ public class Result {
     public static Result isSuccess(Boolean b,String msg){
         if(b){
             return success(msg+"成功");
+        }else {
+            return error(msg+"失败");
+        }
+    }
+    /**
+     * list值得判断
+     * @param list
+     * @param msg
+     * @return
+     */
+    public static Result isSuccess(List list, String msg){
+        if(list!=null){
+            return success(list,list.size(),msg+"成功");
+        }else {
+            return error(msg+"失败");
+        }
+    }
+    /**
+     * 对象值得判断
+     * @param o
+     * @param msg
+     * @return
+     */
+    public static Result isSuccess(Object o, String msg){
+        if(o!=null){
+            return success(o,msg+"成功");
         }else {
             return error(msg+"失败");
         }

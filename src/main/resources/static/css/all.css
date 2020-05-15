@@ -758,6 +758,12 @@ div.selector select {
 	behavior: url(css/PIE.htc);
 	width: 60%;
 }
+.list_table .braun.aaa{
+	text-align:center ;
+	border-radius: 5px 0 0 0;
+	behavior: url(css/PIE.htc);
+	width: 25%;
+}
 .list_table .braun.last{
 	border-radius: 0 5px 0 0;
 	behavior: url(css/PIE.htc);

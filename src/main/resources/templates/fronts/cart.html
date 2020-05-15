@@ -49,7 +49,7 @@
 						</tr>
 					</table>
 					<div class="box_sub_total">
-						<a class="btn btn_finalize" href="/order">立 即 购 买</a>
+						<a class="btn btn_finalize" onclick="toOrder()">立 即 购 买</a>
 					</div>
 				</div>
 			</section>
@@ -73,10 +73,25 @@
         layui.use(['form', ], function () {
             var form = layui.form
                 , $ = layui.jquery;
+            var datas;
             getshopcar();
             choseNorms=function(obj){
 				alert(obj.value);
 			};
+
+            toOrder=function(){
+                if (datas.length > 0) {
+                    setTimeout(2000,window.location="/order?shopCarId="+datas[0].shopcarId);
+				}else {
+                    layer.config(
+                        "购物车无商品",
+                        {
+                            icon: 5,//失败的表情
+                            time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                        });
+				}
+
+			}
 
             deleteShopCar = function(shopCarId) {
                 $.ajax({
@@ -118,6 +133,7 @@
                         if (data.code == 0) {
                             var count = data.count;
                             var data = data.data;
+                            datas=data;
                             var tr;
                             for(var i=0;i<count;i++){
                                 var thisData=data[i];

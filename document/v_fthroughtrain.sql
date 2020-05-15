@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2020-02-18 14:59:47
+Date: 2020-05-15 15:40:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -268,6 +268,7 @@ CREATE TABLE `orders` (
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
+INSERT INTO `orders` VALUES ('6bec77e3f250a3e1c477d1eabfd51ac9', '9xskSYScD8EIPos7L2', '44', 'e9b736feed13141c436a385aead46464', '4c0a8228f927b6b252e10f6b8323c347', '2020-05-15 14:54:41', '0', null, '05c12a8f9431c53a336a52ac768be683', null);
 
 -- ----------------------------
 -- Table structure for order_details
@@ -287,6 +288,7 @@ CREATE TABLE `order_details` (
 -- ----------------------------
 -- Records of order_details
 -- ----------------------------
+INSERT INTO `order_details` VALUES ('c4466b1a07a08af64b9b91adba52e3e8', '6bec77e3f250a3e1c477d1eabfd51ac9', '735822a82d67f7c25bebb8cbccc56ee8', null, '4', '11', '44');
 
 -- ----------------------------
 -- Table structure for permission
@@ -321,6 +323,8 @@ DROP TABLE IF EXISTS `person_address`;
 CREATE TABLE `person_address` (
   `person_address_id` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT '编号',
   `user_id` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '用户编号',
+  `user_tel` varchar(255) COLLATE utf8_unicode_ci DEFAULT '' COMMENT '联系方式',
+  `user_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '收货人姓名',
   `address_description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '地址描述',
   `address_status` int(1) DEFAULT '0' COMMENT '地址状态 0:正常 1：删除',
   PRIMARY KEY (`person_address_id`)
@@ -329,6 +333,11 @@ CREATE TABLE `person_address` (
 -- ----------------------------
 -- Records of person_address
 -- ----------------------------
+INSERT INTO `person_address` VALUES ('05c12a8f9431c53a336a52ac768be683', '4c0a8228f927b6b252e10f6b8323c347', '456', '456', '天津天津和平区15646', '0');
+INSERT INTO `person_address` VALUES ('94f59a531c2eddbcaa550ad18cd08925', '4c0a8228f927b6b252e10f6b8323c347', '1', '1', '北京北京东城区1', '0');
+INSERT INTO `person_address` VALUES ('ad3aa68e4415c11d7bfbdd51cd487c73', '4c0a8228f927b6b252e10f6b8323c347', '5', '5', '北京北京东城区5', '1');
+INSERT INTO `person_address` VALUES ('bee9f13bea4f51daaa6ea33b0207a0e4', '4c0a8228f927b6b252e10f6b8323c347', '2', '2', '\n							请选择省\n						北京天津河北省山西省内蒙古自治区辽宁省吉林省黑龙江省上海江苏省浙江省安徽省福建省江西省山东省河南省湖北省湖南省广东省广西壮族自治区海南省重庆四川省贵州省云南省西藏自治区陕西省甘肃省青海省宁夏回族自治区新疆维吾尔自治区港澳台地区天津和平区河东区河西区南开区河北区红桥区塘沽区汉沽区大港区东丽区西青区津南区北辰区武清区宝坻区宁河县静海县蓟县滨海新区2', '1');
+INSERT INTO `person_address` VALUES ('c1615f28b445ed61e7b2e64a871b9b21', '4c0a8228f927b6b252e10f6b8323c347', '123', 'zhousoong', '120000120100120102123', '1');
 
 -- ----------------------------
 -- Table structure for role
@@ -391,7 +400,9 @@ CREATE TABLE `shop_car` (
 -- ----------------------------
 -- Records of shop_car
 -- ----------------------------
+INSERT INTO `shop_car` VALUES ('b7110a78196cbfe444a734c8103f9160', '4c0a8228f927b6b252e10f6b8323c347', 'fd24703545f0438636b14df021b8dd4e', '357283861119af6382a143303985ce11', '1', '8.8', '8.8');
 INSERT INTO `shop_car` VALUES ('cb528f23b931b825835edbe761342971', '4c0a8228f927b6b252e10f6b8323c347', '735822a82d67f7c25bebb8cbccc56ee8', '17d277c57e4af9b18b11f0a50a01ab01', '4', '11', '44');
+INSERT INTO `shop_car` VALUES ('e55565769fbead98f973521da6dbc506', 'cf21724fde2550b3b9936842d6adbf83', '07235d02713e12ee96751879aec8ebc3', '6b31deaaf1015f7778ff9e1d34c77763', '1', '25.5', '25.5');
 
 -- ----------------------------
 -- Table structure for shop_store

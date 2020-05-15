@@ -3,6 +3,7 @@ package com.wanjy.backSystem.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wanjy.backSystem.Service.MyOrderService;
 import com.wanjy.backSystem.entity.MyTotal;
 import com.wanjy.common.entity.BackMenu;
 import com.wanjy.common.entity.User;
@@ -27,7 +28,7 @@ public class BackHomeController {
     @Autowired private UserService userService;
     @Autowired private ShopStoreService shopStoreService;
     @Autowired private GoodsService goodsService;
-    @Autowired private OrdersService ordersService;
+    @Autowired private MyOrderService ordersService;
     @Autowired private BackMenuService backMenuService;
     /**
      * 获取统计数据

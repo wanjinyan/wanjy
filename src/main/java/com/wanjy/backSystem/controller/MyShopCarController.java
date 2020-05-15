@@ -58,7 +58,7 @@ public class MyShopCarController {
         shopCar.setGoodPrice(goodsNorms.getGoodsNowPrice());
         Boolean bool = shopCarService.saveOrUpdate(shopCar,shopCarQueryWrapper);//根据条件查询，如果没有该商品就保存，如果有就更新
         if(bool){
-            return Result.success("加入购物车成功");
+            return Result.success(shopCar.getShopCarId(),"加入购物车成功");
         }else {
             return Result.error("加入购物车失败");
         }

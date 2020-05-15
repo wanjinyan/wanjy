@@ -68,8 +68,18 @@ public class PageContorller {
     }
 
     @GetMapping("/order")
-    public ModelAndView order(HttpServletRequest request){
-        return new ModelAndView("fronts/order.html");
+    public ModelAndView order(HttpServletRequest request,String shopCarId){
+        Map map = new HashMap();
+        map.put("shopCarId",shopCarId);
+        return new ModelAndView("fronts/order.html",map);
+    }
+    @GetMapping("/myorder")
+    public ModelAndView myorder(HttpServletRequest request){
+        return new ModelAndView("fronts/myorder.html");
+    }
+    @GetMapping("/address")
+    public ModelAndView address(HttpServletRequest request){
+        return new ModelAndView("fronts/address.html");
     }
     /**
      *

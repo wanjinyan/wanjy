@@ -32,6 +32,14 @@ public class PersonAddress implements Serializable {
      * 用户编号
      */
     private String userId;
+    /**
+     * 联系方式
+     */
+    private String userTel;
+    /**
+     * 用户姓名
+     */
+    private String userName;
 
     /**
      * 地址描述

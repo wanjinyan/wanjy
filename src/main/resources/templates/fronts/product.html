@@ -60,13 +60,13 @@
 								</form>
 								<form class="form-sort page">
 									<fieldset>
-										<input type="button" value="加入购物车" onclick="addShopCar()" class="btn pink" />
+										<input type="button" value="加入购物车" onclick="addShopCar(0)" class="btn pink" />
 									</fieldset>
 								</form>
 								<form class="form-sort page">
 									<fieldset>
 										<!--<input type="button" value="立即购买" class="btn pink" />-->
-										<a class="btn pink" href="order.html" style="width: 175px;height: 50px",>立即购买</a>
+										<a class="btn pink" onclick="addShopCar(1)" style="width: 175px;height: 50px",>立即购买</a>
 									</fieldset>
 								</form>
 
@@ -147,7 +147,7 @@
                     }
                 });
             };
-            addShopCar=function(){
+            addShopCar=function(val){
                 $.ajax({
                     url: "/shopcar/addShopcar",
                     type: 'post',
@@ -166,6 +166,9 @@
                                     time: 1000 //1秒关闭（如果不配置，默认是3秒）
 								}
 							)
+							if (val==1){
+                                setTimeout(2000,window.location="/order?shopCarId="+data.data);
+							}
                         }
                         else {
                             layer.msg(

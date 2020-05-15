@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!--[if lte IE 8]> <html class="oldie" lang="en"> <![endif]-->
+<!--[if IE 9]> <html class="ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="format-detection" content="telephone=no">
+	<!--<link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>-->
+	<title>收货地址</title>
+
+	<link rel="stylesheet" href="css/all.css" />
+	<link rel="stylesheet" href="lib/layui-v2.5.4/css/layui.css" media="all">
+</head>
+<body>
+<div id="wrapper">
+	<div class="wrapper-holder">
+		<div id="head"></div>
+		<section class="main">
+			<div class="content">
+				<section class="bar">
+					<div class="bar-frame">
+						<ul class="breadcrumbs">
+							<li><a href="/index">首页</a></li>
+							<li>收货地址</li>
+						</ul>
+					</div>
+				</section>
+				<table class="list_table" id="shopcar">
+					<tr>
+						<td class="braun first">
+							<span>地址</span>
+						</td>
+						<td class="braun price">
+							<span>收货人</span>
+						</td>
+						<td class="braun last">联系方式</td>
+						<td class="braun last"></td>
+					</tr>
+				</table>
+				<div class="box_sub_total">
+					<a onclick="editBox()" class="btn btn_finalize">新 增 地 址</a>
+				</div>
+			</div>
+		</section>
+		<form  class="layui-form layui-form-pane" id="test2" style="display:none;width:800px;margin:50px auto;">
+			<div class="layui-form-item">
+				<div class="layui-form-item" >
+					<div class="layui-inline" style="margin: 10px">
+						<label class="layui-form-label" style="width: 100px">收货人</label>
+						<div class="layui-input-inline">
+							<input type="text" id="userName" autocomplete="off" class="layui-input" style="width: 590px">
+						</div>
+					</div>
+				</div>
+				<div class="layui-form-item" >
+					<div class="layui-inline" style="margin: 10px">
+						<label class="layui-form-label" style="width: 100px">联系方式</label>
+						<div class="layui-input-inline">
+							<input type="text" id="userTel" autocomplete="off" class="layui-input" style="width: 590px">
+						</div>
+					</div>
+				</div>
+				<div class="layui-inline" style="margin: 10px">
+					<label class="layui-form-label" style="width: 100px">选择地区</label>
+					<div class="layui-input-inline">
+						<select name="provid" id="provid" lay-filter="provid">
+							<option value="">请选择省</option>
+						</select>
+					</div>
+					<div class="layui-input-inline">
+						<select name="cityid" id="cityid" lay-filter="cityid">
+							<option value="">请选择市</option>
+						</select>
+					</div>
+					<div class="layui-input-inline">
+						<select name="areaid" id="areaid" lay-filter="areaid">
+							<option value="">请选择县/区</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item" >
+				<div class="layui-inline" style="margin: 10px">
+					<label class="layui-form-label" style="width: 100px">详细地址</label>
+					<div class="layui-input-inline">
+						<input type="text" id="addressDescription" autocomplete="off" class="layui-input" style="width: 590px">
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+	<div id="foot"></div>
+</div>
+
+<!--<script type="text/javascript" src="js/fancySelect.js"></script>-->
+<script src="lib/layui-v2.5.4/layui.js" charset="utf-8"></script>
+<script src="assets/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="assets/data.js"></script>
+<script type="text/javascript" src="assets/province.js"></script>
+<script>
+    $("#head").load("/head");//加载头部
+    $("#foot").load("/foot");//加载尾部
+    layui.use(['form', ], function () {
+        var form = layui.form
+            , $ = layui.jquery;
+
+        getAddress();
+        /**
+         * 弹出编辑框
+         */
+        editBox=function() {
+            layer.open({
+                type:1,
+                area:['1000','600'],
+                title: '编辑地址',
+                content:$("#test2"),
+                shade: 0,
+                btn: ['提交', '取消']
+                ,btn1: function(){
+                    saveAddress();
+                },
+                btn2: function(){
+                    // $("#test2").css("display","none");
+                    layer.closeAll();
+                },
+                cancel: function(layero,index){
+                    // $("#test2").css("display","none");
+                    layer.closeAll();
+                }
+            });
+        }
+        delAddress = function(personAddressId) {
+            $.ajax({
+                url: "/address/saveAddress",
+                type: 'post',
+                dataType:'json',
+                data:{
+                    "personAddressId":personAddressId,
+                    "addressStatus":1
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+                        layer.config(
+                            data.msg,
+                            {
+                                icon: 6,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            });
+                        setTimeout(2000,window.location="/address");
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            {
+                                icon: 5,//失败的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            })
+        };
+        saveAddress= function() {
+            var userTel = $("#userTel").val();
+            var personAddressId = null;
+            var userName = $("#userName").val();
+            var provid = $("#provid option:selected").text();
+            var cityid = $("#cityid option:selected").text();
+            var areaid = $("#areaid option:selected").text();
+            var addressDescription = $("#addressDescription").val();
+            addressDescription=provid+cityid+areaid+addressDescription;
+            $.ajax({
+                url: "/address/saveAddress",
+                type: 'post',
+                dataType:'json',
+                data:{
+                    "personAddressId":personAddressId,
+					"userTel":userTel,
+					"userName":userName,
+					"addressDescription":addressDescription
+                },
+                success: function (data) {
+                    if (data.code == 0) {
+
+                        layer.config(
+                            data.msg,
+                            {
+                                icon: 6,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            });
+                        setTimeout(2000,window.location="/address");
+                        layer.closeAll();
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            {
+                                icon: 5,//失败的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            })
+        };
+        function getAddress() {
+            $.ajax({
+                url: "/address/getAddress",
+                type: 'get',
+                dataType:'json',
+                success: function (data) {
+                    if (data.code == 0) {
+                        var count = data.count;
+                        var data = data.data;
+                        var tr;
+                        for(var i=0;i<count;i++){
+                            var thisData=data[i];
+                            var addressDescription=thisData.addressDescription;
+                            var userName=thisData.userName;
+                            var userTel=thisData.userTel;
+                            var personAddressId=thisData.personAddressId;
+                            tr+='<tr>'+
+                                '<td class="white first">'+
+                                '<div class="description">'+
+                                '<h3><p>'+addressDescription+'</p></h3>'+
+                                '</div>'+
+                                '</td>'+
+                                '<td class="white two">'+userName+'</td>'+
+                                '<td class="white last">'+userTel+'</td>'+
+                                '<td class="white last"><div class="row"><a class="btn-delete" onclick="delAddress(\''+personAddressId+'\')">删除</a></div></td>'+
+                                '</tr>';
+                        }
+                        $("#shopcar").append(tr);
+                    }
+                    else {
+                        layer.msg(
+                            data.msg,
+                            {
+                                icon: 5,//失败的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            })
+                    }
+
+                }
+            })
+        }
+    })
+
+</script>
+</body>
+</html>
